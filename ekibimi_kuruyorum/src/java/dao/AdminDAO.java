@@ -20,7 +20,7 @@ public class AdminDAO extends Connector {
     public void create(Admin admin){
         try {
             Statement st =this.getConnect().createStatement();
-            st.executeUpdate("insert into admins (name,surname,username,email,password) values('"+ admin.getAd()+"' ,'"+admin.getSoyad()+"' , '"+admin.getSoyad()+"', '"+ admin.getEmail()+"','"+admin.getSifre()+"' )");
+            st.executeUpdate("insert into admins (name,surname,username,email,password) values('"+ admin.getAd()+"' ,'"+admin.getSoyad()+"' , '"+admin.getKullaniciadi()+"', '"+ admin.getEmail()+"','"+admin.getSifre()+"' )");
         } catch (SQLException ex) {
             Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
