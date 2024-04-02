@@ -18,7 +18,7 @@ public abstract  class Connector {
         if(this.connect==null){
             try{
                 Class.forName("org.postgresql.Driver");
-                this.connect=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ekibimi_kuruyorum","postgres","fatmanur46");
+                this.connect=DriverManager.getConnection("jdbc:postgresql://localhost:5432/ekibimi_kuruyorum","postgres","yunus2001");
             }
             catch (Exception ex){
                 System.out.println(ex.getMessage());
