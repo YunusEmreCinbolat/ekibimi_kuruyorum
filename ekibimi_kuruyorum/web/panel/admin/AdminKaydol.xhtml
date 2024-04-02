@@ -15,27 +15,33 @@
             <h:form>
                 <div class="mb-3">
                     <label>Ad</label>
-                    <h:inputText value="" styleClass="form-control"/>
+                    <h:inputText value="#{adminBean.entity.ad}" styleClass="form-control" required="true"/>
+                    <h:message for="ad" style="color: red" />
                 </div>
                 <div class="mb-3">
                     <label>Soyad</label>
-                    <h:inputText value="" styleClass="form-control"/>
+                    <h:inputText value="#{adminBean.entity.syad}" styleClass="form-control" required="true"/>
+                    <h:message for="syad" style="color: red" />
                 </div>
                 <div class="mb-3">
                     <label>Kullanıcı Adı</label>
-                    <h:inputText value="" styleClass="form-control"/>
+                    <h:inputText value="#{adminBean.entity.kullaniciadi}" styleClass="form-control" required="true"/>
+                    <h:message for="kullaniciadi" style="color: red" />
                 </div>
                 <div class="mb-3">
                     <label>E-mail</label>
-                    <h:inputText value="" styleClass="form-control"/>
+                    <h:inputText value="#{adminBean.entity.email}" styleClass="form-control" required="true"/>
+                    <h:message for="email" style="color: red" />
                 </div>
                 <div class="mb-3">
                     <label>Şifreyi Giriniz</label>
-                    <h:inputText value="" styleClass="form-control"/>
+                    <h:inputSecret value="#{adminBean.entity.sifre}" styleClass="form-control" required="true"/>
+                    <h:message for="sifre" style="color: red" />
                 </div>
                 <div class="mb-3">
                     <label>Şifreyi Tekrar Giriniz</label>
-                    <h:inputText value="" styleClass="form-control"/>
+                    <h:inputSecret value="#{adminBean.entity.sifreTekrar}" styleClass="form-control" required="true"/>
+                    <h:message for="sifreTekrar" style="color: red" />
                 </div>
 
                 <div class="mb-3">
