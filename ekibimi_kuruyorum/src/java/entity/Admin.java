@@ -15,6 +15,7 @@ public class Admin {
     private String kullaniciadi;
     private String email;
     private String sifre;
+     private String sifretekrar;
 
     public Admin() {
     }
@@ -82,6 +83,14 @@ public class Admin {
 
     public void setSifre(String sifre) {
         this.sifre = sifre;
+    }
+
+    public String getSifretekrar() {
+        return sifretekrar;
+    }
+
+    public void setSifretekrar(String sifretekrar) {
+        this.sifretekrar = sifretekrar;
     }
     
     

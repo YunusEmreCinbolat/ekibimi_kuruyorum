@@ -20,7 +20,7 @@
                 </div>
                 <div class="mb-3">
                     <label>Soyad</label>
-                    <h:inputText value="#{adminBean.entity.syad}" styleClass="form-control" required="true"/>
+                    <h:inputText value="#{adminBean.entity.soyad}" styleClass="form-control" required="true"/>
                     <h:message for="syad" style="color: red" />
                 </div>
                 <div class="mb-3">
@@ -40,8 +40,9 @@
                 </div>
                 <div class="mb-3">
                     <label>Şifreyi Tekrar Giriniz</label>
-                    <h:inputSecret value="#{adminBean.entity.sifreTekrar}" styleClass="form-control" required="true"/>
+                    <h:inputSecret value="#{adminBean.entity.sifretekrar}" styleClass="form-control" required="true"/>
                     <h:message for="sifreTekrar" style="color: red" />
+                    <small style="color: red" rendered="#{not empty adminBean.entity.sifretekrar and adminBean.entity.sifre != adminBean.entity.sifretekrar}">Şifreler eşleşmiyor.</small>
                 </div>
 
                 <div class="mb-3">
