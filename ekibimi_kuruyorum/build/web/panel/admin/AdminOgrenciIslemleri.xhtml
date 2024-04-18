@@ -7,20 +7,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <head>
+    <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <ui:composition template="/template.xhtml">
-    <ui:define name="content">
+    </h:head>
+    <h:body>
+       
 
-        <h:form>
-            <h:commandButton action="/panel/admin/AdminOgrenciKaydet?faces-redirect=true" value="Öğrenci Ekle"/>
-            <h:commandButton action="/panel/ogrenci/OgrenciAnasayfa?faces-redirect=true" value="Öğrencileri Görüntüle/">
-           <h:commandButton action="/panel/admin/AdminPanelNavbar?faces-redirect=true" value="Giriş Yap"/>
+                <h:form>
+                    <h:commandButton action="/panel/admin/AdminOgrenciKaydet?faces-redirect=true" value="Öğrenci Ekle"/>
+                    <h:commandButton action="/panel/ogrenci/OgrenciAnasayfa?faces-redirect=true" value="Öğrencileri Görüntüle"/>
+                    <h:commandButton action="/panel/admin/AdminPanelNavbar?faces-redirect=true" value="Giriş Yap"/>
+                </h:form>
 
-        </h:form>
-        
-    </body>
+          
+    </h:body>
 </html>
