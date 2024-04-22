@@ -23,19 +23,27 @@ public class AdminBean implements Serializable {
     private List<Admin> list;
     private AdminDAO dao;
 
+
     /**
      * Creates a new instance of AdminBean
      */
     public AdminBean() {
     }
     
-    public void create(){
-        this.getDao().create(entity);
-        this.entity=new Admin();
+    public void update(){
+        this.getDao().update(entity);
+        this.entity=entity;
     }
-     public void delete(int id){
+ 
+
+    public void create() {
+        this.getDao().create(entity);
+        this.entity = new Admin();
+    }
+
+    public void delete(int id) {
         this.getDao().delete(id);
-        
+
     }
 
     public Admin getEntity() {
@@ -45,12 +53,13 @@ public class AdminBean implements Serializable {
         return entity;
     }
 
-    public void setEntity(Admin entity) {
+    public String setEntity(Admin entity) {
         this.entity = entity;
+        return "/panel/admin/AdminGuncelle.xhtml?faces-redirect=true";
     }
 
     public List<Admin> getList() {
-        this.list= this.getDao().readList();
+        this.list = this.getDao().readList();
         return list;
     }
 
@@ -69,4 +78,5 @@ public class AdminBean implements Serializable {
         this.dao = dao;
     }
 
+  
 }

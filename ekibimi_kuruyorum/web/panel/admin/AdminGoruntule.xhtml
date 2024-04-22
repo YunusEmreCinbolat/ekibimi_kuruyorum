@@ -79,7 +79,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                             <h:commandButton action="#{adminBean.delete(e.id)}" value="SİL"/>
                                         </td>
                                         <td>
-                                            <h:commandButton value="GÜNCELLE" />
+                                            <h:commandButton action="#{adminBean.setEntity(e)}" value="GÜNCELLE" />
                                         </td>
                                     </tr>                
 
