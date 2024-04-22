@@ -8,68 +8,73 @@
         <h:outputStylesheet library="css" name="bootstrap.min.css" />
         <title>Admin Öğrenci Kaydetme Sayfası</title>
     </h:head>
-    <h:body>
-    
-        <h1>Öğrenci Kaydetme</h1>
-        <hr></hr>
-        <div class="col ml-3">
-            <h:form>
-                <div class="row">
-                    <div class="col">
-                        <div class="mb-3">
-                            <label>Ad</label>
-                            <h:inputText value="" styleClass="form-control"/>
+    <ui:composition template="AdminPanelNavbar.xhtml">
+        <ui:define name="content">
+
+            <h:body>
+
+                <h1>Öğrenci Kaydetme</h1>
+                <hr></hr>
+                <div class="col ml-3">
+                    <h:form>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label>Ad</label>
+                                    <h:inputText value="" styleClass="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Soyad</label>
+                                    <h:inputText value="" styleClass="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Kullanıcı Adı</label>
+                                    <h:inputText value="" styleClass="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Üniversite</label>
+                                    <h:inputText value="" styleClass="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Sinif</label>
+                                    <h:inputText value="" styleClass="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Bölüm</label>
+                                    <h:inputText value="" styleClass="form-control"/>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label>E-mail</label>
+                                    <h:inputText value="" styleClass="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Şifreyi Giriniz</label>
+                                    <h:inputText value="" styleClass="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Şifreyi Tekrar Giriniz</label>
+                                    <h:inputText value="" styleClass="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Profil Resmi</label>
+                                    <h:inputText value="" styleClass="form-control"/>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label>Soyad</label>
-                            <h:inputText value="" styleClass="form-control"/>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <h:commandButton  value="Kayıt Et"/>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label>Kullanıcı Adı</label>
-                            <h:inputText value="" styleClass="form-control"/>
-                        </div>
-                          <div class="mb-3">
-                            <label>Üniversite</label>
-                            <h:inputText value="" styleClass="form-control"/>
-                        </div>
-                           <div class="mb-3">
-                            <label>Sinif</label>
-                            <h:inputText value="" styleClass="form-control"/>
-                        </div>
-                           <div class="mb-3">
-                            <label>Bölüm</label>
-                            <h:inputText value="" styleClass="form-control"/>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="mb-3">
-                            <label>E-mail</label>
-                            <h:inputText value="" styleClass="form-control"/>
-                        </div>
-                        <div class="mb-3">
-                            <label>Şifreyi Giriniz</label>
-                            <h:inputText value="" styleClass="form-control"/>
-                        </div>
-                        <div class="mb-3">
-                            <label>Şifreyi Tekrar Giriniz</label>
-                            <h:inputText value="" styleClass="form-control"/>
-                        </div>
-                          <div class="mb-3">
-                            <label>Profil Resmi</label>
-                            <h:inputText value="" styleClass="form-control"/>
-                        </div>
-                    </div>
+
+
+                    </h:form>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="mb-3">
-                            <h:commandButton  value="Kayıt Et"/>
-                        </div>
-                    </div>
-                </div>
-             
-              
-            </h:form>
-        </div>
-    </h:body>
+            </h:body>
+        </ui:define>
+    </ui:composition>
 </html>
