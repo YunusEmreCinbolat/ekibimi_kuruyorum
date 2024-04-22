@@ -46,6 +46,7 @@ public class AdminBean implements Serializable {
     }
 
     public List<Admin> getList() {
+        this.list= this.getDao().readList();
         return list;
     }
 
