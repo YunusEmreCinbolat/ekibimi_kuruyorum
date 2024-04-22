@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/web/panel/admin/AdminIslemleri.xhtml</file>
             <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/web/panel/admin/AdminOgrenciIslemleri.xhtml</file>
             <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/entity/Admin.java</file>
@@ -21,6 +22,18 @@
             <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/util/Connector.java</file>
             <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/web/panel/admin/AdminGiris.xhtml</file>
             <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/web/panel/admin/AdminGoruntule.xhtml</file>
+=======
+            <file>file:/C:/Users/admın/OneDrive/Belgeler/Internet_programlama/ekibimiKuruyorum/ekibimi_kuruyorum/ekibimi_kuruyorum/web/panel/admin/AdminAnasayfa.xhtml</file>
+            <file>file:/C:/Users/admın/OneDrive/Belgeler/Internet_programlama/ekibimiKuruyorum/ekibimi_kuruyorum/ekibimi_kuruyorum/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/admın/OneDrive/Belgeler/Internet_programlama/ekibimiKuruyorum/ekibimi_kuruyorum/ekibimi_kuruyorum/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/admın/OneDrive/Belgeler/Internet_programlama/ekibimiKuruyorum/ekibimi_kuruyorum/ekibimi_kuruyorum/web/panel/admin/AdminGiris.xhtml</file>
+            <file>file:/C:/Users/admın/OneDrive/Belgeler/Internet_programlama/ekibimiKuruyorum/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/util/Connector.java</file>
+            <file>file:/C:/Users/admın/OneDrive/Belgeler/Internet_programlama/ekibimiKuruyorum/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/dao/AdminDAO.java</file>
+            <file>file:/C:/Users/admın/OneDrive/Belgeler/Internet_programlama/ekibimiKuruyorum/ekibimi_kuruyorum/ekibimi_kuruyorum/web/index.xhtml</file>
+            <file>file:/C:/Users/admın/OneDrive/Belgeler/Internet_programlama/ekibimiKuruyorum/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/beans/AdminBean.java</file>
+            <file>file:/C:/Users/admın/OneDrive/Belgeler/Internet_programlama/ekibimiKuruyorum/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/entity/Admin.java</file>
+            <file>file:/C:/Users/admın/OneDrive/Belgeler/Internet_programlama/ekibimiKuruyorum/ekibimi_kuruyorum/ekibimi_kuruyorum/web/panel/admin/AdminKaydol.xhtml</file>
+>>>>>>> 4edaf40b1a7bbe371c7d9821f7050a1020b425ca
         </group>
     </open-files>
 </project-private>
