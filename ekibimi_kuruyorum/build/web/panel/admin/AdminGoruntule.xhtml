@@ -74,7 +74,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                    #{e.sifre}
                                 </td>
                                 <td>
-                                    <h:commandButton value="SİL"/>
+                                    <h:commandButton action="#{adminBean.delete(e.id)}" value="SİL"/>
                                 </td>
                                 <td>
                                     <h:commandButton value="GÜNCELLE" />

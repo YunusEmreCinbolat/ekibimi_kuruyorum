@@ -33,6 +33,10 @@ public class AdminBean implements Serializable {
         this.getDao().create(entity);
         this.entity=new Admin();
     }
+     public void delete(int id){
+        this.getDao().delete(id);
+        
+    }
 
     public Admin getEntity() {
         if (this.entity == null) {

@@ -46,4 +46,13 @@ public class AdminDAO extends Connector {
             Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void delete (int  id){
+        try {
+            Statement st = this.getConnect().createStatement();
+            st.executeUpdate("DELETE from admins where id="+ id);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
