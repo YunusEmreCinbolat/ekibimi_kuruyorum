@@ -20,37 +20,41 @@ import java.util.List;
 @Named(value = "fakulteBean")
 @SessionScoped
 public class FakulteBean implements Serializable {
-    
-     private Fakulte entity;
+
+    private Fakulte entity;
     private List<Fakulte> list;
     private FakulteDAO dao;
-
 
     /**
      * Creates a new instance of FakulteBean
      */
     public FakulteBean() {
     }
-    
-    public void create(){
+
+    public void create() {
         this.getDao().create(entity);
-        this.entity= new Fakulte();
+        this.entity = new Fakulte();
     }
-    
-     public void delete(int id) {
+
+    public void delete(int id) {
         this.getDao().delete(id);
 
     }
-     
-      public void update(){
-        this.getDao().update(entity);
-        this.entity=new Fakulte();
+
+    public String getFakulteAdi(int fakulteid) {
+        Fakulte f = this.getDao().getFakulteAdi(fakulteid);
+        return f.getFakulteadi();
+
     }
- 
+
+    public void update() {
+        this.getDao().update(entity);
+        this.entity = new Fakulte();
+    }
 
     public Fakulte getEntity() {
-      if(this.entity==null){
-            this.entity=new Fakulte();
+        if (this.entity == null) {
+            this.entity = new Fakulte();
         }
         return entity;
     }
@@ -61,7 +65,7 @@ public class FakulteBean implements Serializable {
     }
 
     public List<Fakulte> getList() {
-       this.list=this.getDao().readList();
+        this.list = this.getDao().readList();
         return list;
     }
 
@@ -70,7 +74,7 @@ public class FakulteBean implements Serializable {
     }
 
     public FakulteDAO getDao() {
-           if (this.dao == null) {
+        if (this.dao == null) {
             this.dao = new FakulteDAO();
         }
         return dao;
@@ -79,7 +83,5 @@ public class FakulteBean implements Serializable {
     public void setDao(FakulteDAO dao) {
         this.dao = dao;
     }
-    
-    
-    
+
 }

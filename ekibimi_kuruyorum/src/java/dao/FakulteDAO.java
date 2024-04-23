@@ -40,7 +40,7 @@ public class FakulteDAO extends Connector {
     }
         
          public List<Fakulte> readList() {
-        List<Fakulte> list = new ArrayList<>();
+        List<Fakulte> entity = new ArrayList<>();
 
         Statement st;
         try {
@@ -48,13 +48,13 @@ public class FakulteDAO extends Connector {
             ResultSet rs = st.executeQuery("select * from fakulteler");
 
             while (rs.next()) {
-                list.add(new Fakulte(rs.getLong("fakulteid"),rs.getString("fakulteadi")));
+                entity.add(new Fakulte(rs.getLong("fakulteid"),rs.getString("fakulteadi")));
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(FakulteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+        return entity;
     }
            public void update(Fakulte fakulte) {
          try {
@@ -64,6 +64,24 @@ public class FakulteDAO extends Connector {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public Fakulte getFakulteAdi(int fakulteid) {
+        Fakulte entity = null;
+
+        Statement st;
+        try {
+            st = this.getConnect().createStatement();
+            ResultSet rs = st.executeQuery("select * from fakulteler where fakulteid="+fakulteid);
+
+            while (rs.next()) {
+                entity =new Fakulte(rs.getLong("fakulteid"),rs.getString("fakulteadi"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FakulteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return entity;
     }
     
     

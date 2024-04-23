@@ -3,7 +3,8 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <h:outputStylesheet library="css" name="bootstrap.min.css" />
         <title>Admin Kaydetme</title>
@@ -13,18 +14,29 @@
         <ui:define name="content">
 
             <h:body>
-                <h1>Fakülte Kaydetme</h1>
+                <h1>Bölüm Kaydetme</h1>
                 <hr></hr>
                 <div class="row ml-3">
                     <h:form>
+                        
+                         <div class="mb-3">
+                            <label>Bölüm</label>
+                             <div class="mb-3">
+                                    <label>Category</label>
+                                    <h:selectOneMenu value="#{bolumBean.entity.fakulteid}" styleClass="form-control">
+                                        <f:selectItems value="#{fakulteBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.fakulteadi}" />
+                                    </h:selectOneMenu>
+                                </div>
+                        </div>
+                        
                         <div class="mb-3">
                             <label>Ad</label>
-                            <h:inputText value="#{fakulteBean.entity.fakulteadi}" styleClass="form-control" required="true"/>
+                            <h:inputText value="#{bolumBean.entity.bolumadi}" styleClass="form-control" required="true"/>
                             <h:message for="ad" style="color: red" />
                         </div>
                       
                         <div class="mb-3">
-                            <h:commandButton action="#{fakulteBean.create}" value="ekle"/>
+                            <h:commandButton action="#{bolumBean.update()}" value="Bolum Güncelle"/>
                         </div>
                     </h:form>
                 </div>
