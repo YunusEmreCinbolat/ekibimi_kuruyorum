@@ -38,6 +38,16 @@
                     <li class="nav-item">
                         <h:link  styleClass="nav-link" value="Çıkış Yap"/>
                     </li>
+                       <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Fakülte İşlemleri
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="studentDropdown">
+                            <h:link outcome="/panel/admin/AdminFakulteEkle.xhtml" styleClass="dropdown-item" value="Fakülte Ekle"/>
+                            <h:link outcome="/panel/admin/AdminFakulteGoruntule.xhtml" styleClass="dropdown-item" value="Fakülteleri Görüntüle"/>
+                            <!-- Add more dropdown items as needed -->
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>
