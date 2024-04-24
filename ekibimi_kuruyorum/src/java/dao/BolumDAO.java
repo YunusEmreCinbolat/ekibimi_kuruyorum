@@ -20,26 +20,26 @@ import util.Connector;
  * @author Dell
  */
 public class BolumDAO extends Connector {
-    
-       public void create(Bolum bolum) {
+
+    public void create(Bolum bolum) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("insert into bolumler (bolumadi,fakulteid) values('" + bolum.getBolumadi()+ "', '" + bolum.getFakulteid()+ "' )");
+            st.executeUpdate("insert into bolumler (bolumadi,fakulteid) values('" + bolum.getBolumadi() + "', '" + bolum.getFakulteid() + "' )");
         } catch (SQLException ex) {
             Logger.getLogger(BolumDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-       
-        public void delete (int  id){
+
+    public void delete(int id) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("DELETE from bolumler where bolumid="+ id);
+            st.executeUpdate("DELETE from bolumler where bolumid=" + id);
         } catch (SQLException ex) {
             Logger.getLogger(BolumDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        
-         public List<Bolum> readList() {
+
+    public List<Bolum> readList() {
         List<Bolum> list = new ArrayList<>();
 
         Statement st;
@@ -48,7 +48,7 @@ public class BolumDAO extends Connector {
             ResultSet rs = st.executeQuery("select * from bolumler");
 
             while (rs.next()) {
-                list.add(new Bolum(rs.getLong("bolumid"),rs.getLong("fakulteid"),rs.getString("bolumadi")));
+                list.add(new Bolum(rs.getLong("bolumid"), rs.getLong("fakulteid"), rs.getString("bolumadi")));
             }
 
         } catch (SQLException ex) {
@@ -56,15 +56,33 @@ public class BolumDAO extends Connector {
         }
         return list;
     }
-           public void update(Bolum bolum) {
-         try {
+
+    public void update(Bolum bolum) {
+        try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update bolumler set bolumadi='"+bolum.getBolumadi()+"',  fakulteid='"+bolum.getFakulteid()+"' where bolumid="+bolum.getId());
+            st.executeUpdate("update bolumler set bolumadi='" + bolum.getBolumadi() + "',  fakulteid='" + bolum.getFakulteid() + "' where bolumid=" + bolum.getId());
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
-    
-    
+
+    public Bolum getTitle(int id) {
+        Bolum entity =  null;
+
+        Statement st;
+        try {
+            st = this.getConnect().createStatement();
+            ResultSet rs = st.executeQuery("select * from bolumler where bolumid="+id);
+
+            while (rs.next()) {
+               entity = new Bolum(rs.getLong("bolumid"), rs.getLong("fakulteid"), rs.getString("bolumadi"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BolumDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return entity;
+    }
+
 }

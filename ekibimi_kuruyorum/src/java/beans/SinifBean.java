@@ -5,8 +5,8 @@
 package beans;
 
 import dao.AdminDAO;
-import dao.BolumDAO;
-import entity.Bolum;
+import dao.SinifDAO;
+import entity.Sinif;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -17,31 +17,24 @@ import java.util.List;
  *
  * @author Dell
  */
-@Named(value = "bolumBean")
+@Named(value = "sinifBean")
 @SessionScoped
-public class BolumBean implements Serializable {
+public class SinifBean implements Serializable {
     
-     private Bolum entity;
-    private List<Bolum> list;
-    private BolumDAO dao;
+     private Sinif entity;
+    private List<Sinif> list;
+    private SinifDAO dao;
 
 
     /**
-     * Creates a new instance of BolumBean
+     * Creates a new instance of SinifBean
      */
-    public BolumBean() {
-    }
-    
-    public String getTitle(int id){
-        Bolum b= this.getDao().getTitle(id);
-        
-        return b.getBolumadi();
-    
+    public SinifBean() {
     }
     
     public void create(){
         this.getDao().create(entity);
-        this.entity= new Bolum();
+        this.entity= new Sinif();
     }
     
      public void delete(int id) {
@@ -51,39 +44,39 @@ public class BolumBean implements Serializable {
      
       public void update(){
         this.getDao().update(entity);
-        this.entity=new Bolum();
+        this.entity=new Sinif();
     }
  
 
-    public Bolum getEntity() {
+    public Sinif getEntity() {
       if(this.entity==null){
-            this.entity=new Bolum();
+            this.entity=new Sinif();
         }
         return entity;
     }
 
-    public String setEntity(Bolum entity) {
+    public String setEntity(Sinif entity) {
         this.entity = entity;
-        return "/panel/admin/AdminBolumGuncelle.xhtml?faces-redirect=true";
+        return "/panel/admin/AdminSinifDetay.xhtml?faces-redirect=true";
     }
 
-    public List<Bolum> getList() {
+    public List<Sinif> getList() {
        this.list=this.getDao().readList();
         return list;
     }
 
-    public void setList(List<Bolum> list) {
+    public void setList(List<Sinif> list) {
         this.list = list;
     }
 
-    public BolumDAO getDao() {
+    public SinifDAO getDao() {
            if (this.dao == null) {
-            this.dao = new BolumDAO();
+            this.dao = new SinifDAO();
         }
         return dao;
     }
 
-    public void setDao(BolumDAO dao) {
+    public void setDao(SinifDAO dao) {
         this.dao = dao;
     }
     

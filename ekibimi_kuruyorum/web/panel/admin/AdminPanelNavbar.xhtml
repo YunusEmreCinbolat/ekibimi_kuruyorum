@@ -35,9 +35,7 @@
                             <!-- Add more dropdown items as needed -->
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <h:link  styleClass="nav-link" value="Çıkış Yap"/>
-                    </li>
+                    
                        <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Fakülte İşlemleri
@@ -57,6 +55,20 @@
                             <h:link outcome="/panel/admin/AdminBolumGoruntule.xhtml" styleClass="dropdown-item" value="Bölümleri Görüntüle"/>
                             <!-- Add more dropdown items as needed -->
                         </div>
+                    </li>
+                     
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sınıf İşlemleri
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="studentDropdown">
+                            <h:link outcome="/panel/admin/AdminSinifEkle.xhtml" styleClass="dropdown-item" value="Sınıf Ekle"/>
+                            <h:link outcome="/panel/admin/AdminSinifGoruntule.xhtml" styleClass="dropdown-item" value="Sınıfları Görüntüle"/>
+                            <!-- Add more dropdown items as needed -->
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <h:link  styleClass="nav-link" value="Çıkış Yap"/>
                     </li>
                 </ul>
             </div>
