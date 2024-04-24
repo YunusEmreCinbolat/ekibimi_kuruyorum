@@ -48,8 +48,10 @@ public class OgrenciBean implements Serializable {
         return entity;
     }
 
-    public void setEntity(Ogrenci entity) {
+    public String setEntity(Ogrenci entity) {
         this.entity = entity;
+        return "/panel/admin/AdminOgrenciDetay.xhtml?faces-redirect=true";
+
     }
 
     public OgrenciDAO getDao() {
