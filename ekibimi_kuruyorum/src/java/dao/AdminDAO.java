@@ -59,10 +59,10 @@ public class AdminDAO extends Connector {
     public void update(Admin admin) {
          try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update admins set name='"+admin.getAd()+"', surname='"+admin.getSoyad()+"', username='"+admin.getEmail()+"', password='"+admin.getSifre()+"' where id="+admin.getId());
+            st.executeUpdate("update admins set name='"+admin.getAd()+"', surname='"+admin.getSoyad()+"', username='"+admin.getKullaniciadi()+"', password='"+admin.getSifre()+"' where id="+admin.getId());
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-    }
+    } 
 }
