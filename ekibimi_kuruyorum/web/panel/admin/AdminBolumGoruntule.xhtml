@@ -32,13 +32,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         ID
                                     </th>
                                     <th>
-                                       FAKÜLTE ADI
+                                        FAKÜLTE ADI
                                     </th>
-                                    
-                                     <th>
-                                       BÖLÜM ADI
+
+                                    <th>
+                                        BÖLÜM ADI
                                     </th>
-                                   
+
                                     <th>
                                         SİL
                                     </th>
@@ -56,10 +56,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         <td>
                                             #{fakulteBean.getFakulteAdi(e.fakulteid)}
                                         </td>
-                                         <td>
+                                        <td>
                                             #{e.bolumadi}
                                         </td>
-                                      
+
                                         <td>
                                             <h:commandButton action="#{bolumBean.delete(e.id)}" value="SİL"/>
                                         </td>
