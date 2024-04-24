@@ -6,6 +6,7 @@ package beans;
 
 import dao.AdminDAO;
 import dao.SinifDAO;
+import entity.Fakulte;
 import entity.Sinif;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
@@ -35,6 +36,12 @@ public class SinifBean implements Serializable {
     public void create(){
         this.getDao().create(entity);
         this.entity= new Sinif();
+    }
+    
+     public int getSinifAdi(int sinifid) {
+        Sinif s = this.getDao().getSinifAdi(sinifid);
+        return s.getSinifadi();
+
     }
     
      public void delete(int id) {

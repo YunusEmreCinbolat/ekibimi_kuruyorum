@@ -20,26 +20,26 @@ import util.Connector;
  * @author Dell
  */
 public class FakulteDAO extends Connector {
-    
-       public void create(Fakulte fakulte) {
+
+    public void create(Fakulte fakulte) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("insert into fakulteler (fakulteadi) values('" + fakulte.getFakulteadi()+ "' )");
+            st.executeUpdate("insert into fakulteler (fakulteadi) values('" + fakulte.getFakulteadi() + "' )");
         } catch (SQLException ex) {
             Logger.getLogger(FakulteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-       
-        public void delete (int  id){
+
+    public void delete(int id) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("DELETE from fakulteler where fakulteid="+ id);
+            st.executeUpdate("DELETE from fakulteler where fakulteid=" + id);
         } catch (SQLException ex) {
             Logger.getLogger(FakulteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        
-         public List<Fakulte> readList() {
+
+    public List<Fakulte> readList() {
         List<Fakulte> entity = new ArrayList<>();
 
         Statement st;
@@ -48,7 +48,7 @@ public class FakulteDAO extends Connector {
             ResultSet rs = st.executeQuery("select * from fakulteler");
 
             while (rs.next()) {
-                entity.add(new Fakulte(rs.getLong("fakulteid"),rs.getString("fakulteadi")));
+                entity.add(new Fakulte(rs.getLong("fakulteid"), rs.getString("fakulteadi")));
             }
 
         } catch (SQLException ex) {
@@ -56,10 +56,11 @@ public class FakulteDAO extends Connector {
         }
         return entity;
     }
-           public void update(Fakulte fakulte) {
-         try {
+
+    public void update(Fakulte fakulte) {
+        try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update fakulteler set fakulteadi='"+fakulte.getFakulteadi()+"' where fakulteid="+fakulte.getId());
+            st.executeUpdate("update fakulteler set fakulteadi='" + fakulte.getFakulteadi() + "' where fakulteid=" + fakulte.getId());
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -72,10 +73,10 @@ public class FakulteDAO extends Connector {
         Statement st;
         try {
             st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select * from fakulteler where fakulteid="+fakulteid);
+            ResultSet rs = st.executeQuery("select * from fakulteler where fakulteid=" + fakulteid);
 
             while (rs.next()) {
-                entity =new Fakulte(rs.getLong("fakulteid"),rs.getString("fakulteadi"));
+                entity = new Fakulte(rs.getLong("fakulteid"), rs.getString("fakulteadi"));
             }
 
         } catch (SQLException ex) {
@@ -83,6 +84,27 @@ public class FakulteDAO extends Connector {
         }
         return entity;
     }
-    
-    
+
+    public Fakulte getFromOgrenciFakulteAdi(int bolumid) {
+        Fakulte entity = null;
+
+        Statement st;
+        try {
+            st = this.getConnect().createStatement();
+            ResultSet rs = st.executeQuery("SELECT b.*, f.fakulteadi\n"
+                    + "FROM bolumler b\n"
+                    + "INNER JOIN fakulteler f ON b.fakulteid = f.fakulteid\n"
+                    + "WHERE b.bolumid ="+ bolumid);
+
+            while (rs.next()) {
+                entity = new Fakulte(rs.getLong("fakulteid"), rs.getString("fakulteadi"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FakulteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return entity;
+    }
 }
+
+

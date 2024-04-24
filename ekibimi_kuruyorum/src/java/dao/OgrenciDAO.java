@@ -27,7 +27,7 @@ public class OgrenciDAO extends Connector {
             ResultSet rs=st.executeQuery("Select * from ogrenciler");
             
             while(rs.next()){
-            list.add(new Ogrenci(rs.getLong("ogrenciid"),rs.getString("kullanicıadi"),rs.getString("eposta"), rs.getString("sifre"), rs.getString("ad"), rs.getString("soyad"), rs.getString("universite"),rs.getLong("sinifid"),rs.getLong("bolumid")));
+            list.add(new Ogrenci(rs.getLong("ogrenciid"),rs.getString("kullaniciadi"),rs.getString("eposta"), rs.getString("sifre"), rs.getString("ad"), rs.getString("soyad"), rs.getString("universite"),rs.getLong("sinifid"),rs.getLong("bolumid")));
         }
         } catch (SQLException ex) {
             Logger.getLogger(OgrenciDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -38,7 +38,8 @@ public class OgrenciDAO extends Connector {
     public void create(Ogrenci ogrenci){
         try {
             Statement st=this.getConnect().createStatement();
-            st.executeUpdate("insert into ogrenciler(kullaniciadi,eposta,sifre,ad,soyad,universite,sinifid,bolumid) values('" + ogrenci.getKullaniciadi() +"' , '" + ogrenci.getEmail() +"' , '" + ogrenci.getSifre() +"', '" + ogrenci.getAd() +"' , '" + ogrenci.getSoyad()+"' , '" + ogrenci.getUniversite() +"' ,'" + ogrenci.getSinifid() +"' , '" + ogrenci.getBolumid() +"')");
+            
+            st.executeUpdate("insert into ogrenciler (kullaniciadi,eposta,sifre,ad,soyad,universite,sinifid,bolumid) values ('" + ogrenci.getKullaniciadi() +"' , '" + ogrenci.getEmail() +"' , '" + ogrenci.getSifre() +"', '" + ogrenci.getAd() +"' , '" + ogrenci.getSoyad()+"' , '" + ogrenci.getUniversite() +"' ,'" + ogrenci.getSinifid() +"' , '" + ogrenci.getBolumid() +"')");
         } catch (SQLException ex) {
             Logger.getLogger(OgrenciDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

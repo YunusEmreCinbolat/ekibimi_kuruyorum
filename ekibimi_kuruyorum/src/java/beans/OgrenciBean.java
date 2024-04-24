@@ -5,9 +5,12 @@
 package beans;
 
 import dao.OgrenciDAO;
+import entity.Fakulte;
 import entity.Ogrenci;
+import entity.Sinif;
 import jakarta.inject.Named;
-import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.SessionScoped;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,8 +18,8 @@ import java.util.List;
  * @author admın
  */
 @Named(value = "ogrenciBean")
-@Dependent
-public class OgrenciBean {
+@SessionScoped
+public class OgrenciBean implements Serializable {
 
     private Ogrenci entity;
     private OgrenciDAO dao;
@@ -25,9 +28,22 @@ public class OgrenciBean {
     public OgrenciBean() {
     }
 
+    public void create() {
+        this.getDao().create(entity);
+        this.entity = new Ogrenci();
+    }
+    
+      public void delete(int id) {
+        this.getDao().delete(id);
+
+    }
+        public void update() {
+        this.getDao().update(entity);
+        this.entity = new Ogrenci();
+    }
     public Ogrenci getEntity() {
-        if(this.entity==null){
-            this.entity=new Ogrenci();
+        if (this.entity == null) {
+            this.entity = new Ogrenci();
         }
         return entity;
     }
@@ -36,11 +52,9 @@ public class OgrenciBean {
         this.entity = entity;
     }
 
- 
-    
     public OgrenciDAO getDao() {
-        if(this.dao==null){
-            this.dao=new OgrenciDAO();
+        if (this.dao == null) {
+            this.dao = new OgrenciDAO();
         }
         return dao;
     }
@@ -50,7 +64,7 @@ public class OgrenciBean {
     }
 
     public List<Ogrenci> getList() {
-        this.list=this.getDao().readList();
+        this.list = this.getDao().readList();
         return list;
     }
 

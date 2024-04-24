@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-       xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <h:outputStylesheet library="css" name="bootstrap.min.css" />
         <title>Admin Öğrenci Kaydetme Sayfası</title>
@@ -22,29 +22,29 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label>Ad</label>
-                                    <h:inputText value="#{ogrencibean.entity.ad}" styleClass="form-control"/>
+                                    <h:inputText value="#{ogrenciBean.entity.ad}" styleClass="form-control"/>
                                 </div>
                                 <div class="mb-3">
                                     <label>Soyad</label>
-                                    <h:inputText value="#{ogrencibean.entity.soyad}" styleClass="form-control"/>
+                                    <h:inputText value="#{ogrenciBean.entity.soyad}" styleClass="form-control"/>
                                 </div>
                                 <div class="mb-3">
                                     <label>Kullanıcı Adı</label>
-                                    <h:inputText value="#{ogrencibean.entity.kullaniciadi}" styleClass="form-control"/>
+                                    <h:inputText value="#{ogrenciBean.entity.kullaniciadi}" styleClass="form-control"/>
                                 </div>
                                 <div class="mb-3">
                                     <label>Üniversite</label>
-                                    <h:inputText value="#{ogrencibean.entity.universite}" styleClass="form-control"/>
+                                    <h:inputText value="#{ogrenciBean.entity.universite}" styleClass="form-control"/>
                                 </div>
                                 <div class="mb-3">
-                                     <label>Sınıf</label>
-                                    <h:selectOneMenu value="#{ogrencibean.entity.sinifid}" styleClass="form-control">
+                                    <label>Sınıf</label>
+                                    <h:selectOneMenu value="#{ogrenciBean.entity.sinifid}" styleClass="form-control">
                                         <f:selectItems value="#{sinifBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.sinifadi}" />
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="mb-3">
                                     <label>Bölüm</label>
-                                      <h:selectOneMenu value="#{ogrencibean.entity.bolumid}" styleClass="form-control">
+                                    <h:selectOneMenu value="#{ogrenciBean.entity.bolumid}" styleClass="form-control">
                                         <f:selectItems value="#{bolumBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.bolumadi}" />
                                     </h:selectOneMenu>
 
@@ -53,23 +53,23 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label>E-mail</label>
-                                    <h:inputText value="#{ogrencibean.entity.email}" styleClass="form-control"/>
+                                    <h:inputText value="#{ogrenciBean.entity.email}" styleClass="form-control"/>
                                 </div>
                                 <div class="mb-3">
                                     <label>Şifreyi Giriniz</label>
-                                    <h:inputText value="#{ogrencibean.entity.sifre}" styleClass="form-control"/>
+                                    <h:inputText value="#{ogrenciBean.entity.sifre}" styleClass="form-control"/>
                                 </div>
                                 <div class="mb-3">
                                     <label>Şifreyi Tekrar Giriniz</label>
-                                    <h:inputText value="" styleClass="form-control"/>
+                                    <h:inputText value="#{ogrenciBean.entity.sifre}" styleClass="form-control"/>
                                 </div>
-                               
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <h:commandButton  value="Kayıt Et"/>
+                                    <h:commandButton action="#{ogrenciBean.create}" value="Kayıt Et"/>
                                 </div>
                             </div>
                         </div>

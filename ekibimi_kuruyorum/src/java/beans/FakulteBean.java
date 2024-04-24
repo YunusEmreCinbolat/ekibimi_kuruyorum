@@ -46,6 +46,14 @@ public class FakulteBean implements Serializable {
         return f.getFakulteadi();
 
     }
+    
+      public String getFromOgrenciFakulteAdi(int fakulteid) {
+        Fakulte f = this.getDao().getFromOgrenciFakulteAdi(fakulteid);
+        return f.getFakulteadi();
+
+    }
+    
+    
 
     public void update() {
         this.getDao().update(entity);

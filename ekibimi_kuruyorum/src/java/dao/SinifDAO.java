@@ -65,6 +65,26 @@ public class SinifDAO extends Connector {
             System.out.println(ex.getMessage());
         }
     }
+
+    public Sinif getSinifAdi(int sinifid) {
+          
+        Sinif entity = null;
+
+        Statement st;
+        try {
+            st = this.getConnect().createStatement();
+            ResultSet rs = st.executeQuery("select * from siniflar where sinifid = "+sinifid);
+
+            while (rs.next()) {
+                entity=new Sinif(rs.getLong("sinifid"),rs.getLong("bolumid"),rs.getInt("sinifadi"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(SinifDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return entity;
+    
+    }
     
     
 }
