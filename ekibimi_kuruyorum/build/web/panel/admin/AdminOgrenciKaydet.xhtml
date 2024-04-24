@@ -3,7 +3,8 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <h:outputStylesheet library="css" name="bootstrap.min.css" />
         <title>Admin Öğrenci Kaydetme Sayfası</title>
@@ -36,12 +37,17 @@
                                     <h:inputText value="#{ogrencibean.entity.universite}" styleClass="form-control"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label>Sinif</label>
-                                    <h:inputText value="" styleClass="form-control"/>
+                                     <label>Sınıf</label>
+                                    <h:selectOneMenu value="#{ogrencibean.entity.sinifid}" styleClass="form-control">
+                                        <f:selectItems value="#{sinifBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.sinifadi}" />
+                                    </h:selectOneMenu>
                                 </div>
                                 <div class="mb-3">
                                     <label>Bölüm</label>
-                                    <h:inputText value="" styleClass="form-control"/>
+                                      <h:selectOneMenu value="#{ogrencibean.entity.bolumid}" styleClass="form-control">
+                                        <f:selectItems value="#{bolumBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.bolumadi}" />
+                                    </h:selectOneMenu>
+
                                 </div>
                             </div>
                             <div class="col">
