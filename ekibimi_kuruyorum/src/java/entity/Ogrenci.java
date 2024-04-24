@@ -20,6 +20,11 @@ public class Ogrenci {
     private Long sinifid;
     private Long bolumid;
 
+    public Ogrenci() {
+    }
+    
+    
+
     public Ogrenci(Long id, String kullaniciadi, String email, String sifre, String ad, String soyad, String universite, Long sinifid, Long bolumid) {
         this.id = id;
         this.kullaniciadi = kullaniciadi;
