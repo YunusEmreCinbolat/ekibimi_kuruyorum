@@ -29,17 +29,25 @@
 
                         <h:outputText value="Üniversite:" />
                         <h:outputText value="#{ogrenciBean.entity.universite}" />
-                           
+
                         <h:outputText value="Fakülte :" />
                         <h:outputText value="#{fakulteBean.getFromOgrenciFakulteAdi(ogrenciBean.entity.bolumid)}" />
-                        
+
                         <h:outputText value="Bölüm :" />
                         <h:outputText value="#{bolumBean.getTitle(ogrenciBean.entity.bolumid)}" />
-                        
+
                         <h:outputText value="Sınıf :" />
                         <h:outputText value="#{sinifBean.getSinifAdi(ogrenciBean.entity.sinifid)}" />
+                        <h:form>
+
+                            <div class="mb-3">
+                                <h:commandButton action="/panel/admin/AdminOgrenciKaydet.xhtml?faces-redirect=true"  value="Öğrenciyi Güncelle"/>
+                            </div>
+                        </h:form>
 
                     </h:panelGrid>
+
+
                 </div>
             </h:body>
         </ui:define>

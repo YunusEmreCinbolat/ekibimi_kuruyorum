@@ -48,7 +48,7 @@ public class OgrenciDAO extends Connector {
      public void update(Ogrenci ogrenci){
         try {
             Statement st=this.getConnect().createStatement();
-            st.executeUpdate("update ogrenciler set kullaniciadi='" +ogrenci.getKullaniciadi() +"' , eposta='" +ogrenci.getEmail() +"' , sifre='" +ogrenci.getSifre()+"' , ad= '" +ogrenci.getAd() +"' , soyad= '" +ogrenci.getSoyad() +"' universite= '" +ogrenci.getUniversite() +"' , sinifid='" +ogrenci.getSinifid() +"' , bolumid='" +ogrenci.getBolumid() +"'");
+            st.executeUpdate("update ogrenciler set kullaniciadi='" +ogrenci.getKullaniciadi() +"' , eposta='" +ogrenci.getEmail() +"' , sifre='" +ogrenci.getSifre()+"' , ad= '" +ogrenci.getAd() +"' , soyad= '" +ogrenci.getSoyad() +"' , universite= '" +ogrenci.getUniversite() +"' , sinifid='" +ogrenci.getSinifid() +"' , bolumid='" +ogrenci.getBolumid() +"' where ogrenciid="+ogrenci.getId());
         } catch (SQLException ex) {
             Logger.getLogger(OgrenciDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
