@@ -10,25 +10,25 @@ package entity;
  */
 public class Sinif {
     private Long id;
-    private Long bolumid;
-    private int sinifadi;
+    private Long bolumId;
+    private int sinifAdi;
 
     public Sinif() {
     }
 
-    public Sinif(Long id, Long bolumid, int sinifadi) {
+    public Sinif(Long id, Long bolumId, int sinifAdi) {
         this.id = id;
-        this.bolumid = bolumid;
-        this.sinifadi = sinifadi;
+        this.bolumId = bolumId;
+        this.sinifAdi = sinifAdi;
     }
 
-    public Sinif(Long bolumid, int sinifadi) {
-        this.bolumid = bolumid;
-        this.sinifadi = sinifadi;
+    public Sinif(Long bolumId, int sinifAdi) {
+        this.bolumId = bolumId;
+        this.sinifAdi = sinifAdi;
     }
 
-    public Sinif(int sinifadi) {
-        this.sinifadi = sinifadi;
+    public Sinif(int sinifAdi) {
+        this.sinifAdi = sinifAdi;
     }
 
     public Long getId() {
@@ -40,19 +40,19 @@ public class Sinif {
     }
 
     public Long getBolumid() {
-        return bolumid;
+        return bolumId;
     }
 
-    public void setBolumid(Long bolumid) {
-        this.bolumid = bolumid;
+    public void setBolumid(Long bolumId) {
+        this.bolumId = bolumId;
     }
 
     public int getSinifadi() {
-        return sinifadi;
+        return sinifAdi;
     }
 
-    public void setSinifadi(int sinifadi) {
-        this.sinifadi = sinifadi;
+    public void setSinifadi(int sinifAdi) {
+        this.sinifAdi = sinifAdi;
     }
     
     

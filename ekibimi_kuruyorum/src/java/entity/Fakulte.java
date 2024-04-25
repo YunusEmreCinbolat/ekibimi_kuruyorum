@@ -11,18 +11,18 @@ package entity;
 public class Fakulte {
     
     private Long id;
-    private String fakulteadi;
+    private String fakulteAdi;
 
     public Fakulte() {
     }
 
-    public Fakulte(Long id, String fakulteadi) {
+    public Fakulte(Long id, String fakulteAdi) {
         this.id = id;
-        this.fakulteadi = fakulteadi;
+        this.fakulteAdi = fakulteAdi;
     }
 
-    public Fakulte(String fakulteadi) {
-        this.fakulteadi = fakulteadi;
+    public Fakulte(String fakulteAdi) {
+        this.fakulteAdi = fakulteAdi;
     }
 
     public Long getId() {
@@ -34,11 +34,11 @@ public class Fakulte {
     }
 
     public String getFakulteadi() {
-        return fakulteadi;
+        return fakulteAdi;
     }
 
-    public void setFakulteadi(String fakulteadi) {
-        this.fakulteadi = fakulteadi;
+    public void setFakulteadi(String fakulteAdi) {
+        this.fakulteAdi = fakulteAdi;
     }
     
     

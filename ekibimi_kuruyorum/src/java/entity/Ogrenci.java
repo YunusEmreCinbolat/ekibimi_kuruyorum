@@ -11,41 +11,41 @@ package entity;
 public class Ogrenci {
     
     private Long id;
-    private String kullaniciadi;
+    private String kullaniciAdi;
     private String email;
     private String sifre;
     private String ad;
     private String soyad;
     private String universite;
-    private Long sinifid;
-    private Long bolumid;
+    private Long sinifId;
+    private Long bolumId;
 
     public Ogrenci() {
     }
     
     
 
-    public Ogrenci(Long id, String kullaniciadi, String email, String sifre, String ad, String soyad, String universite, Long sinifid, Long bolumid) {
+    public Ogrenci(Long id, String kullaniciAdi, String email, String sifre, String ad, String soyad, String universite, Long sinifId, Long bolumId) {
         this.id = id;
-        this.kullaniciadi = kullaniciadi;
+        this.kullaniciAdi = kullaniciAdi;
         this.email = email;
         this.sifre = sifre;
         this.ad = ad;
         this.soyad = soyad;
         this.universite = universite;
-        this.sinifid = sinifid;
-        this.bolumid = bolumid;
+        this.sinifId = sinifId;
+        this.bolumId = bolumId;
     }
 
-    public Ogrenci(String kullaniciadi, String email, String sifre, String ad, String soyad, String universite, Long sinifid, Long bolumid) {
-        this.kullaniciadi = kullaniciadi;
+    public Ogrenci(String kullaniciAdi, String email, String sifre, String ad, String soyad, String universite, Long sinifId, Long bolumId) {
+        this.kullaniciAdi = kullaniciAdi;
         this.email = email;
         this.sifre = sifre;
         this.ad = ad;
         this.soyad = soyad;
         this.universite = universite;
-        this.sinifid = sinifid;
-        this.bolumid = bolumid;
+        this.sinifId = sinifId;
+        this.bolumId = bolumId;
     }
 
     public Long getId() {
@@ -57,11 +57,11 @@ public class Ogrenci {
     }
 
     public String getKullaniciadi() {
-        return kullaniciadi;
+        return kullaniciAdi;
     }
 
-    public void setKullaniciadi(String kullaniciadi) {
-        this.kullaniciadi = kullaniciadi;
+    public void setKullaniciadi(String kullaniciAdi) {
+        this.kullaniciAdi = kullaniciAdi;
     }
 
     public String getEmail() {
@@ -105,19 +105,19 @@ public class Ogrenci {
     }
 
     public Long getSinifid() {
-        return sinifid;
+        return sinifId;
     }
 
-    public void setSinifid(Long sinifid) {
-        this.sinifid = sinifid;
+    public void setSinifid(Long sinifId) {
+        this.sinifId = sinifId;
     }
 
     public Long getBolumid() {
-        return bolumid;
+        return bolumId;
     }
 
-    public void setBolumid(Long bolumid) {
-        this.bolumid = bolumid;
+    public void setBolumid(Long bolumId) {
+        this.bolumId = bolumId;
     }
     
     

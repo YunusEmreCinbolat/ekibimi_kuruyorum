@@ -12,27 +12,27 @@ public class Admin {
     private Long id;
     private String ad;
     private String soyad;
-    private String kullaniciadi;
+    private String kullaniciAdi;
     private String email;
     private String sifre;
-     private String sifretekrar;
+     private String sifreTekrar;
 
     public Admin() {
     }
 
-    public Admin(Long id, String ad, String soyad, String kullaniciadi, String email, String sifre) {
+    public Admin(Long id, String ad, String soyad, String kullaniciAdi, String email, String sifre) {
         this.id = id;
         this.ad = ad;
         this.soyad = soyad;
-        this.kullaniciadi = kullaniciadi;
+        this.kullaniciAdi = kullaniciAdi;
         this.email = email;
         this.sifre = sifre;
     }
 
-    public Admin(String ad, String soyad, String kullaniciadi, String email, String sifre) {
+    public Admin(String ad, String soyad, String kullaniciAdi, String email, String sifre) {
         this.ad = ad;
         this.soyad = soyad;
-        this.kullaniciadi = kullaniciadi;
+        this.kullaniciAdi = kullaniciAdi;
         this.email = email;
         this.sifre = sifre;
     }
@@ -62,11 +62,11 @@ public class Admin {
     }
 
     public String getKullaniciadi() {
-        return kullaniciadi;
+        return kullaniciAdi;
     }
 
-    public void setKullaniciadi(String kullaniciadi) {
-        this.kullaniciadi = kullaniciadi;
+    public void setKullaniciadi(String kullaniciAdi) {
+        this.kullaniciAdi = kullaniciAdi;
     }
 
     public String getEmail() {
@@ -86,11 +86,11 @@ public class Admin {
     }
 
     public String getSifretekrar() {
-        return sifretekrar;
+        return sifreTekrar;
     }
 
-    public void setSifretekrar(String sifretekrar) {
-        this.sifretekrar = sifretekrar;
+    public void setSifretekrar(String sifreTekrar) {
+        this.sifreTekrar = sifreTekrar;
     }
     
     
