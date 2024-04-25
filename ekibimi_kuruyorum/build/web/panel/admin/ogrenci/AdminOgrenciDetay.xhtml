@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
+        <title>Öğrenci Detay Sayfası</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <ui:composition template="../AdminPanelNavbar.xhtml">
+        <ui:define name="content">
+            <h:body>
+                <div class="container">
+                    <h1>Öğrenci Detayları</h1>
+                    <hr />
+                    <h:panelGrid columns="2" styleClass="table">
+                        <h:outputText value="Ad:" />
+                        <h:outputText value="#{ogrenciBean.entity.ad}" />
+
+                        <h:outputText value="Soyad:" />
+                        <h:outputText value="#{ogrenciBean.entity.soyad}" />
+
+                        <h:outputText value="Kullanıcı Adı:" />
+                        <h:outputText value="#{ogrenciBean.entity.kullaniciadi}" />
+
+                        <h:outputText value="E-posta:" />
+                        <h:outputText value="#{ogrenciBean.entity.email}" />
+
+                        <h:outputText value="Üniversite:" />
+                        <h:outputText value="#{ogrenciBean.entity.universite}" />
+
+                        <h:outputText value="Fakülte :" />
+                        <h:outputText value="#{fakulteBean.getFromOgrenciFakulteAdi(ogrenciBean.entity.bolumid)}" />
+
+                        <h:outputText value="Bölüm :" />
+                        <h:outputText value="#{bolumBean.getTitle(ogrenciBean.entity.bolumid)}" />
+
+                        <h:outputText value="Sınıf :" />
+                        <h:outputText value="}" />
+                        <h:form>
+
+                            <div class="mb-3">
+                                <h:commandButton action="/panel/admin/ogrenci/AdminOgrenciKaydet.xhtml?faces-redirect=true"  value="Öğrenciyi Güncelle"/>
+                            </div>
+                        </h:form>
+
+                    </h:panelGrid>
+
+
+                </div>
+            </h:body>
+        </ui:define>
+    </ui:composition>
+</html>

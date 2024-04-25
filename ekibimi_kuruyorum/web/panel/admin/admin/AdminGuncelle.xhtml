@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
+        <title>Admin Görüntüleme Sayfası</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+
+    <h:body>
+        <ui:composition template="../AdminPanelNavbar.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Adı:"/>
+                        <h:inputText value="#{adminBean.entity.ad}" />
+                        <h:outputText value="Soyadı:"/>
+                        <h:inputText value="#{adminBean.entity.soyad}" />
+                        <h:outputText value="Kullanıcı Adı:"/>
+                        <h:inputText value="#{adminBean.entity.kullaniciadi}" />
+                        <h:outputText value="Email:"/>
+                        <h:inputText value="#{adminBean.entity.email}" />
+                        <h:outputText value="Şifre:"/>
+                        <h:inputText value="#{adminBean.entity.sifre}" />
+                        <!-- İhtiyaç duyulursa, diğer alanlar da buraya eklenebilir -->
+                    </h:panelGrid>
+                    <h:commandButton value="Güncelle" action="#{adminBean.update}"/>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

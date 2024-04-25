@@ -64,7 +64,7 @@ public class BolumBean implements Serializable {
 
     public String setEntity(Bolum entity) {
         this.entity = entity;
-        return "/panel/admin/AdminBolumGuncelle.xhtml?faces-redirect=true";
+        return "/panel/admin/bolum/AdminBolumGuncelle.xhtml?faces-redirect=true";
     }
 
     public List<Bolum> getList() {

@@ -54,7 +54,7 @@ public class OgrenciBean implements Serializable {
 
     public String setEntity(Ogrenci entity) {
         this.entity = entity;
-        return "/panel/admin/AdminOgrenciDetay.xhtml?faces-redirect=true";
+        return "/panel/admin/ogrenci/AdminOgrenciDetay.xhtml?faces-redirect=true";
 
     }
 

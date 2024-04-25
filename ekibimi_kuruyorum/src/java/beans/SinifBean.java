@@ -64,7 +64,7 @@ public class SinifBean implements Serializable {
 
     public String setEntity(Sinif entity) {
         this.entity = entity;
-        return "/panel/admin/AdminSinifDetay.xhtml?faces-redirect=true";
+        return "/panel/admin/sinif/AdminSinifDetay.xhtml?faces-redirect=true";
     }
 
     public List<Sinif> getList() {

@@ -55,7 +55,7 @@ public class AdminBean implements Serializable {
 
     public String setEntity(Admin entity) {
         this.entity = entity;
-        return "/panel/admin/AdminGuncelle.xhtml?faces-redirect=true";
+        return "/panel/admin/admin/AdminGuncelle.xhtml?faces-redirect=true";
     }
 
     public List<Admin> getList() {

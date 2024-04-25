@@ -10,25 +10,25 @@ package entity;
  */
 public class Bolum {
     private Long id;
-    private Long fakulteId;
-    private String bolumAdi;
+    private Long fakulteid;
+    private String bolumadi;
 
     public Bolum() {
     }
 
-    public Bolum(Long id, Long fakulteId, String bolumAdi) {
+    public Bolum(Long id, Long fakulteid, String bolumadi) {
         this.id = id;
-        this.fakulteId = fakulteId;
-        this.bolumAdi = bolumAdi;
+        this.fakulteid = fakulteid;
+        this.bolumadi = bolumadi;
     }
 
-    public Bolum(Long fakulteId, String bolumAdi) {
-        this.fakulteId = fakulteId;
-        this.bolumAdi = bolumAdi;
+    public Bolum(Long fakulteid, String bolumadi) {
+        this.fakulteid = fakulteid;
+        this.bolumadi = bolumadi;
     }
 
-    public Bolum(String bolumAdi) {
-        this.bolumAdi = bolumAdi;
+    public Bolum(String bolumadi) {
+        this.bolumadi = bolumadi;
     }
 
     public Long getId() {
@@ -40,19 +40,19 @@ public class Bolum {
     }
 
     public Long getFakulteid() {
-        return fakulteId;
+        return fakulteid;
     }
 
-    public void setFakulteid(Long fakulteId) {
-        this.fakulteId = fakulteId;
+    public void setFakulteid(Long fakulteid) {
+        this.fakulteid = fakulteid;
     }
 
     public String getBolumadi() {
-        return bolumAdi;
+        return bolumadi;
     }
 
-    public void setBolumadi(String bolumAdi) {
-        this.bolumAdi = bolumAdi;
+    public void setBolumadi(String bolumadi) {
+        this.bolumadi = bolumadi;
     }
     
     

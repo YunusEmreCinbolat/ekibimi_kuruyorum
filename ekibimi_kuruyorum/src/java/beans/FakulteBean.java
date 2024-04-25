@@ -69,7 +69,7 @@ public class FakulteBean implements Serializable {
 
     public String setEntity(Fakulte entity) {
         this.entity = entity;
-        return "/panel/admin/AdminFakulteGuncelle.xhtml?faces-redirect=true";
+        return "/panel/admin/fakultee/AdminFakulteGuncelle.xhtml?faces-redirect=true";
     }
 
     public List<Fakulte> getList() {

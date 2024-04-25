@@ -64,7 +64,7 @@ public class KategoriBean implements Serializable {
 
     public String setEntity(Kategori entity) {
         this.entity = entity;
-        return "/panel/admin/AdminProjeKategoriDetay.xhtml?faces-redirect=true";
+        return "/panel/admin/kategori/AdminProjeKategoriDetay.xhtml?faces-redirect=true";
     }
 
     public List<Kategori> getList() {
