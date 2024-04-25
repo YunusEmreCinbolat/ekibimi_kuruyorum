@@ -65,4 +65,19 @@ public class OgrenciDAO extends Connector {
          
          
      }
+
+    public Ogrenci getFromOgrenci(int id) {
+        Ogrenci entity= null;
+        try {
+            Statement st=this.getConnect().createStatement();
+            ResultSet rs=st.executeQuery("Select * from ogrenciler where sahipogrenciid="+id);
+            
+            while(rs.next()){
+            entity =new Ogrenci(rs.getLong("ogrenciid"),rs.getString("kullaniciadi"),rs.getString("eposta"), rs.getString("sifre"), rs.getString("ad"), rs.getString("soyad"), rs.getString("universite"),rs.getLong("sinifid"),rs.getLong("bolumid"));
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(OgrenciDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return entity;
+    }
 }
