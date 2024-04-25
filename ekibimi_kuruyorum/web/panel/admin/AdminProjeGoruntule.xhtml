@@ -60,15 +60,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         <td>
                                             #{e.projeAdi}
                                         </td>
-                                        <td>
-                                            #{fakulteBean.getFromOgrenciFakulteAdi(e.bolumid)}
+                                           <td>
+                                            #{kategoriBean.getTitle(e.kategoriId)}
                                         </td>
                                         <td>
-                                            #{bolumBean.getTitle(e.bolumid)}
+                                            #{ogrenciBean.getFromOgrenci(e.sahipOgrenciId)}
                                         </td>
-                                        <td>
-                                            #{sinifBean.getSinifAdi(e.sinifid)}
-                                        </td>
+                                     
                                       
                                         <td>
                                             <h:commandButton action="#{projeBean.delete(e.id)}" value="SİL"/>

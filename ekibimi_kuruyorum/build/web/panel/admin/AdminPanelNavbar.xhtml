@@ -7,7 +7,7 @@
     <h:head>
         <title>JSF Navbar</title>
         <h:outputStylesheet library="css" name="bootstrap.min.css" />
-      <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
         <h:outputScript library="js" name="bootstrap.min.js" target="head" />
     </h:head>
 
@@ -35,8 +35,8 @@
                             <!-- Add more dropdown items as needed -->
                         </div>
                     </li>
-                    
-                       <li class="nav-item dropdown">
+
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Fakülte İşlemleri
                         </a>
@@ -46,7 +46,7 @@
                             <!-- Add more dropdown items as needed -->
                         </div>
                     </li>
-                      <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Bölüm İşlemleri
                         </a>
@@ -56,8 +56,8 @@
                             <!-- Add more dropdown items as needed -->
                         </div>
                     </li>
-                     
-                      <li class="nav-item dropdown">
+
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Sınıf İşlemleri
                         </a>
@@ -66,16 +66,19 @@
                             <h:link outcome="/panel/admin/AdminSinifGoruntule.xhtml" styleClass="dropdown-item" value="Sınıfları Görüntüle"/>
                             <!-- Add more dropdown items as needed -->
                         </div>
-                               <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Proje İşlemleri
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="studentDropdown">
-                            <h:link outcome="/panel/admin/AdminProjeKategoriEkle.xhtml" styleClass="dropdown-item" value="Proje Kategorisi Ekle"/>
-                            <h:link outcome="/panel/admin/AdminProjeKategoriGoruntule.xhtml" styleClass="dropdown-item" value="Proje Kategorileri Görüntüle"/>
-                            <!-- Add more dropdown items as needed -->
-                        </div>
-                    </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Proje İşlemleri
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="studentDropdown">
+                                <h:link outcome="/panel/admin/AdminProjeKategoriEkle.xhtml" styleClass="dropdown-item" value="Proje Kategorisi Ekle"/>
+                                <h:link outcome="/panel/admin/AdminProjeKategoriGoruntule.xhtml" styleClass="dropdown-item" value="Proje Kategorileri Görüntüle"/>
+                                <!-- Add more dropdown items as needed -->
+                                <h:link outcome="/panel/admin/AdminProjeEkle.xhtml" styleClass="dropdown-item" value="Proje Ekle"/>
+                                <h:link outcome="/panel/admin/AdminProjeGoruntule.xhtml" styleClass="dropdown-item" value="Projeleri Görüntüle"/>
+                                <!-- Add more dropdown items as needed -->
+                            </div>
+                        </li>
                     </li>
                     <li class="nav-item">
                         <h:link  styleClass="nav-link" value="Çıkış Yap"/>
@@ -86,6 +89,6 @@
 
         <ui:insert name="content"/>
 
-      
+
     </h:body>
 </html>

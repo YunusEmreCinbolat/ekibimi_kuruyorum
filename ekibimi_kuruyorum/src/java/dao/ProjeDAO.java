@@ -50,7 +50,7 @@ public class ProjeDAO extends Connector {
     public void delete (int  id){
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("DELETE from projes where id="+ id);
+            st.executeUpdate("DELETE from projeler where projeid="+ id);
         } catch (SQLException ex) {
             Logger.getLogger(ProjeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,4 +65,8 @@ public class ProjeDAO extends Connector {
             System.out.println(ex.getMessage());
         }
     } 
+
+    public Proje getTitle(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

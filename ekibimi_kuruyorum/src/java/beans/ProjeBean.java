@@ -64,7 +64,7 @@ public class ProjeBean implements Serializable {
 
     public String setEntity(Proje entity) {
         this.entity = entity;
-        return "/panel/admin/AdminProjeGuncelle.xhtml?faces-redirect=true";
+        return "/panel/admin/AdminProjeDetay.xhtml?faces-redirect=true";
     }
 
     public List<Proje> getList() {

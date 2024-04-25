@@ -27,7 +27,11 @@ public class OgrenciBean implements Serializable {
 
     public OgrenciBean() {
     }
-
+    
+    public String getFromOgrenci(int id){
+        Ogrenci o = this.getDao().getFromOgrenci(id);
+        return o.getAd();
+    }
     public void create() {
         this.getDao().create(entity);
         this.entity = new Ogrenci();
