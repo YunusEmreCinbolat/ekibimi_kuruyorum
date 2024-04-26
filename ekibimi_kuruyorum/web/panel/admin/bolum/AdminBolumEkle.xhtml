@@ -4,43 +4,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-       xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Admin Kaydetme</title>
+        <title>Bölüm Kaydetme</title>
     </h:head>
 
     <ui:composition template="../AdminPanelNavbar.xhtml">
         <ui:define name="content">
-
-            <h:body>
-                <h1>Bölüm Kaydetme</h1>
-                <hr></hr>
-                <div class="row ml-3">
-                    <h:form>
-                        
-                         <div class="mb-3">
-                            <label>Bölüm</label>
-                             <div class="mb-3">
-                                  
-                                    <h:selectOneMenu value="#{bolumBean.entity.fakulteid}" styleClass="form-control">
-                                        <f:selectItems value="#{fakulteBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.fakulteadi}" />
-                                    </h:selectOneMenu>
-                                </div>
+            <h1 class="text-center mt-3 mb-4">Bölüm Kaydetme</h1>
+            <div class="container">
+                <h:form>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="fakulte">Fakülte</label>
+                                <h:selectOneMenu id="fakulte" value="#{bolumBean.entity.fakulteid}" styleClass="form-control">
+                                    <f:selectItems value="#{fakulteBean.list}" var="fakulte" itemValue="#{fakulte.id}" itemLabel="#{fakulte.fakulteadi}" />
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="mb-3">
+                                <label for="bolumadi">Bölüm Adı</label>
+                                <h:inputText id="bolumadi" value="#{bolumBean.entity.bolumadi}" styleClass="form-control" required="true"/>
+                                <h:message for="bolumadi" style="color: red" />
+                            </div>
+                            <div class="mb-3">
+                                <h:commandButton styleClass="btn btn-primary btn-block" action="#{bolumBean.create}" value="Bölüm Ekle" />
+                            </div>
                         </div>
-                        
-                        <div class="mb-3">
-                            <label>Ad</label>
-                            <h:inputText value="#{bolumBean.entity.bolumadi}" styleClass="form-control" required="true"/>
-                            <h:message for="ad" style="color: red" />
-                        </div>
-                      
-                        <div class="mb-3">
-                            <h:commandButton action="#{bolumBean.create}" value="Bolum Ekle" />
-                         
-                        </div>
-                    </h:form>
-                </div>
-            </h:body>
+                    </div>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 </html>

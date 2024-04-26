@@ -9,6 +9,14 @@
         <h:outputStylesheet library="css" name="bootstrap.min.css" />
         <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
         <h:outputScript library="js" name="bootstrap.min.js" target="head" />
+        <style>
+            .footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            }
+
+        </style>
     </h:head>
 
     <h:body>
@@ -88,14 +96,14 @@
         </nav>
 
         <ui:insert name="content"/>
-           <footer class="footer mt-auto py-3 bg-dark   ">
-        <div class="container text-center">
-            <span class="text-muted">@Copyright Ekibimi Kuruyorum 2024</span>
-        </div>
-    </footer>
+        <footer class="footer mt-auto py-3 bg-dark bottom-0  ">
+            <div class="container text-center">
+                <span class="text-muted">@Copyright Ekibimi Kuruyorum 2024</span>
+            </div>
+        </footer>
 
-    <!-- Bootstrap Bundle with Popper.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha512-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX==" crossorigin="anonymous"></script>
+        <!-- Bootstrap Bundle with Popper.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha512-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX==" crossorigin="anonymous"></script>
 
     </h:body>
 </html>

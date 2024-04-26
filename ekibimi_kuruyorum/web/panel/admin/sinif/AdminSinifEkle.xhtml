@@ -7,48 +7,62 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Sınıf Kaydetme</title>
+        <style>
+            body {
+                background-color: #f8f9fa;
+            }
+            .container {
+                margin-top: 50px;
+            }
+            .form-group {
+                margin-bottom: 30px;
+            }
+            .btn-primary {
+                background-color: #007bff;
+                border-color: #007bff;
+            }
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+        </style>
     </h:head>
 
     <ui:composition template="../AdminPanelNavbar.xhtml">
         <ui:define name="content">
-
-            <h:body>
-                <h1>Sınıf Kaydetme</h1>
-                <hr></hr>
-                <div class="row ml-3">
-                    <h:form>
-
-                        <div class="mb-3">
-                            <label>Bölüm</label>
-                         
+            <div class="container">
+                <h1 class="text-center mt-3 mb-4">Sınıf Kaydetme</h1>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h:form>
+                            <div class="form-group">
+                                <label>Bölüm</label>
                                 <h:selectOneMenu value="#{sinifBean.entity.bolumid}" styleClass="form-control">
                                     <f:selectItems value="#{bolumBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.bolumadi}" />
                                 </h:selectOneMenu>
                             </div>
-                     
 
-                        <div class="mb-3">
-                            <label>Sınıf</label>
-                            <h:selectOneMenu value="#{sinifBean.entity.sinifadi}" styleClass="form-control">
-                                <f:selectItem itemValue="" itemLabel="Sınıf Seçiniz" />
-                                 <f:selectItem itemValue="0" itemLabel="Hazırlık Sınıfı" />
-                                <f:selectItem itemValue="1" itemLabel="1" />
-                                <f:selectItem itemValue="2" itemLabel="2" />
-                                <f:selectItem itemValue="3" itemLabel="3" />
-                                <f:selectItem itemValue="4" itemLabel="4" />
-                                <f:selectItem itemValue="5" itemLabel="5" />
-                                <f:selectItem itemValue="6" itemLabel="6" />
-                            </h:selectOneMenu>
-                        </div>
+                            <div class="form-group">
+                                <label>Sınıf</label>
+                                <h:selectOneMenu value="#{sinifBean.entity.sinifadi}" styleClass="form-control">
+                                    <f:selectItem itemValue="" itemLabel="Sınıf Seçiniz" />
+                                    <f:selectItem itemValue="0" itemLabel="Hazırlık Sınıfı" />
+                                    <f:selectItem itemValue="1" itemLabel="1" />
+                                    <f:selectItem itemValue="2" itemLabel="2" />
+                                    <f:selectItem itemValue="3" itemLabel="3" />
+                                    <f:selectItem itemValue="4" itemLabel="4" />
+                                    <f:selectItem itemValue="5" itemLabel="5" />
+                                    <f:selectItem itemValue="6" itemLabel="6" />
+                                </h:selectOneMenu>
+                            </div>
 
-
-                        <div class="mb-3">
-                            <h:commandButton action="#{sinifBean.create}" value="Sınıf Ekle"/>
-                    
-                        </div>
-                    </h:form>
+                            <div class="form-group">
+                                <h:commandButton action="#{sinifBean.create}" value="Sınıf Ekle" styleClass="btn btn-primary btn-block"/>
+                            </div>
+                        </h:form>
+                    </div>
                 </div>
-            </h:body>
+            </div>
         </ui:define>
     </ui:composition>
 </html>

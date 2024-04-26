@@ -17,8 +17,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
             <h:body>
 
-
-
                 <div class="container">
                     <h1 class="center">Sınıf LİSTESİ</h1>
                     <h:form>
@@ -33,10 +31,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                     <th>
                                        BÖLÜM ADI
                                     </th>
-                                   <th>
+                                    <th>
                                        Sınıf
                                     </th>
-                                   
                                     <th>
                                         SİL
                                     </th>
@@ -54,11 +51,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         <td>
                                             #{bolumBean.getTitle(e.bolumid)}
                                         </td>
-                                        
-                                          <td>
+                                        <td>
                                             #{e.sinifadi}
                                         </td>
-                                      
                                         <td>
                                             <h:commandButton action="#{sinifBean.delete(e.id)}" value="SİL"/>
                                         </td>
@@ -66,16 +61,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                             <h:commandButton action="#{sinifBean.setEntity(e)}" value="Detaylar" />
                                         </td>
                                     </tr>                
-
                                 </ui:repeat>
                             </tbody>
-
                         </table>
                     </h:form>
-
-
-
-
                 </div>
             </h:body>
         </ui:define>

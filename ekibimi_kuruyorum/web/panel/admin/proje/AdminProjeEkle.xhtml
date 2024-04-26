@@ -11,48 +11,47 @@
 
     <ui:composition template="../AdminPanelNavbar.xhtml">
         <ui:define name="content">
-
-            <h:body>
-                <h1>Proje Kaydetme</h1>
+            <div class="container">
+                <h1 class="text-center mt-3">Proje Kaydetme</h1>
                 <hr></hr>
-                <div class="row ml-3">
-                    <h:form>
-                        <label>Kategori</label>
-                        <div class="mb-3">
-
-                            <h:selectOneMenu value="#{projeBean.entity.kategoriId}" styleClass="form-control">
-                                <f:selectItems value="#{kategoriBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.kategoriAdi}" />
-                            </h:selectOneMenu>
-                        </div>
-                        <div class="mb-3">
-                            <label>Ad</label>
-                            <h:inputText value="#{projeBean.entity.projeAdi}" styleClass="form-control" required="true"/>
-                            <h:message for="ad" style="color: red" />
-                        </div>
-                        <div class="mb-3">
-                            <label>Proje Açıklaması</label>
-                            <h:inputTextarea value="#{projeBean.entity.projeAciklamasi}" styleClass="form-control" rows="5" required="true"/>
-                            <h:message for="ad" style="color: red" />
-                        </div>
-
-                        <div class="mb-3">
-                            <label>Proje Sahibi</label>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h:form>
                             <div class="mb-3">
-
+                                <label>Kategori</label>
+                                <h:selectOneMenu value="#{projeBean.entity.kategoriId}" styleClass="form-control">
+                                    <f:selectItems value="#{kategoriBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.kategoriAdi}" />
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="mb-3">
+                                <label>Ad</label>
+                                <h:inputText value="#{projeBean.entity.projeAdi}" styleClass="form-control" required="true"/>
+                                <h:message for="ad" style="color: red" />
+                            </div>
+                            <div class="mb-3">
+                                <label>Proje Açıklaması</label>
+                                <h:inputTextarea value="#{projeBean.entity.projeAciklamasi}" styleClass="form-control" rows="5" required="true"/>
+                                <h:message for="ad" style="color: red" />
+                            </div>
+                            <div class="mb-3">
+                                <label>Proje Yeterlilikleri</label>
+                                <h:inputTextarea value="#{projeBean.entity.kullanilanTeknolojiler}" styleClass="form-control" rows="5" required="true"/>
+                                <h:message for="ad" style="color: red" />
+                            </div>
+                            <div class="mb-3">
+                                <label>Proje Sahibi</label>
                                 <h:selectOneMenu value="#{projeBean.entity.sahipOgrenciId}" styleClass="form-control">
-                                <f:selectItems value="#{ogrenciBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.ad}" />
-                            </h:selectOneMenu>
-                        </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <h:commandButton action="#{projeBean.create}" value="Kayıt Et" rendered="#{projeBean.entity.id==null}"/>
-                            <h:commandButton action="#{projeBean.update}" value="Güncelle" rendered="#{projeBean.entity.id!=null}"/>
-
-                        </div>
-                    </h:form>
+                                    <f:selectItems value="#{ogrenciBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.ad}" />
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="mb-3">
+                                <h:commandButton class="btn-primary" action="#{projeBean.create}" value="Kayıt Et" rendered="#{projeBean.entity.id==null}"/>
+                                <h:commandButton class="btn-primary" action="#{projeBean.update}" value="Güncelle" rendered="#{projeBean.entity.id!=null}"/>
+                            </div>
+                        </h:form>
+                    </div>
                 </div>
-            </h:body>
+            </div>
         </ui:define>
     </ui:composition>
 </html>

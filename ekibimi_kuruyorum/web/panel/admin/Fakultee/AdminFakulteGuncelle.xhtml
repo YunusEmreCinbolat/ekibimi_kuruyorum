@@ -10,24 +10,23 @@
 
     <ui:composition template="../AdminPanelNavbar.xhtml">
         <ui:define name="content">
-
-            <h:body>
-                <h1>Fakülte Güncelleme</h1>
-                <hr></hr>
-                <div class="row ml-3">
-                    <h:form>
-                        <div class="mb-3">
-                            <label>Ad</label>
-                            <h:inputText value="#{fakulteBean.entity.fakulteadi}" styleClass="form-control" required="true"/>
-                            <h:message for="ad" style="color: red" />
-                        </div>
-                      
-                        <div class="mb-3">
-                            <h:commandButton action="#{fakulteBean.update}" value="Ekle"/>
-                        </div>
-                    </h:form>
+            <div class="container">
+                <h1 class="text-center mt-3 mb-4">Fakülte Güncelleme</h1>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h:form>
+                            <div class="mb-3">
+                                <label for="ad">Ad</label>
+                                <h:inputText id="ad" value="#{fakulteBean.entity.fakulteadi}" styleClass="form-control" required="true"/>
+                                <h:message for="ad" style="color: red" />
+                            </div>
+                            <div class="mb-3">
+                                <h:commandButton styleClass="btn btn-primary btn-block" action="#{fakulteBean.update}" value="Güncelle"/>
+                            </div>
+                        </h:form>
+                    </div>
                 </div>
-            </h:body>
+            </div>
         </ui:define>
     </ui:composition>
 </html>

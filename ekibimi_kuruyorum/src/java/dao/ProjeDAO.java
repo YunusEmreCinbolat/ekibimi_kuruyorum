@@ -59,7 +59,7 @@ public class ProjeDAO extends Connector {
     public void update(Proje proje) {
          try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update projeler set projeadi='"+proje.getProjeAdi()+"', projeaciklamasi='"+proje.getProjeAciklamasi()+"', kullanilanteknolojiler='"+proje.getKullanilanTeknolojiler()+"', sahipogrenciid='"+proje.getSahipOgrenciId()+", kategoriid='"+proje.getKategoriId()+"  where id="+proje.getId());
+            st.executeUpdate("update projeler set projeadi='"+proje.getProjeAdi()+"', projeaciklamasi='"+proje.getProjeAciklamasi()+"', kullanilanteknolojiler='"+proje.getKullanilanTeknolojiler()+"', sahipogrenciid='"+proje.getSahipOgrenciId()+", kategoriid='"+proje.getKategoriId()+"  where projeid="+proje.getId());
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

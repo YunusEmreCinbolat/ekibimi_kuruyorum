@@ -20,18 +20,17 @@
 
                         <div class="mb-3">
                             <label>Bölüm</label>
-                         
-                                <h:selectOneMenu value="#{sinifBean.entity.bolumid}" styleClass="form-control">
-                                    <f:selectItems value="#{bolumBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.bolumadi}" />
-                                </h:selectOneMenu>
-                            </div>
+                            <h:selectOneMenu value="#{sinifBean.entity.bolumid}" styleClass="form-control">
+                                <f:selectItems value="#{bolumBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.bolumadi}" />
+                            </h:selectOneMenu>
+                        </div>
                      
 
                         <div class="mb-3">
                             <label>Sınıf</label>
                             <h:selectOneMenu value="#{sinifBean.entity.sinifadi}" styleClass="form-control">
                                 <f:selectItem itemValue="" itemLabel="Sınıf Seçiniz" />
-                                 <f:selectItem itemValue="0" itemLabel="Hazırlık Sınıfı" />
+                                <f:selectItem itemValue="0" itemLabel="Hazırlık Sınıfı" />
                                 <f:selectItem itemValue="1" itemLabel="1" />
                                 <f:selectItem itemValue="2" itemLabel="2" />
                                 <f:selectItem itemValue="3" itemLabel="3" />

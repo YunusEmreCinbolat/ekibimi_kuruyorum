@@ -14,34 +14,30 @@
                     <h1>Proje Detayları</h1>
                     <hr />
                     <h:panelGrid columns="2" styleClass="table">
-                        <h:outputText value="Proje Ad:" />
+                        <h:outputText value="Proje Adı:" />
                         <h:outputText value="#{projeBean.entity.projeAdi}" />
 
-                        <h:outputText value="Proje Kategorisi: " />
+                        <h:outputText value="Proje Kategorisi:" />
                         <h:outputText value="#{kategoriBean.getTitle(projeBean.entity.kategoriId)}" />
 
                         <h:outputText value="Proje Sahibi:" />
                         <h:outputText value="#{ogrenciBean.getFromOgrenci(projeBean.entity.sahipOgrenciId)}" />
 
-                        <h:outputText value="Proje AÇıklaması:" />
+                        <h:outputText value="Proje Açıklaması:" />
                         <h:outputText value="#{projeBean.entity.projeAciklamasi}" />
 
                         <h:outputText value="Kullanılan Teknolojiler:" />
                         <h:outputText value="#{projeBean.entity.kullanilanTeknolojiler}" />
 
-                       
                         <h:outputText value="Proje Ekibi :" />
                         <h:outputText value="}" />
-                        <h:form>
-
-                            <div class="mb-3">
-                                <h:commandButton action="/panel/admin/AdminProjeEkle.xhtml?faces-redirect=true"  value="Projeyi Güncelle"/>
-                            </div>
-                        </h:form>
-
                     </h:panelGrid>
 
-
+                    <h:form>
+                        <div class="mb-3">
+                            <h:commandButton class="btn btn-secondary" action="/panel/admin/proje/AdminProjeEkle.xhtml?faces-redirect=true"  value="Projeyi Güncelle"/>
+                        </div>
+                    </h:form>
                 </div>
             </h:body>
         </ui:define>

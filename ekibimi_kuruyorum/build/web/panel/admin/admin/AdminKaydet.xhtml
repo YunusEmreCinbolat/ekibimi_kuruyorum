@@ -10,50 +10,50 @@
 
     <ui:composition template="../AdminPanelNavbar.xhtml">
         <ui:define name="content">
+            <h1 class="text-center mt-3 mb-4">Admin Kaydolma Formu</h1>
+            <div class="container">
+                <h:form>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="ad">Ad</label>
+                                <h:inputText id="ad" value="#{adminBean.entity.ad}" styleClass="form-control" required="true"/>
+                                <h:message for="ad" style="color: red" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="soyad">Soyad</label>
+                                <h:inputText id="soyad" value="#{adminBean.entity.soyad}" styleClass="form-control" required="true"/>
+                                <h:message for="soyad" style="color: red" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="kullaniciadi">Kullanıcı Adı</label>
+                                <h:inputText id="kullaniciadi" value="#{adminBean.entity.kullaniciadi}" styleClass="form-control" required="true"/>
+                                <h:message for="kullaniciadi" style="color: red" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="email">E-mail</label>
+                                <h:inputText id="email" value="#{adminBean.entity.email}" styleClass="form-control" required="true"/>
+                                <h:message for="email" style="color: red" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="sifre">Şifreyi Giriniz</label>
+                                <h:inputSecret id="sifre" value="#{adminBean.entity.sifre}" styleClass="form-control" required="true"/>
+                                <h:message for="sifre" style="color: red" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="sifreTekrar">Şifreyi Tekrar Giriniz</label>
+                                <h:inputSecret id="sifreTekrar" value="#{adminBean.entity.sifretekrar}" styleClass="form-control" required="true"/>
+                                <h:message for="sifreTekrar" style="color: red" />
+                                <small style="color: red" rendered="#{not empty adminBean.entity.sifretekrar and adminBean.entity.sifre != adminBean.entity.sifretekrar}">Şifreler eşleşmiyor.</small>
+                            </div>
 
-            <h:body>
-                <h1>Admin Kaydetme</h1>
-                <hr></hr>
-                <div class="row ml-3">
-                    <h:form>
-                        <div class="mb-3">
-                            <label>Ad</label>
-                            <h:inputText value="#{adminBean.entity.ad}" styleClass="form-control" required="true"/>
-                            <h:message for="ad" style="color: red" />
+                            <div class="mb-3">
+                                <h:commandButton styleClass="btn btn-primary btn-block" action="#{adminBean.create}" value="Kaydet"/>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label>Soyad</label>
-                            <h:inputText value="#{adminBean.entity.soyad}" styleClass="form-control" required="true"/>
-                            <h:message for="syad" style="color: red" />
-                        </div>
-                        <div class="mb-3">
-                            <label>Kullanıcı Adı</label>
-                            <h:inputText value="#{adminBean.entity.kullaniciadi}" styleClass="form-control" required="true"/>
-                            <h:message for="kullaniciadi" style="color: red" />
-                        </div>
-                        <div class="mb-3">
-                            <label>E-mail</label>
-                            <h:inputText value="#{adminBean.entity.email}" styleClass="form-control" required="true"/>
-                            <h:message for="email" style="color: red" />
-                        </div>
-                        <div class="mb-3">
-                            <label>Şifreyi Giriniz</label>
-                            <h:inputSecret value="#{adminBean.entity.sifre}" styleClass="form-control" required="true"/>
-                            <h:message for="sifre" style="color: red" />
-                        </div>
-                        <div class="mb-3">
-                            <label>Şifreyi Tekrar Giriniz</label>
-                            <h:inputSecret value="#{adminBean.entity.sifretekrar}" styleClass="form-control" required="true"/>
-                            <h:message for="sifreTekrar" style="color: red" />
-                            <small style="color: red" rendered="#{not empty adminBean.entity.sifretekrar and adminBean.entity.sifre != adminBean.entity.sifretekrar}">Şifreler eşleşmiyor.</small>
-                        </div>
-
-                        <div class="mb-3">
-                            <h:commandButton action="#{adminBean.create}" value="Kaydol"/>
-                        </div>
-                    </h:form>
-                </div>
-            </h:body>
+                    </div>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 </html>

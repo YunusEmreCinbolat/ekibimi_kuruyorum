@@ -10,74 +10,65 @@
     </h:head>
     <ui:composition template="../AdminPanelNavbar.xhtml">
         <ui:define name="content">
-
             <h:body>
-
-                <h1>Öğrenci Kaydetme</h1>
-                <hr></hr>
-                <div class="col ml-3">
+                <div class="container">
+                    <h1 class="mt-3">Öğrenci Kaydetme</h1>
+                    <hr />
                     <h:form>
                         <div class="row">
-                            <div class="col">
+                            <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label>Ad</label>
-                                    <h:inputText value="#{ogrenciBean.entity.ad}" styleClass="form-control"/>
+                                    <label for="ad">Ad</label>
+                                    <h:inputText id="ad" value="#{ogrenciBean.entity.ad}" styleClass="form-control"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label>Soyad</label>
-                                    <h:inputText value="#{ogrenciBean.entity.soyad}" styleClass="form-control"/>
+                                    <label for="soyad">Soyad</label>
+                                    <h:inputText id="soyad" value="#{ogrenciBean.entity.soyad}" styleClass="form-control"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label>Kullanıcı Adı</label>
-                                    <h:inputText value="#{ogrenciBean.entity.kullaniciadi}" styleClass="form-control"/>
+                                    <label for="kullaniciadi">Kullanıcı Adı</label>
+                                    <h:inputText id="kullaniciadi" value="#{ogrenciBean.entity.kullaniciadi}" styleClass="form-control"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label>Üniversite</label>
-                                    <h:inputText value="#{ogrenciBean.entity.universite}" styleClass="form-control"/>
+                                    <label for="universite">Üniversite</label>
+                                    <h:inputText id="universite" value="#{ogrenciBean.entity.universite}" styleClass="form-control"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label>Sınıf</label>
-                                    <h:selectOneMenu value="#{ogrenciBean.entity.sinifid}" styleClass="form-control">
-                                        <f:selectItems value="#{sinifBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.sinifadi  }" />
-                                   
+                                    <label for="sinifid">Sınıf</label>
+                                    <h:selectOneMenu id="sinifid" value="#{ogrenciBean.entity.sinifid}" styleClass="form-control">
+                                        <f:selectItems value="#{sinifBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.sinifadi}" />
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="mb-3">
-                                    <label>Bölüm</label>
-                                    <h:selectOneMenu value="#{ogrenciBean.entity.bolumid}" styleClass="form-control">
+                                    <label for="bolumid">Bölüm</label>
+                                    <h:selectOneMenu id="bolumid" value="#{ogrenciBean.entity.bolumid}" styleClass="form-control">
                                         <f:selectItems value="#{bolumBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.bolumadi}" />
-                                   
                                     </h:selectOneMenu>
-
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label>E-mail</label>
-                                    <h:inputText value="#{ogrenciBean.entity.email}" styleClass="form-control"/>
+                                    <label for="email">E-mail</label>
+                                    <h:inputText id="email" value="#{ogrenciBean.entity.email}" styleClass="form-control"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label>Şifreyi Giriniz</label>
-                                    <h:inputText value="#{ogrenciBean.entity.sifre}" styleClass="form-control"/>
+                                    <label for="sifre">Şifreyi Giriniz</label>
+                                    <h:inputSecret id="sifre" value="#{ogrenciBean.entity.sifre}" styleClass="form-control"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label>Şifreyi Tekrar Giriniz</label>
-                                    <h:inputText value="#{ogrenciBean.entity.sifre}" styleClass="form-control"/>
+                                    <label for="sifreTekrar">Şifreyi Tekrar Giriniz</label>
+                                    <h:inputSecret id="sifreTekrar" value="#{ogrenciBean.entity.sifre}" styleClass="form-control"/>
                                 </div>
-
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <h:commandButton action="#{ogrenciBean.create}" value="Kayıt Et" rendered="#{ogrenciBean.entity.id==null}"/>
-                                    <h:commandButton action="#{ogrenciBean.update}" value="Güncelle" rendered="#{ogrenciBean.entity.id!=null}"/>
-                                
+                                    <h:commandButton class="btn btn-primary" action="#{ogrenciBean.create}" value="Kayıt Et" rendered="#{empty ogrenciBean.entity.id}"/>
+                                    <h:commandButton class="btn btn-secondary" action="#{ogrenciBean.update}" value="Güncelle" rendered="#{not empty ogrenciBean.entity.id}"/>
                                 </div>
                             </div>
                         </div>
-
-
                     </h:form>
                 </div>
             </h:body>

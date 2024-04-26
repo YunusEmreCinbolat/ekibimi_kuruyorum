@@ -9,46 +9,44 @@
     </h:head>
     <ui:composition template="../AdminPanelNavbar.xhtml">
         <ui:define name="content">
-            <h:body>
-                <div class="container">
-                    <h1>Öğrenci Detayları</h1>
-                    <hr />
-                    <h:panelGrid columns="2" styleClass="table">
-                        <h:outputText value="Ad:" />
-                        <h:outputText value="#{ogrenciBean.entity.ad}" />
+            <div class="container">
+                <h1 class="mt-3">Öğrenci Detayları</h1>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-3">Ad:</dt>
+                            <dd class="col-sm-9">#{ogrenciBean.entity.ad}</dd>
 
-                        <h:outputText value="Soyad:" />
-                        <h:outputText value="#{ogrenciBean.entity.soyad}" />
+                            <dt class="col-sm-3">Soyad:</dt>
+                            <dd class="col-sm-9">#{ogrenciBean.entity.soyad}</dd>
 
-                        <h:outputText value="Kullanıcı Adı:" />
-                        <h:outputText value="#{ogrenciBean.entity.kullaniciadi}" />
+                            <dt class="col-sm-3">Kullanıcı Adı:</dt>
+                            <dd class="col-sm-9">#{ogrenciBean.entity.kullaniciadi}</dd>
 
-                        <h:outputText value="E-posta:" />
-                        <h:outputText value="#{ogrenciBean.entity.email}" />
+                            <dt class="col-sm-3">E-posta:</dt>
+                            <dd class="col-sm-9">#{ogrenciBean.entity.email}</dd>
 
-                        <h:outputText value="Üniversite:" />
-                        <h:outputText value="#{ogrenciBean.entity.universite}" />
+                            <dt class="col-sm-3">Üniversite:</dt>
+                            <dd class="col-sm-9">#{ogrenciBean.entity.universite}</dd>
 
-                        <h:outputText value="Fakülte :" />
-                        <h:outputText value="#{fakulteBean.getFromOgrenciFakulteAdi(ogrenciBean.entity.bolumid)}" />
+                            <dt class="col-sm-3">Fakülte:</dt>
+                            <dd class="col-sm-9">#{fakulteBean.getFromOgrenciFakulteAdi(ogrenciBean.entity.bolumid)}</dd>
 
-                        <h:outputText value="Bölüm :" />
-                        <h:outputText value="#{bolumBean.getTitle(ogrenciBean.entity.bolumid)}" />
+                            <dt class="col-sm-3">Bölüm:</dt>
+                            <dd class="col-sm-9">#{bolumBean.getTitle(ogrenciBean.entity.bolumid)}</dd>
 
-                        <h:outputText value="Sınıf :" />
-                        <h:outputText value="}" />
+                            <dt class="col-sm-3">Sınıf:</dt>
+                            <dd class="col-sm-9">#{sinifBean.getSinifAdi(ogrenciBean.entity.sinifid)}</dd>
+                        </dl>
                         <h:form>
-
                             <div class="mb-3">
-                                <h:commandButton action="/panel/admin/ogrenci/AdminOgrenciKaydet.xhtml?faces-redirect=true"  value="Öğrenciyi Güncelle"/>
+                                <h:commandButton class="btn btn-secondary" action="/panel/admin/ogrenci/AdminOgrenciKaydet.xhtml?faces-redirect=true" value="Öğrenciyi Güncelle"/>
                             </div>
                         </h:form>
-
-                    </h:panelGrid>
-
-
+                    </div>
                 </div>
-            </h:body>
+            </div>
         </ui:define>
     </ui:composition>
 </html>
