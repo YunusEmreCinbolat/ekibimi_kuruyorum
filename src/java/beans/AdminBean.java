@@ -22,6 +22,8 @@ public class AdminBean implements Serializable {
     private Admin entity;
     private List<Admin> list;
     private AdminDAO dao;
+    
+    
 
 
     /**
