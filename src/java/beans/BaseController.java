@@ -14,34 +14,51 @@ import java.util.logging.Logger;
  * @author Dell
  */
 abstract public class BaseController<E, T> {
-    protected E entity;
+   
     protected T dao;
     protected List<E> list;
     
     private Class<E> entityClass;
     private Class<T> daoClass;
+    
+    protected int gorunenVeri=10;
+    protected int hangiSayfa=1;
+    
+    public void prev(){
+        hangiSayfa--;
+    }
+
+      public void next(){
+        hangiSayfa++;
+    }
+
+    public int getGorunenVeri() {
+        return gorunenVeri;
+    }
+
+    public void setGorunenVeri(int gorunenVeri) {
+        this.gorunenVeri = gorunenVeri;
+    }
+
+    public int getHangiSayfa() {
+        return hangiSayfa;
+    }
+
+    public void setHangiSyfa(int hangiSyfa) {
+        this.hangiSayfa = hangiSyfa;
+    }
+    
+    
+    
 
     public BaseController(Class<E> entityClass, Class<T> daoClass) {
         this.entityClass = entityClass;
         this.daoClass = daoClass;
     }
 
-   public E getEntity() {
-    if (this.entity == null) {
-        try {
-            this.entity = entityClass.getDeclaredConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-            e.printStackTrace(); // Hatanın nedenini raporla
-        } 
-    }
-    return entity;
-}
+  
 
-
-    public void setEntity(E entity) {
-        this.entity = entity;
-    }
-
+   
     public T getDao() {
       if(this.dao==null){
          try {

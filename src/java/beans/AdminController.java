@@ -18,11 +18,7 @@ import java.util.List;
 @Named(value = "adminBean")
 @SessionScoped
 public class AdminController extends BaseController<Admin,AdminDAO> implements Serializable {
-
-    
-    /**
-     * Creates a new instance of AdminBean
-     */
+private Admin entity; 
     public AdminController() {
         super(Admin.class,AdminDAO.class);
     }
@@ -44,10 +40,25 @@ public class AdminController extends BaseController<Admin,AdminDAO> implements S
     }
 
     public List<Admin> getList() {
-        this.list= this.getDao().readList();
+        this.list= this.getDao().readList(this.hangiSayfa,this.gorunenVeri);
         return this.list;
     }
 
+  
+
+    public Admin getEntity() {
+        if(this.entity==null){
+            this.entity=new Admin();
+        }
+        return entity;
+    }
+
+    public String setEntity(Admin entity) {
+        this.entity = entity;
+         return "/panel/admin/admin/AdminGuncelle.xhtml?faces-redirect=true";
+    }
+    
+   
 
   
   

@@ -39,6 +39,11 @@
                                     <td><h:commandButton class="btn-secondary" action="#{adminBean.setEntity(e)}" value="GÜNCELLE"/></td>
                                 </tr>
                             </ui:repeat>
+                            <h:form>
+                                <h:commandButton action="#{adminBean.prev()}" value="Geri"/>
+                                <h:commandButton action="#{adminBean.next()}"  value="İleri"/>
+
+                            </h:form>
                         </tbody>
                     </table>
                 </h:form>

@@ -21,7 +21,7 @@ import java.util.List;
 @SessionScoped
 public class FakulteController extends BaseController<Fakulte , FakulteDAO> implements Serializable {
 
-    
+     private Fakulte entity;
     public FakulteController() {
         super(Fakulte.class,FakulteDAO.class);
     }
@@ -62,7 +62,20 @@ public class FakulteController extends BaseController<Fakulte , FakulteDAO> impl
         return list;
     }
 
+    public Fakulte getEntity() {
+        if(this.entity==null){
+            this.entity=new Fakulte();
+        }
+        return entity;
+    }
+
+       public String setEntity(Fakulte entity) {
+        this.entity = entity;
+         return "/panel/admin/fakultee/AdminFakulteGuncelle.xhtml?faces-redirect=true";
+    }
+    
    
+
    
 
 }

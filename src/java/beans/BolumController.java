@@ -6,6 +6,7 @@ package beans;
 
 import dao.AdminDAO;
 import dao.BolumDAO;
+import entity.Admin;
 import entity.Bolum;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
@@ -21,12 +22,8 @@ import java.util.List;
 @SessionScoped
 public class BolumController extends BaseController<Bolum ,BolumDAO> implements Serializable {
     
-     
-
-
-    /**
-     * Creates a new instance of BolumBean
-     */
+     private Bolum entity;
+       
     public BolumController() {
        super(Bolum.class ,BolumDAO.class);
     }
@@ -59,8 +56,20 @@ public class BolumController extends BaseController<Bolum ,BolumDAO> implements 
         return list;
     }
 
-    public void setList(List<Bolum> list) {
-        this.list = list;
+     public String setEntity(Bolum entity) {
+        this.entity = entity;
+         return "/panel/admin/bolum/AdminBolumGuncelle.xhtml?faces-redirect=true";
     }
+    
+   
+    public Bolum getEntity() {
+        if(this.entity==null){
+            this.entity=new Bolum();
+        }
+        return entity;
+    }
+
+   
+    
 }
     

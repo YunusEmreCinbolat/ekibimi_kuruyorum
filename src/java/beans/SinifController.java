@@ -22,7 +22,7 @@ import java.util.List;
 @SessionScoped
 public class SinifController extends BaseController<Sinif,SinifDAO> implements Serializable {
     
-      
+       private Sinif entity;
     public SinifController() {
         super(Sinif.class,SinifDAO.class);
     }
@@ -54,9 +54,18 @@ public class SinifController extends BaseController<Sinif,SinifDAO> implements S
         return list;
     }
 
+    public Sinif getEntity() {
+        if(this.entity==null){
+            this.entity=new Sinif();
+        }
+        return entity;
+    }
+
+    public String setEntity(Sinif entity) {
+        this.entity = entity;
+         return "/panel/admin/sinif/AdminSinifGuncelle.xhtml?faces-redirect=true";
+    }
     
-   
-    
-    
-    
+
+
 }

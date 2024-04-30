@@ -21,7 +21,7 @@ import java.util.List;
 @SessionScoped
 public class OgrenciController extends BaseController<Ogrenci,OgrenciDAO> implements Serializable {
 
-    
+     private Ogrenci entity;
     public OgrenciController() {
         super(Ogrenci.class,OgrenciDAO.class);
     }
@@ -48,6 +48,21 @@ public class OgrenciController extends BaseController<Ogrenci,OgrenciDAO> implem
         this.list = this.getDao().readList();
         return list;
     }
+
+    public Ogrenci getEntity() {
+        if(this.entity==null){
+            this.entity=new Ogrenci();
+        }
+        return entity;
+    }
+
+     public String setEntity(Ogrenci entity) {
+        this.entity = entity;
+         return "/panel/admin/ogrenci/AdminOgrenciKaydet.xhtml?faces-redirect=true";
+    }
+    
+   
+   
 
    
 }

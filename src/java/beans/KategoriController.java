@@ -21,6 +21,7 @@ import java.util.List;
 @SessionScoped
 public class KategoriController extends BaseController<Kategori ,KategoriDAO> implements Serializable {
     
+     private Kategori entity;
     public KategoriController() {
         super(Kategori.class,KategoriDAO.class);
     }
@@ -55,7 +56,21 @@ public class KategoriController extends BaseController<Kategori ,KategoriDAO> im
         return list;
     }
 
+    public Kategori getEntity() {
+        if(this.entity==null){
+            this.entity=new Kategori();
+        }
+        return entity;
+    }
+
+      public String setEntity(Kategori entity) {
+        this.entity = entity;
+         return "/panel/admin/kategori/AdminProjeKategoriEkle.xhtml?faces-redirect=true";
+    }
     
+   
+
+  
     
     
     

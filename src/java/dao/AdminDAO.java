@@ -20,15 +20,15 @@ import util.Connector;
  */
 public class AdminDAO extends Connector {
 
-    public List<Admin> readList() {
+    public List<Admin> readList(int hangiSayfa,int gorunenVeri) {
         List<Admin> list = new ArrayList<>();
 
         Statement st;
         try {
             st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select * from admins");
+           ResultSet rs = st.executeQuery("SELECT * FROM admins LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
 
-            while (rs.next()) {
+           while (rs.next()) {
                 list.add(new Admin(rs.getLong("id"), rs.getString("name"), rs.getString("surname"), rs.getString("username"), rs.getString("email"), rs.getString("password")));
             }
 
@@ -65,4 +65,20 @@ public class AdminDAO extends Connector {
             System.out.println(ex.getMessage());
         }
     } 
+    
+       public int getAdminCount() {
+              int veriSayisi=0;
+        Statement st;
+        try {
+            st = this.getConnect().createStatement();
+            ResultSet rs = st.executeQuery("select count(id) as adminSayisi from admins");
+
+          rs.next();
+          veriSayisi=rs.getInt("adminSayisi");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return veriSayisi;
+    }
 }

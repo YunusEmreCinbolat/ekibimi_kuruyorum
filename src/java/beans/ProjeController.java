@@ -20,7 +20,7 @@ import java.util.List;
 @Named(value = "projeBean")
 @SessionScoped
 public class ProjeController extends BaseController<Proje ,ProjeDAO> implements Serializable {
-    
+     private Proje entity;
     
     public ProjeController() {
         super(Proje.class,ProjeDAO.class);
@@ -55,6 +55,22 @@ public class ProjeController extends BaseController<Proje ,ProjeDAO> implements 
        this.list=this.getDao().readList();
         return list;
     }
+
+    public Proje getEntity() {
+        if(this.entity==null){
+            this.entity=new Proje();
+        }
+        return entity;
+    }
+
+       public String setEntity(Proje entity) {
+        this.entity = entity;
+         return "/panel/admin/proje/AdminProjeEkle.xhtml?faces-redirect=true";
+    }
+    
+   
+
+  
 
    
    
