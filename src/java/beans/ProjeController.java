@@ -19,18 +19,13 @@ import java.util.List;
  */
 @Named(value = "projeBean")
 @SessionScoped
-public class ProjeController implements Serializable {
+public class ProjeController extends BaseController<Proje ,ProjeDAO> implements Serializable {
     
-     private Proje entity;
-    private List<Proje> list;
-    private ProjeDAO dao;
-
-
-    /**
-     * Creates a new instance of ProjeBean
-     */
+    
     public ProjeController() {
+        super(Proje.class,ProjeDAO.class);
     }
+   
     
     public String getTitle(int id){
         Proje b= this.getDao().getTitle(id);
@@ -55,38 +50,14 @@ public class ProjeController implements Serializable {
     }
  
 
-    public Proje getEntity() {
-      if(this.entity==null){
-            this.entity=new Proje();
-        }
-        return entity;
-    }
-
-    public String setEntity(Proje entity) {
-        this.entity = entity;
-        return "/panel/admin/proje/AdminProjeDetay.xhtml?faces-redirect=true";
-    }
-
+    
     public List<Proje> getList() {
        this.list=this.getDao().readList();
         return list;
     }
 
-    public void setList(List<Proje> list) {
-        this.list = list;
-    }
-
-    public ProjeDAO getDao() {
-           if (this.dao == null) {
-            this.dao = new ProjeDAO();
-        }
-        return dao;
-    }
-
-    public void setDao(ProjeDAO dao) {
-        this.dao = dao;
-    }
-    
+   
+   
     
     
 }

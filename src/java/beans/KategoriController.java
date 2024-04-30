@@ -19,17 +19,10 @@ import java.util.List;
  */
 @Named(value = "kategoriBean")
 @SessionScoped
-public class KategoriController implements Serializable {
+public class KategoriController extends BaseController<Kategori ,KategoriDAO> implements Serializable {
     
-     private Kategori entity;
-    private List<Kategori> list;
-    private KategoriDAO dao;
-
-
-    /**
-     * Creates a new instance of KategoriBean
-     */
     public KategoriController() {
+        super(Kategori.class,KategoriDAO.class);
     }
     
     public String getTitle(int id){
@@ -55,37 +48,14 @@ public class KategoriController implements Serializable {
     }
  
 
-    public Kategori getEntity() {
-      if(this.entity==null){
-            this.entity=new Kategori();
-        }
-        return entity;
-    }
-
-    public String setEntity(Kategori entity) {
-        this.entity = entity;
-        return "/panel/admin/kategori/AdminProjeKategoriDetay.xhtml?faces-redirect=true";
-    }
+   
 
     public List<Kategori> getList() {
        this.list=this.getDao().readList();
         return list;
     }
 
-    public void setList(List<Kategori> list) {
-        this.list = list;
-    }
-
-    public KategoriDAO getDao() {
-           if (this.dao == null) {
-            this.dao = new KategoriDAO();
-        }
-        return dao;
-    }
-
-    public void setDao(KategoriDAO dao) {
-        this.dao = dao;
-    }
+    
     
     
     

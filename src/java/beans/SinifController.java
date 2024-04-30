@@ -20,17 +20,11 @@ import java.util.List;
  */
 @Named(value = "sinifBean")
 @SessionScoped
-public class SinifController implements Serializable {
+public class SinifController extends BaseController<Sinif,SinifDAO> implements Serializable {
     
-     private Sinif entity;
-    private List<Sinif> list;
-    private SinifDAO dao;
-
-
-    /**
-     * Creates a new instance of SinifBean
-     */
+      
     public SinifController() {
+        super(Sinif.class,SinifDAO.class);
     }
     
     public void create(){
@@ -55,37 +49,13 @@ public class SinifController implements Serializable {
     }
  
 
-    public Sinif getEntity() {
-      if(this.entity==null){
-            this.entity=new Sinif();
-        }
-        return entity;
-    }
-
-    public String setEntity(Sinif entity) {
-        this.entity = entity;
-        return "/panel/admin/sinif/AdminSinifDetay.xhtml?faces-redirect=true";
-    }
-
     public List<Sinif> getList() {
        this.list=this.getDao().readList();
         return list;
     }
 
-    public void setList(List<Sinif> list) {
-        this.list = list;
-    }
-
-    public SinifDAO getDao() {
-           if (this.dao == null) {
-            this.dao = new SinifDAO();
-        }
-        return dao;
-    }
-
-    public void setDao(SinifDAO dao) {
-        this.dao = dao;
-    }
+    
+   
     
     
     

@@ -19,16 +19,11 @@ import java.util.List;
  */
 @Named(value = "fakulteBean")
 @SessionScoped
-public class FakulteController implements Serializable {
+public class FakulteController extends BaseController<Fakulte , FakulteDAO> implements Serializable {
 
-    private Fakulte entity;
-    private List<Fakulte> list;
-    private FakulteDAO dao;
-
-    /**
-     * Creates a new instance of FakulteBean
-     */
+    
     public FakulteController() {
+        super(Fakulte.class,FakulteDAO.class);
     }
 
     public void create() {
@@ -60,36 +55,14 @@ public class FakulteController implements Serializable {
         this.entity = new Fakulte();
     }
 
-    public Fakulte getEntity() {
-        if (this.entity == null) {
-            this.entity = new Fakulte();
-        }
-        return entity;
-    }
-
-    public String setEntity(Fakulte entity) {
-        this.entity = entity;
-        return "/panel/admin/fakultee/AdminFakulteGuncelle.xhtml?faces-redirect=true";
-    }
+    
 
     public List<Fakulte> getList() {
         this.list = this.getDao().readList();
         return list;
     }
 
-    public void setList(List<Fakulte> list) {
-        this.list = list;
-    }
-
-    public FakulteDAO getDao() {
-        if (this.dao == null) {
-            this.dao = new FakulteDAO();
-        }
-        return dao;
-    }
-
-    public void setDao(FakulteDAO dao) {
-        this.dao = dao;
-    }
+   
+   
 
 }

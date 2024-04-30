@@ -19,13 +19,11 @@ import java.util.List;
  */
 @Named(value = "ogrenciBean")
 @SessionScoped
-public class OgrenciController implements Serializable {
+public class OgrenciController extends BaseController<Ogrenci,OgrenciDAO> implements Serializable {
 
-    private Ogrenci entity;
-    private OgrenciDAO dao;
-    private List<Ogrenci> list;
-
+    
     public OgrenciController() {
+        super(Ogrenci.class,OgrenciDAO.class);
     }
     
     public String getFromOgrenci(int id){
@@ -45,37 +43,11 @@ public class OgrenciController implements Serializable {
         this.getDao().update(entity);
         this.entity = new Ogrenci();
     }
-    public Ogrenci getEntity() {
-        if (this.entity == null) {
-            this.entity = new Ogrenci();
-        }
-        return entity;
-    }
-
-    public String setEntity(Ogrenci entity) {
-        this.entity = entity;
-        return "/panel/admin/ogrenci/AdminOgrenciDetay.xhtml?faces-redirect=true";
-
-    }
-
-    public OgrenciDAO getDao() {
-        if (this.dao == null) {
-            this.dao = new OgrenciDAO();
-        }
-        return dao;
-    }
-
-    public void setDao(OgrenciDAO dao) {
-        this.dao = dao;
-    }
-
+    
     public List<Ogrenci> getList() {
         this.list = this.getDao().readList();
         return list;
     }
 
-    public void setList(List<Ogrenci> list) {
-        this.list = list;
-    }
-
+   
 }
