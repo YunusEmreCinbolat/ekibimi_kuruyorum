@@ -32,7 +32,12 @@
                                             <td><h:commandButton class="btn btn-secondary" action="#{kategoriBean.setEntity(e)}" value="Detaylar"/></td>
                                         </tr>
                                     </ui:repeat>
-                                </tbody>
+                                    <h:form>
+                                        <h:commandButton action="#{kategoriBean.prev()}" value="Geri"/>
+                                        <h:commandButton action="#{kategoriBean.next()}"  value="İleri"/>
+
+                                    </h:form>
+                        </tbody>
                             </table>
                         </h:form>
                     </div>

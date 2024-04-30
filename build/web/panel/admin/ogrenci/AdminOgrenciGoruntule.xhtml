@@ -45,6 +45,11 @@
                                     </td>
                                 </tr>
                             </ui:repeat>
+                            <h:form>
+                                <h:commandButton action="#{ogrenciBean.prev()}" value="Geri"/>
+                                <h:commandButton action="#{ogrenciBean.next()}"  value="İleri"/>
+
+                            </h:form>
                         </tbody>
                     </table>
                 </div>

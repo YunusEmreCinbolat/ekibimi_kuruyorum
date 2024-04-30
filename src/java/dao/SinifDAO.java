@@ -39,13 +39,13 @@ public class SinifDAO extends Connector {
         }
     }
         
-         public List<Sinif> readList() {
+         public List<Sinif> readList(int hangiSayfa,int gorunenVeri) {
         List<Sinif> list = new ArrayList<>();
 
         Statement st;
         try {
             st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select * from siniflar");
+            ResultSet rs = st.executeQuery("select * from siniflar LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
 
             while (rs.next()) {
                 list.add(new Sinif(rs.getLong("sinifid"),rs.getLong("bolumid"),rs.getInt("sinifadi")));
@@ -86,5 +86,20 @@ public class SinifDAO extends Connector {
     
     }
     
+      public int getSinifCount() {
+              int veriSayisi=0;
+        Statement st;
+        try {
+            st = this.getConnect().createStatement();
+            ResultSet rs = st.executeQuery("select count(sinifid) as sinifSayisi from siniflar");
+
+          rs.next();
+          veriSayisi=rs.getInt("sinifSayisi");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return veriSayisi;
+    }
     
 }

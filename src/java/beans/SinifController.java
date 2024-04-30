@@ -50,7 +50,7 @@ public class SinifController extends BaseController<Sinif,SinifDAO> implements S
  
 
     public List<Sinif> getList() {
-       this.list=this.getDao().readList();
+       this.list=this.getDao().readList(this.hangiSayfa,this.gorunenVeri);
         return list;
     }
 

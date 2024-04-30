@@ -52,7 +52,7 @@ public class KategoriController extends BaseController<Kategori ,KategoriDAO> im
    
 
     public List<Kategori> getList() {
-       this.list=this.getDao().readList();
+       this.list=this.getDao().readList(this.hangiSayfa,this.gorunenVeri);
         return list;
     }
 

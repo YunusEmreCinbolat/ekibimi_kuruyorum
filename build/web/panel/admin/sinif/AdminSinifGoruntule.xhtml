@@ -29,10 +29,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         ID
                                     </th>
                                     <th>
-                                       BÖLÜM ADI
+                                        BÖLÜM ADI
                                     </th>
                                     <th>
-                                       Sınıf
+                                        Sınıf
                                     </th>
                                     <th>
                                         SİL
@@ -62,6 +62,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         </td>
                                     </tr>                
                                 </ui:repeat>
+                                <h:form>
+                                    <h:commandButton action="#{sinifBean.prev()}" value="Geri"/>
+                                    <h:commandButton action="#{sinifBean.next()}"  value="İleri"/>
+
+                                </h:form>
                             </tbody>
                         </table>
                     </h:form>

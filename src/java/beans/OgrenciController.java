@@ -45,7 +45,7 @@ public class OgrenciController extends BaseController<Ogrenci,OgrenciDAO> implem
     }
     
     public List<Ogrenci> getList() {
-        this.list = this.getDao().readList();
+        this.list = this.getDao().readList(this.hangiSayfa,this.gorunenVeri);
         return list;
     }
 

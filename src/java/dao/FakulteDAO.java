@@ -39,13 +39,13 @@ public class FakulteDAO extends Connector {
         }
     }
 
-    public List<Fakulte> readList() {
+    public List<Fakulte> readList(int hangiSayfa,int gorunenVeri) {
         List<Fakulte> entity = new ArrayList<>();
 
         Statement st;
         try {
             st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select * from fakulteler");
+            ResultSet rs = st.executeQuery("select * from fakulteler LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
 
             while (rs.next()) {
                 entity.add(new Fakulte(rs.getLong("fakulteid"), rs.getString("fakulteadi")));
@@ -104,6 +104,22 @@ public class FakulteDAO extends Connector {
             Logger.getLogger(FakulteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return entity;
+    }
+    
+      public int getFakulteCount() {
+              int veriSayisi=0;
+        Statement st;
+        try {
+            st = this.getConnect().createStatement();
+            ResultSet rs = st.executeQuery("select count(fakulteid) as fakulteSayisi from fakulteler");
+
+          rs.next();
+          veriSayisi=rs.getInt("fakulteSayisi");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return veriSayisi;
     }
 }
 

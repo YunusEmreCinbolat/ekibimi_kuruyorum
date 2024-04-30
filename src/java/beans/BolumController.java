@@ -52,7 +52,7 @@ public class BolumController extends BaseController<Bolum ,BolumDAO> implements 
  
 
     public List<Bolum> getList() {
-       this.list=this.getDao().readList();
+       this.list=this.getDao().readList(this.hangiSayfa,this.gorunenVeri);
         return list;
     }
 

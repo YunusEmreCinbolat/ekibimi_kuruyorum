@@ -38,6 +38,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                     </td>
                                 </tr>                
                             </ui:repeat>
+                            <h:form>
+                                <h:commandButton action="#{fakulteBean.prev()}" value="Geri"/>
+                                <h:commandButton action="#{fakulteBean.next()}"  value="İleri"/>
+
+                            </h:form>
                         </tbody>
                     </table>
                 </h:form>

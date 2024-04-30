@@ -58,7 +58,7 @@ public class FakulteController extends BaseController<Fakulte , FakulteDAO> impl
     
 
     public List<Fakulte> getList() {
-        this.list = this.getDao().readList();
+        this.list = this.getDao().readList(this.hangiSayfa,this.gorunenVeri);
         return list;
     }
 

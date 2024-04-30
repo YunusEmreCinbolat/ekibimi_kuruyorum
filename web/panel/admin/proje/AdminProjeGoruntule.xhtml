@@ -39,6 +39,11 @@
                                         </td>
                                     </tr>
                                 </ui:repeat>
+                                <h:form>
+                                    <h:commandButton action="#{projeBean.prev()}" value="Geri"/>
+                                    <h:commandButton action="#{projeBean.next()}"  value="İleri"/>
+
+                                </h:form>
                             </tbody>
                         </table>
                     </h:form>

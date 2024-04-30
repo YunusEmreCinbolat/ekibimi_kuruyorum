@@ -20,11 +20,11 @@ import util.Connector;
  */
 public class OgrenciDAO extends Connector {
 
-    public List<Ogrenci> readList() {
+    public List<Ogrenci> readList(int hangiSayfa,int gorunenVeri) {
         List<Ogrenci> list = new ArrayList<>();
         try {
             Statement st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("Select * from ogrenciler");
+            ResultSet rs = st.executeQuery("Select * from ogrenciler LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
 
             while (rs.next()) {
                 list.add(new Ogrenci(rs.getLong("ogrenciid"), rs.getString("kullaniciadi"), rs.getString("eposta"), rs.getString("sifre"), rs.getString("ad"), rs.getString("soyad"), rs.getString("universite"), rs.getLong("sinifid"), rs.getLong("bolumid")));
@@ -80,5 +80,21 @@ public class OgrenciDAO extends Connector {
             Logger.getLogger(OgrenciDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return entity;
+    }
+    
+      public int getOgrenciCount() {
+              int veriSayisi=0;
+        Statement st;
+        try {
+            st = this.getConnect().createStatement();
+            ResultSet rs = st.executeQuery("select count(ogrenciid) as ogrenciSayisi from ogrenciler");
+
+          rs.next();
+          veriSayisi=rs.getInt("ogrenciSayisi");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return veriSayisi;
     }
 }

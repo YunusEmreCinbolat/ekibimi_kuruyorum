@@ -39,13 +39,13 @@ public class BolumDAO extends Connector {
         }
     }
 
-    public List<Bolum> readList() {
+    public List<Bolum> readList(int hangiSayfa,int gorunenVeri) {
         List<Bolum> list = new ArrayList<>();
 
         Statement st;
         try {
             st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select * from bolumler");
+            ResultSet rs = st.executeQuery("select * from bolumler LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
 
             while (rs.next()) {
                 list.add(new Bolum(rs.getLong("bolumid"), rs.getLong("fakulteid"), rs.getString("bolumadi")));
@@ -83,6 +83,22 @@ public class BolumDAO extends Connector {
             Logger.getLogger(BolumDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return entity;
+    }
+    
+      public int getBolumCount() {
+              int veriSayisi=0;
+        Statement st;
+        try {
+            st = this.getConnect().createStatement();
+            ResultSet rs = st.executeQuery("select count(bolumid) as bolumSayisi from bolumler");
+
+          rs.next();
+          veriSayisi=rs.getInt("bolumSayisi");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return veriSayisi;
     }
 
 }

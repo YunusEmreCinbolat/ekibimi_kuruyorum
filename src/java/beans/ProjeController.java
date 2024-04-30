@@ -52,7 +52,7 @@ public class ProjeController extends BaseController<Proje ,ProjeDAO> implements 
 
     
     public List<Proje> getList() {
-       this.list=this.getDao().readList();
+       this.list=this.getDao().readList(this.hangiSayfa,this.gorunenVeri);
         return list;
     }
 

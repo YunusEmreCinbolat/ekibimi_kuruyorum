@@ -24,7 +24,7 @@ public class KategoriDAO extends Connector {
     public void create(Kategori kategori) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("insert into kategoriler (kategoriadi,aciklama) values('" + kategori.getKategoriAdi()+ "', '" + kategori.getAciklama()+ "' )");
+            st.executeUpdate("insert into kategoriler (kategoriadi,aciklama) values('" + kategori.getKategoriAdi() + "', '" + kategori.getAciklama() + "' )");
         } catch (SQLException ex) {
             Logger.getLogger(KategoriDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -39,13 +39,13 @@ public class KategoriDAO extends Connector {
         }
     }
 
-    public List<Kategori> readList() {
+    public List<Kategori> readList(int hangiSayfa, int gorunenVeri) {
         List<Kategori> list = new ArrayList<>();
 
         Statement st;
         try {
             st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select * from kategoriler");
+            ResultSet rs = st.executeQuery("select * from kategoriler LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
 
             while (rs.next()) {
                 list.add(new Kategori(rs.getLong("kategoriid"), rs.getString("kategoriadi"), rs.getString("aciklama")));
@@ -60,7 +60,7 @@ public class KategoriDAO extends Connector {
     public void update(Kategori kategori) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update kategoriler set kategoriadi='" + kategori.getKategoriAdi()+ "',  aciklama='" + kategori.getAciklama()+ "' where kategoriid=" + kategori.getId());
+            st.executeUpdate("update kategoriler set kategoriadi='" + kategori.getKategoriAdi() + "',  aciklama='" + kategori.getAciklama() + "' where kategoriid=" + kategori.getId());
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -68,21 +68,37 @@ public class KategoriDAO extends Connector {
     }
 
     public Kategori getTitle(int id) {
-        Kategori entity =  null;
+        Kategori entity = null;
 
         Statement st;
         try {
             st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select * from kategoriler where kategoriid="+id);
+            ResultSet rs = st.executeQuery("select * from kategoriler where kategoriid=" + id);
 
             while (rs.next()) {
-               entity = new Kategori(rs.getLong("kategoriid"), rs.getString("kategoriadi"), rs.getString("aciklama"));
+                entity = new Kategori(rs.getLong("kategoriid"), rs.getString("kategoriadi"), rs.getString("aciklama"));
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(KategoriDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return entity;
+    }
+
+    public int getKaetegoriCount() {
+        int veriSayisi = 0;
+        Statement st;
+        try {
+            st = this.getConnect().createStatement();
+            ResultSet rs = st.executeQuery("select count(kategoriid) as kategoriSayisi from kategoriler");
+
+            rs.next();
+            veriSayisi = rs.getInt("kategoriSayisi");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return veriSayisi;
     }
 
 }
