@@ -5,8 +5,8 @@
 package beans;
 
 import dao.AdminDAO;
-import dao.ProjeDAO;
-import entity.Proje;
+import dao.KategoriDAO;
+import entity.Kategori;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -17,31 +17,31 @@ import java.util.List;
  *
  * @author Dell
  */
-@Named(value = "projeBean")
+@Named(value = "kategoriBean")
 @SessionScoped
-public class ProjeBean implements Serializable {
+public class KategoriController implements Serializable {
     
-     private Proje entity;
-    private List<Proje> list;
-    private ProjeDAO dao;
+     private Kategori entity;
+    private List<Kategori> list;
+    private KategoriDAO dao;
 
 
     /**
-     * Creates a new instance of ProjeBean
+     * Creates a new instance of KategoriBean
      */
-    public ProjeBean() {
+    public KategoriController() {
     }
     
     public String getTitle(int id){
-        Proje b= this.getDao().getTitle(id);
+        Kategori b= this.getDao().getTitle(id);
         
-        return b.getProjeAdi();
+        return b.getKategoriAdi();
     
     }
     
     public void create(){
         this.getDao().create(entity);
-        this.entity= new Proje();
+        this.entity= new Kategori();
     }
     
      public void delete(int id) {
@@ -51,39 +51,39 @@ public class ProjeBean implements Serializable {
      
       public void update(){
         this.getDao().update(entity);
-        this.entity=new Proje();
+        this.entity=new Kategori();
     }
  
 
-    public Proje getEntity() {
+    public Kategori getEntity() {
       if(this.entity==null){
-            this.entity=new Proje();
+            this.entity=new Kategori();
         }
         return entity;
     }
 
-    public String setEntity(Proje entity) {
+    public String setEntity(Kategori entity) {
         this.entity = entity;
-        return "/panel/admin/proje/AdminProjeDetay.xhtml?faces-redirect=true";
+        return "/panel/admin/kategori/AdminProjeKategoriDetay.xhtml?faces-redirect=true";
     }
 
-    public List<Proje> getList() {
+    public List<Kategori> getList() {
        this.list=this.getDao().readList();
         return list;
     }
 
-    public void setList(List<Proje> list) {
+    public void setList(List<Kategori> list) {
         this.list = list;
     }
 
-    public ProjeDAO getDao() {
+    public KategoriDAO getDao() {
            if (this.dao == null) {
-            this.dao = new ProjeDAO();
+            this.dao = new KategoriDAO();
         }
         return dao;
     }
 
-    public void setDao(ProjeDAO dao) {
+    public void setDao(KategoriDAO dao) {
         this.dao = dao;
     }
     

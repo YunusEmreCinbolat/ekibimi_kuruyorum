@@ -17,19 +17,14 @@ import java.util.List;
  */
 @Named(value = "adminBean")
 @SessionScoped
-public class AdminBean implements Serializable {
+public class AdminController extends BaseController<Admin,AdminDAO> implements Serializable {
 
-    private Admin entity;
-    private List<Admin> list;
-    private AdminDAO dao;
     
-    
-
-
     /**
      * Creates a new instance of AdminBean
      */
-    public AdminBean() {
+    public AdminController() {
+        super(Admin.class,AdminDAO.class);
     }
     
     public void update(){
@@ -48,37 +43,12 @@ public class AdminBean implements Serializable {
 
     }
 
-    public Admin getEntity() {
-        if (this.entity == null) {
-            this.entity = new Admin();
-        }
-        return entity;
-    }
-
-    public String setEntity(Admin entity) {
-        this.entity = entity;
-        return "/panel/admin/admin/AdminGuncelle.xhtml?faces-redirect=true";
-    }
-
     public List<Admin> getList() {
-        this.list = this.getDao().readList();
-        return list;
+        this.list= this.getDao().readList();
+        return this.list;
     }
 
-    public void setList(List<Admin> list) {
-        this.list = list;
-    }
 
-    public AdminDAO getDao() {
-        if (this.dao == null) {
-            this.dao = new AdminDAO();
-        }
-        return dao;
-    }
-
-    public void setDao(AdminDAO dao) {
-        this.dao = dao;
-    }
-
+  
   
 }

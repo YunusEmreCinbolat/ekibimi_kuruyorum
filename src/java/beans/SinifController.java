@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Named(value = "sinifBean")
 @SessionScoped
-public class SinifBean implements Serializable {
+public class SinifController implements Serializable {
     
      private Sinif entity;
     private List<Sinif> list;
@@ -30,7 +30,7 @@ public class SinifBean implements Serializable {
     /**
      * Creates a new instance of SinifBean
      */
-    public SinifBean() {
+    public SinifController() {
     }
     
     public void create(){

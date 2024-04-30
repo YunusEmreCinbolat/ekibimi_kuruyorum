@@ -5,8 +5,8 @@
 package beans;
 
 import dao.AdminDAO;
-import dao.BolumDAO;
-import entity.Bolum;
+import dao.ProjeDAO;
+import entity.Proje;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -17,31 +17,31 @@ import java.util.List;
  *
  * @author Dell
  */
-@Named(value = "bolumBean")
+@Named(value = "projeBean")
 @SessionScoped
-public class BolumBean implements Serializable {
+public class ProjeController implements Serializable {
     
-     private Bolum entity;
-    private List<Bolum> list;
-    private BolumDAO dao;
+     private Proje entity;
+    private List<Proje> list;
+    private ProjeDAO dao;
 
 
     /**
-     * Creates a new instance of BolumBean
+     * Creates a new instance of ProjeBean
      */
-    public BolumBean() {
+    public ProjeController() {
     }
     
     public String getTitle(int id){
-        Bolum b= this.getDao().getTitle(id);
+        Proje b= this.getDao().getTitle(id);
         
-        return b.getBolumadi();
+        return b.getProjeAdi();
     
     }
     
     public void create(){
         this.getDao().create(entity);
-        this.entity= new Bolum();
+        this.entity= new Proje();
     }
     
      public void delete(int id) {
@@ -51,39 +51,39 @@ public class BolumBean implements Serializable {
      
       public void update(){
         this.getDao().update(entity);
-        this.entity=new Bolum();
+        this.entity=new Proje();
     }
  
 
-    public Bolum getEntity() {
+    public Proje getEntity() {
       if(this.entity==null){
-            this.entity=new Bolum();
+            this.entity=new Proje();
         }
         return entity;
     }
 
-    public String setEntity(Bolum entity) {
+    public String setEntity(Proje entity) {
         this.entity = entity;
-        return "/panel/admin/bolum/AdminBolumGuncelle.xhtml?faces-redirect=true";
+        return "/panel/admin/proje/AdminProjeDetay.xhtml?faces-redirect=true";
     }
 
-    public List<Bolum> getList() {
+    public List<Proje> getList() {
        this.list=this.getDao().readList();
         return list;
     }
 
-    public void setList(List<Bolum> list) {
+    public void setList(List<Proje> list) {
         this.list = list;
     }
 
-    public BolumDAO getDao() {
+    public ProjeDAO getDao() {
            if (this.dao == null) {
-            this.dao = new BolumDAO();
+            this.dao = new ProjeDAO();
         }
         return dao;
     }
 
-    public void setDao(BolumDAO dao) {
+    public void setDao(ProjeDAO dao) {
         this.dao = dao;
     }
     
