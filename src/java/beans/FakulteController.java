@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Named(value = "fakulteBean")
 @SessionScoped
-public class FakulteBean implements Serializable {
+public class FakulteController implements Serializable {
 
     private Fakulte entity;
     private List<Fakulte> list;
@@ -28,7 +28,7 @@ public class FakulteBean implements Serializable {
     /**
      * Creates a new instance of FakulteBean
      */
-    public FakulteBean() {
+    public FakulteController() {
     }
 
     public void create() {

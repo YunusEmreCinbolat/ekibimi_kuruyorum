@@ -5,8 +5,8 @@
 package beans;
 
 import dao.AdminDAO;
-import dao.KategoriDAO;
-import entity.Kategori;
+import dao.BolumDAO;
+import entity.Bolum;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -17,31 +17,31 @@ import java.util.List;
  *
  * @author Dell
  */
-@Named(value = "kategoriBean")
+@Named(value = "bolumBean")
 @SessionScoped
-public class KategoriBean implements Serializable {
+public class BolumController implements Serializable {
     
-     private Kategori entity;
-    private List<Kategori> list;
-    private KategoriDAO dao;
+     private Bolum entity;
+    private List<Bolum> list;
+    private BolumDAO dao;
 
 
     /**
-     * Creates a new instance of KategoriBean
+     * Creates a new instance of BolumBean
      */
-    public KategoriBean() {
+    public BolumController() {
     }
     
     public String getTitle(int id){
-        Kategori b= this.getDao().getTitle(id);
+        Bolum b= this.getDao().getTitle(id);
         
-        return b.getKategoriAdi();
+        return b.getBolumadi();
     
     }
     
     public void create(){
         this.getDao().create(entity);
-        this.entity= new Kategori();
+        this.entity= new Bolum();
     }
     
      public void delete(int id) {
@@ -51,39 +51,39 @@ public class KategoriBean implements Serializable {
      
       public void update(){
         this.getDao().update(entity);
-        this.entity=new Kategori();
+        this.entity=new Bolum();
     }
  
 
-    public Kategori getEntity() {
+    public Bolum getEntity() {
       if(this.entity==null){
-            this.entity=new Kategori();
+            this.entity=new Bolum();
         }
         return entity;
     }
 
-    public String setEntity(Kategori entity) {
+    public String setEntity(Bolum entity) {
         this.entity = entity;
-        return "/panel/admin/kategori/AdminProjeKategoriDetay.xhtml?faces-redirect=true";
+        return "/panel/admin/bolum/AdminBolumGuncelle.xhtml?faces-redirect=true";
     }
 
-    public List<Kategori> getList() {
+    public List<Bolum> getList() {
        this.list=this.getDao().readList();
         return list;
     }
 
-    public void setList(List<Kategori> list) {
+    public void setList(List<Bolum> list) {
         this.list = list;
     }
 
-    public KategoriDAO getDao() {
+    public BolumDAO getDao() {
            if (this.dao == null) {
-            this.dao = new KategoriDAO();
+            this.dao = new BolumDAO();
         }
         return dao;
     }
 
-    public void setDao(KategoriDAO dao) {
+    public void setDao(BolumDAO dao) {
         this.dao = dao;
     }
     

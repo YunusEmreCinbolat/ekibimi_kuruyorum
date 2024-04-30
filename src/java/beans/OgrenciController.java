@@ -19,13 +19,13 @@ import java.util.List;
  */
 @Named(value = "ogrenciBean")
 @SessionScoped
-public class OgrenciBean implements Serializable {
+public class OgrenciController implements Serializable {
 
     private Ogrenci entity;
     private OgrenciDAO dao;
     private List<Ogrenci> list;
 
-    public OgrenciBean() {
+    public OgrenciController() {
     }
     
     public String getFromOgrenci(int id){
