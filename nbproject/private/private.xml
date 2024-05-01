@@ -3,17 +3,36 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/beans/BolumBean.java</file>
-            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/beans/SinifBean.java</file>
-            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/web/panel/admin/AdminOgrenciGoruntule.xhtml</file>
-            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/web/panel/admin/AdminFakulteGoruntule.xhtml</file>
-            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/entity/Ogrenci.java</file>
-            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/beans/FakulteBean.java</file>
-            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/beans/OgrenciBean.java</file>
-            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/web/panel/admin/AdminBolumGoruntule.xhtml</file>
-            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/dao/SinifDAO.java</file>
-            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/dao/FakulteDAO.java</file>
-            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/ekibimi_kuruyorum/src/java/dao/OgrenciDAO.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/beans/FakulteController.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/beans/SinifController.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/beans/KategoriController.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/admin/fakultee/AdminFakulteGoruntule.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/admin/bolum/AdminBolumGoruntule.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/admin/proje/AdminProjeGoruntule.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/dao/BolumDAO.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/beans/BolumController.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/dao/OgrenciDAO.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/admin/admin/AdminGuncelle.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/admin/sinif/AdminSinifGoruntule.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/admin/kategori/AdminProjeKategoriGoruntule.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/admin/AdminPanelNavbar.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/admin/admin/AdminGoruntule.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/admin/kategori/AdminProjeKategoriEkle.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/dao/AdminDAO.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/admin/fakultee/AdminFakulteGuncelle.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/dao/KategoriDAO.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/ogrenci/OgrenciAnasayfa.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/dao/FakulteDAO.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/dao/ProjeDAO.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/admin/bolum/AdminBolumEkle.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/admin/anasayfa/AdminPanelAnasayfa.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/web/panel/admin/ogrenci/AdminOgrenciGoruntule.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/beans/AdminController.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/beans/BaseController.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/beans/ProjeController.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/dao/SinifDAO.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/navigation/NavigationBean.java</file>
+            <file>file:/C:/Users/Dell/Documents/3.sinif/ekibimi_kuruyorum/src/java/beans/OgrenciController.java</file>
         </group>
     </open-files>
 </project-private>
