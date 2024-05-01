@@ -23,14 +23,13 @@ public class NavigationBean implements Serializable {
     }
 
     public Map<String, String> getPages() {
-                pages.put("index", "/panel/admin/admin/AdminKaydet.xhtm?faces-redirect=true");
+       
         return pages;
     }
 
     public String goToPage(String page){
         pages= new HashMap();
         pages.put(page, "active");
-        pages.put("index", "/panel/admin/admin/AdminKaydet.xhtml");
         return page;
     } 
 }
