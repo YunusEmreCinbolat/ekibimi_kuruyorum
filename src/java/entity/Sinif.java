@@ -12,6 +12,7 @@ public class Sinif {
     private Long id;
     private Long bolumid;
     private int sinifadi;
+    
 
     public Sinif() {
     }

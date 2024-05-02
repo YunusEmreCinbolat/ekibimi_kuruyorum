@@ -5,27 +5,57 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-         <h:outputStylesheet library="css" name="bootstrap.min.css" />
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
         <title>Admin Girişi</title>
+        <script>
+            function submitForm() {
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+
+                // Boş alan kontrolü
+                if (email.trim() === "" || password.trim() === "") {
+                    alert("E-Mail ve Şifre alanları boş olamaz.");
+                    return;
+                }
+
+                var formData = new FormData();
+                formData.append("email", email);
+                formData.append("password", password);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "url_of_your_server_endpoint", true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            // Başarılı yanıt alındığında burası çalışır
+                            console.log(xhr.responseText);
+                            // Burada isteğe göre yanıtı işleyebilirsiniz
+                        } else {
+                            // Yanıt alınamadığında veya hata durumunda burası çalışır
+                            console.error('Form gönderilirken hata oluştu.');
+                        }
+                    }
+                };
+                xhr.send(formData);
+            }
+        </script>
     </h:head>
     <h:body>
         <h1>Admin Girişi</h1>
-        <hr></hr>
-                 
-            <div class="row ml-3">
-                <h:form>
-                    <div class="mb-3">
-                        <label>E-Mail</label>
-                        <h:inputText value="" styleClass="form-control"/>
-                    </div>
-                    <div class="mb-3">
-                        <label>Şifre</label>
-                        <h:inputText value="" styleClass="form-control"/>
-                    </div>
-                    <div class="mb-3">
-                        <h:commandButton  value="Giriş Yap"/>
-                    </div>
-                </h:form>
+        <hr />
+        <div class="row ml-3">
+            <div>
+                <label for="email">E-Mail</label>
+                <input type="email" id="email" class="form-control" />
             </div>
+            <div>
+                <label for="password">Şifre</label>
+                <input type="password" id="password" class="form-control" />
+            </div>
+            <div>
+                <!-- AJAX isteği göndermek için bir düğme -->
+                <button onclick="submitForm()">Giriş Yap</button>
+            </div>
+        </div>
     </h:body>
 </html>
