@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Named(value = "kategoriBean")
 @SessionScoped
-public class KategoriController extends BaseController<Kategori ,KategoriDAO> implements Serializable {
+public class KategoriController extends BaseController<Kategori ,KategoriDAO> implements Serializable,Controller {
     
      private Kategori entity;
     public KategoriController() {
@@ -33,16 +33,19 @@ public class KategoriController extends BaseController<Kategori ,KategoriDAO> im
     
     }
     
+     @Override
     public void create(){
         this.getDao().create(entity);
         this.entity= new Kategori();
     }
     
+     @Override
      public void delete(int id) {
         this.getDao().delete(id);
 
     }
      
+     @Override
       public void update(){
         this.getDao().update(entity);
         this.entity=new Kategori();

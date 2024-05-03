@@ -20,13 +20,14 @@ import java.util.List;
  */
 @Named(value = "sinifBean")
 @SessionScoped
-public class SinifController extends BaseController<Sinif,SinifDAO> implements Serializable {
+public class SinifController extends BaseController<Sinif,SinifDAO> implements Serializable,Controller {
     
        private Sinif entity;
     public SinifController() {
         super(Sinif.class,SinifDAO.class);
     }
     
+       @Override
     public void create(){
         this.getDao().create(entity);
         this.entity= new Sinif();
@@ -38,11 +39,13 @@ public class SinifController extends BaseController<Sinif,SinifDAO> implements S
 
     }
     
+       @Override
      public void delete(int id) {
         this.getDao().delete(id);
 
     }
      
+       @Override
       public void update(){
         this.getDao().update(entity);
         this.entity=new Sinif();

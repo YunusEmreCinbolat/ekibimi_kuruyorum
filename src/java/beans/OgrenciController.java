@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Named(value = "ogrenciBean")
 @SessionScoped
-public class OgrenciController extends BaseController<Ogrenci,OgrenciDAO> implements Serializable {
+public class OgrenciController extends BaseController<Ogrenci,OgrenciDAO> implements Serializable,Controller {
 
      private Ogrenci entity;
     public OgrenciController() {
@@ -30,15 +30,18 @@ public class OgrenciController extends BaseController<Ogrenci,OgrenciDAO> implem
         Ogrenci o = this.getDao().getFromOgrenci(id);
         return o.getAd();
     }
+     @Override
     public void create() {
         this.getDao().create(entity);
         this.entity = new Ogrenci();
     }
     
+     @Override
       public void delete(int id) {
         this.getDao().delete(id);
 
     }
+     @Override
         public void update() {
         this.getDao().update(entity);
         this.entity = new Ogrenci();

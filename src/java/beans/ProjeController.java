@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Named(value = "projeBean")
 @SessionScoped
-public class ProjeController extends BaseController<Proje ,ProjeDAO> implements Serializable {
+public class ProjeController extends BaseController<Proje ,ProjeDAO> implements Serializable,Controller {
      private Proje entity;
     
     public ProjeController() {
@@ -34,16 +34,19 @@ public class ProjeController extends BaseController<Proje ,ProjeDAO> implements 
     
     }
     
+     @Override
     public void create(){
         this.getDao().create(entity);
         this.entity= new Proje();
     }
     
+     @Override
      public void delete(int id) {
         this.getDao().delete(id);
 
     }
      
+     @Override
       public void update(){
         this.getDao().update(entity);
         this.entity=new Proje();

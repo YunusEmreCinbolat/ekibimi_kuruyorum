@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Named(value = "bolumBean")
 @SessionScoped
-public class BolumController extends BaseController<Bolum ,BolumDAO> implements Serializable {
+public class BolumController extends BaseController<Bolum ,BolumDAO> implements Serializable,Controller {
     
      private Bolum entity;
        
@@ -35,16 +35,19 @@ public class BolumController extends BaseController<Bolum ,BolumDAO> implements 
     
     }
     
+     @Override
     public void create(){
         this.getDao().create(entity);
         this.entity= new Bolum();
     }
     
+     @Override
      public void delete(int id) {
         this.getDao().delete(id);
 
     }
      
+     @Override
       public void update(){
         this.getDao().update(entity);
         this.entity=new Bolum();

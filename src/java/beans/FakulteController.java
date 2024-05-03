@@ -19,18 +19,20 @@ import java.util.List;
  */
 @Named(value = "fakulteBean")
 @SessionScoped
-public class FakulteController extends BaseController<Fakulte , FakulteDAO> implements Serializable {
+public class FakulteController extends BaseController<Fakulte , FakulteDAO> implements Serializable,Controller {
 
      private Fakulte entity;
     public FakulteController() {
         super(Fakulte.class,FakulteDAO.class);
     }
 
+     @Override
     public void create() {
         this.getDao().create(entity);
         this.entity = new Fakulte();
     }
 
+     @Override
     public void delete(int id) {
         this.getDao().delete(id);
 
@@ -50,6 +52,7 @@ public class FakulteController extends BaseController<Fakulte , FakulteDAO> impl
     
     
 
+     @Override
     public void update() {
         this.getDao().update(entity);
         this.entity = new Fakulte();
