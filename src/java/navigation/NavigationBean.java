@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package navigation;
 
 import jakarta.inject.Named;
@@ -10,26 +6,23 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * @author Dell
- */
-@Named
+@Named(value="navigationBean")
 @SessionScoped
 public class NavigationBean implements Serializable {
 
-  private Map<String,String> pages;
+    private Map<String, Boolean> pageStates;
+
     public NavigationBean() {
-    }
-
-    public Map<String, String> getPages() {
        
-        return pages;
     }
 
-    public String goToPage(String page){
-        pages= new HashMap();
-        pages.put(page, "active");
+    public Map<String, Boolean> getPageStates() {
+        return pageStates;
+    }
+
+    public String goToPage(String page) {
+      pageStates = new HashMap<>();        // Hedef sayfayı aktif yap
+        pageStates.put(page, true);
         return page;
-    } 
+    }
 }
