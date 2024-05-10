@@ -5,6 +5,7 @@
 package dao;
 
 import entity.Proje;
+import entity.Proje;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -41,7 +42,7 @@ public class ProjeDAO extends Connector {
     public void create(Proje proje) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("insert into projeler (projeadi,projeaciklamasi,kullanilanteknolojiler,sahipogrenciid,kategoriid) values('" + proje.getProjeAdi() + "' ,'" + proje.getProjeAciklamasi() + "' , '" + proje.getKullanilanTeknolojiler() + "', '" + proje.getSahipOgrenciId() + "','" + proje.getKategoriId() + "' )");
+            st.executeUpdate("insert into projeler (projeadi,projeaciklamasi,kullanilanteknolojiler,sahipogrenciid,kategoriid) values('" + proje.getProjeAdi() + "' ,'" + proje.getProjeAciklamasi() + "' , '" + proje.getKullanilanTeknolojiler() + "', '" + proje.getSahipOgrenciId()+ "','" + proje.getKategoriId() + "' )");
         } catch (SQLException ex) {
             Logger.getLogger(ProjeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -59,7 +60,7 @@ public class ProjeDAO extends Connector {
     public void update(Proje proje) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update projeler set projeadi='" + proje.getProjeAdi() + "', projeaciklamasi='" + proje.getProjeAciklamasi() + "', kullanilanteknolojiler='" + proje.getKullanilanTeknolojiler() + "', sahipogrenciid='" + proje.getSahipOgrenciId() + ", kategoriid='" + proje.getKategoriId() + "  where projeid=" + proje.getId());
+            st.executeUpdate("update projeler set projeadi='" + proje.getProjeAdi() + "', projeaciklamasi='" + proje.getProjeAciklamasi() + "', kullanilanteknolojiler='" + proje.getKullanilanTeknolojiler() + "', sahipogrenciid='" + proje.getSahipOgrenciId()+ ", kategoriid='" + proje.getKategoriId() + "  where projeid=" + proje.getId());
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -67,7 +68,20 @@ public class ProjeDAO extends Connector {
     }
 
     public Proje getTitle(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+         Proje entity = null;
+        try {
+            Statement st = this.getConnect().createStatement();
+            ResultSet rs = st.executeQuery("Select * from projeler where projeid=" + id);
+
+            while (rs.next()) {
+                entity = new Proje(rs.getLong("projeid"), rs.getString("projeadi"), rs.getString("projeaciklamasi"), rs.getString("kullanilanteknolojiler"), rs.getLong("sahipogrenciid"), rs.getLong("kategoriid"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return entity;
+   
     }
 
     public int getProjeCount() {

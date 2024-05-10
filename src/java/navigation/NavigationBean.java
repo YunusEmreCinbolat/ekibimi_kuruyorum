@@ -1,5 +1,7 @@
 package navigation;
 
+
+
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -10,10 +12,11 @@ import java.util.Map;
 @SessionScoped
 public class NavigationBean implements Serializable {
 
+    private String activePage;
     private Map<String, Boolean> pageStates;
 
     public NavigationBean() {
-
+        pageStates = new HashMap<>();
     }
 
     public Map<String, Boolean> getPageStates() {
@@ -23,26 +26,14 @@ public class NavigationBean implements Serializable {
     public String goToPage(String page) {
         if (pageStates == null) {
             pageStates = new HashMap<>();
-        } else {
-            // Eğer pageStates zaten oluşturulmuşsa, mevcut zgirdileri kontrol et
-            for (Map.Entry<String, Boolean> entry : pageStates.entrySet()) {
-                String key = entry.getKey();
-                Boolean value = entry.getValue();
+        } 
 
-                // Eğer sayfa zaten mevcutsa, durumunu güncelleme
-                if (key.contains(page)) {
-                  
-                } 
-                else{
-                      pageStates.put(page, false);
-                    return page;
-                }
-            }
+        // Gidilen sayfayı aktif yap, diğer sayfaları pasif yap
+        for (Map.Entry<String, Boolean> entry : pageStates.entrySet()) {
+            String key = entry.getKey();
+            pageStates.put(key, key.equals(page));
         }
 
-        // Sayfa daha önce eklenmemişse, yeni bir giriş oluşturma
-        pageStates.put(page, false);
         return page;
     }
-
 }
