@@ -51,7 +51,7 @@
 
                             <div class="mb-3">
                                 <h:commandButton styleClass="btn btn-primary btn-block" action="#{adminBean.create}" value="Kaydet">
-                                   
+                                    <f:ajax execute="@form" render="@form"/>
                                 </h:commandButton>
                             </div>
                         </div>

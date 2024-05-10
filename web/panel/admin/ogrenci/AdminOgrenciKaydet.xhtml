@@ -14,7 +14,7 @@
                 <div class="container">
                     <h1 class="mt-3">Öğrenci Kaydetme</h1>
                     <hr />
-                    <h:form id="ogrenciForm">
+                    <h:form>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -64,11 +64,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <h:commandButton id="kaydetButton" class="btn btn-primary" value="Kayıt Et" 
-                                                      rendered="#{empty ogrenciBean.entity.id}"
-                                                      action="#{ogrenciBean.create}">
-                                        <f:ajax execute="@form" render="@form"/>
-                                    </h:commandButton>
+                                    <h:commandButton class="btn btn-primary" action="#{ogrenciBean.create}" value="Kayıt Et" rendered="#{empty ogrenciBean.entity.id}"/>
+                                    <h:commandButton class="btn btn-secondary" action="#{ogrenciBean.update}" value="Güncelle" rendered="#{not empty ogrenciBean.entity.id}"/>
                                 </div>
                             </div>
                         </div>
