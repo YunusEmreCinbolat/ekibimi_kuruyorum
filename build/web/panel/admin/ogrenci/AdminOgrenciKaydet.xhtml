@@ -7,28 +7,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Admin Öğrenci Kaydetme Sayfası</title>
-        <h:outputScript library="javax.faces" name="jsf.js"/>
-        <script>
-            function validateInput() {
-                var ad = document.getElementById("form:ad").value;
-                var soyad = document.getElementById("form:soyad").value;
-                var kullaniciadi = document.getElementById("form:kullaniciadi").value;
-                var email = document.getElementById("form:email").value;
-                var sifre = document.getElementById("form:sifre").value;
-                var sifreTekrar = document.getElementById("form:sifreTekrar").value;
-
-                // Basit bir kontrol örneği, istediğiniz gibi değiştirebilirsiniz
-                if (ad === "" || soyad === "" || kullaniciadi === "" || email === "" || sifre === "" || sifreTekrar === "") {
-                    alert("Lütfen tüm alanları doldurun.");
-                    return false;
-                }
-
-                // Diğer kontrolleri burada yapabilirsiniz
-                // Örneğin, e-posta formatı kontrolü gibi
-                // return false; // uygun değilse
-                // return true;  // uygunsa
-            }
-        </script>
     </h:head>
     <ui:composition template="../AdminPanelNavbar.xhtml">
         <ui:define name="content">
@@ -36,10 +14,11 @@
                 <div class="container">
                     <h1 class="mt-3">Öğrenci Kaydetme</h1>
                     <hr />
-                    <h:form id="form" onsubmit="return validateInput();">
+                    <h:form>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
+                                    
                                     <label for="ad">Ad</label>
                                     <h:inputText id="ad" value="#{ogrenciBean.entity.ad}" styleClass="form-control"/>
                                 </div>
