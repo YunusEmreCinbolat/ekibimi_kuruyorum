@@ -40,14 +40,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                     </td>
                                 </tr>                
                             </ui:repeat>
-                            <h:form>
-                                <h:commandButton action="#{bolumBean.prev()}" value="Geri"/>
-                                <h:commandButton action="#{bolumBean.next()}"  value="İleri"/>
-
-                            </h:form>
+                           
                         </tbody>
                     </table>
                 </h:form>
+                   <!-- İleri ve Geri Butonları -->
+                <div class="text-center">
+                    <div class="d-inline-block mr-2">
+                        <h:form>
+                            <h:commandButton action="#{bolumBean.prev()}" value="Geri"/>
+                        </h:form>
+                    </div>
+                    <div class="d-inline-block">
+                        <h:form>
+                            <h:commandButton action="#{bolumBean.next()}"  value="İleri"/>
+                        </h:form>
+                    </div>
+                </div>
             </div>
         </ui:define>
     </ui:composition>

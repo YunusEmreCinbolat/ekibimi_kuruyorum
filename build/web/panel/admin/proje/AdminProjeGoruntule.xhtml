@@ -39,14 +39,24 @@
                                         </td>
                                     </tr>
                                 </ui:repeat>
-                                <h:form>
-                                    <h:commandButton action="#{projeBean.prev()}" value="Geri"/>
-                                    <h:commandButton action="#{projeBean.next()}"  value="İleri"/>
-
-                                </h:form>
+                          
                             </tbody>
                         </table>
+                           <!-- İleri ve Geri Butonları -->
+                <div class="text-center">
+                    <div class="d-inline-block mr-2">
+                        <h:form>
+                            <h:commandButton action="#{projeBean.prev()}" value="Geri"/>
+                        </h:form>
+                    </div>
+                    <div class="d-inline-block">
+                        <h:form>
+                            <h:commandButton action="#{projeBean.next()}"  value="İleri"/>
+                        </h:form>
+                    </div>
+                </div>
                     </h:form>
+                    
                 </div>
             </h:body>
         </ui:define>

@@ -39,14 +39,22 @@
                                     <td><h:commandButton class="btn-secondary" action="#{adminBean.setEntity(e)}" value="GÜNCELLE"/></td>
                                 </tr>
                             </ui:repeat>
-                            <h:form>
-                                <h:commandButton action="#{adminBean.prev()}" value="Geri"/>
-                                <h:commandButton action="#{adminBean.next()}"  value="İleri"/>
-
-                            </h:form>
                         </tbody>
                     </table>
                 </h:form>
+                <!-- İleri ve Geri Butonları -->
+                <div class="text-center">
+                    <div class="d-inline-block mr-2">
+                        <h:form>
+                            <h:commandButton action="#{adminBean.prev()}" value="Geri"/>
+                        </h:form>
+                    </div>
+                    <div class="d-inline-block">
+                        <h:form>
+                            <h:commandButton action="#{adminBean.next()}"  value="İleri"/>
+                        </h:form>
+                    </div>
+                </div>
             </div>
         </ui:define>
     </ui:composition>
