@@ -18,7 +18,7 @@
                         <h:form>
                             <div class="mb-3">
                                 <label for="fakulte">Fakülte</label>
-                                <h:selectOneMenu id="fakulte" value="#{bolumBean.entity.fakulteid}" styleClass="form-control">
+                                <h:selectOneMenu id="fakulte" value="#{bolumBean.entity.fakulte.id}" styleClass="form-control">
                                     <f:selectItems value="#{fakulteBean.list}" var="fakulte" itemValue="#{fakulte.id}" itemLabel="#{fakulte.fakulteadi}" />
                                 </h:selectOneMenu>
                             </div>

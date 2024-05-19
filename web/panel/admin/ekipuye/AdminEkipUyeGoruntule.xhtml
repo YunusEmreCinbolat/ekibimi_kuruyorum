@@ -31,8 +31,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             <ui:repeat value="#{ekipuyeBean.list}" var="e" >
                                 <tr>
                                     <td>#{e.id}</td>
-                                    <td>#{ogrenciBean.getFromOgrenci(e.ogrenciid)}</td>
-                                    <td>#{projeBean.getTitle(e.projeid)}</td>
+                                    <td>#{e.ogrenci.ad}</td>
+                                    <td>#{e.proje.projeAdi}</td>
                                     <td>#{e.ekiprolu}</td>
                                     
                                  

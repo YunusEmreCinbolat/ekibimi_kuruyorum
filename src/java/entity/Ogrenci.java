@@ -4,6 +4,8 @@
  */
 package entity;
 
+import java.util.Objects;
+
 /**
  *
  * @author Dell
@@ -17,15 +19,24 @@ public class Ogrenci {
     private String ad;
     private String soyad;
     private String universite;
-    private Long sinifid;
-    private Long bolumid;
+    private Sinif sinif;
+    private Bolum bolum;
 
     public Ogrenci() {
     }
-    
-    
 
-    public Ogrenci(Long id, String kullaniciadi, String email, String sifre, String ad, String soyad, String universite, Long sinifid, Long bolumid) {
+    public Ogrenci(String kullaniciadi, String email, String sifre, String ad, String soyad, String universite, Sinif sinif, Bolum bolumid) {
+        this.kullaniciadi = kullaniciadi;
+        this.email = email;
+        this.sifre = sifre;
+        this.ad = ad;
+        this.soyad = soyad;
+        this.universite = universite;
+        this.sinif = sinif;
+        this.bolum = bolumid;
+    }
+
+    public Ogrenci(Long id, String kullaniciadi, String email, String sifre, String ad, String soyad, String universite, Sinif sinif, Bolum bolum) {
         this.id = id;
         this.kullaniciadi = kullaniciadi;
         this.email = email;
@@ -33,19 +44,8 @@ public class Ogrenci {
         this.ad = ad;
         this.soyad = soyad;
         this.universite = universite;
-        this.sinifid = sinifid;
-        this.bolumid = bolumid;
-    }
-
-    public Ogrenci(String kullaniciadi, String email, String sifre, String ad, String soyad, String universite, Long sinifid, Long bolumid) {
-        this.kullaniciadi = kullaniciadi;
-        this.email = email;
-        this.sifre = sifre;
-        this.ad = ad;
-        this.soyad = soyad;
-        this.universite = universite;
-        this.sinifid = sinifid;
-        this.bolumid = bolumid;
+        this.sinif = sinif;
+        this.bolum = bolum;
     }
 
     public Long getId() {
@@ -104,22 +104,47 @@ public class Ogrenci {
         this.universite = universite;
     }
 
-    public Long getSinifid() {
-        return sinifid;
+    public Sinif getSinif() {
+        return sinif;
     }
 
-    public void setSinifid(Long sinifid) {
-        this.sinifid = sinifid;
+    public void setSinif(Sinif sinif) {
+        this.sinif = sinif;
     }
 
-    public Long getBolumid() {
-        return bolumid;
+    public Bolum getBolum() {
+        return bolum;
     }
 
-    public void setBolumid(Long bolumid) {
-        this.bolumid = bolumid;
+    public void setBolum(Bolum bolum) {
+        this.bolum = bolum;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ogrenci other = (Ogrenci) obj;
+        return Objects.equals(this.id, other.id);
     }
     
+    
+    
+
     
     
 }

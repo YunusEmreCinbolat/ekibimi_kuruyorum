@@ -6,6 +6,7 @@ package dao;
 
 import entity.Admin;
 import entity.Bolum;
+import entity.Fakulte;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,11 +21,13 @@ import util.Connector;
  * @author Dell
  */
 public class BolumDAO extends Connector {
+    
+    private FakulteDAO dao;
 
     public void create(Bolum bolum) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("insert into bolumler (bolumadi,fakulteid) values('" + bolum.getBolumadi() + "', '" + bolum.getFakulteid() + "' )");
+            st.executeUpdate("insert into bolumler (bolumadi,fakulteid) values('" + bolum.getBolumadi() + "', '" + bolum.getFakulte().getId()+ "' )");
         } catch (SQLException ex) {
             Logger.getLogger(BolumDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -48,7 +51,8 @@ public class BolumDAO extends Connector {
             ResultSet rs = st.executeQuery("select * from bolumler LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
 
             while (rs.next()) {
-                list.add(new Bolum(rs.getLong("bolumid"), rs.getLong("fakulteid"), rs.getString("bolumadi")));
+                Fakulte f=this.getDao().getFakulteAdi(rs.getInt("fakulteid"));
+                list.add(new Bolum(rs.getLong("bolumid"), f , rs.getString("bolumadi")));
             }
 
         } catch (SQLException ex) {
@@ -60,7 +64,7 @@ public class BolumDAO extends Connector {
     public void update(Bolum bolum) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update bolumler set bolumadi='" + bolum.getBolumadi() + "',  fakulteid='" + bolum.getFakulteid() + "' where bolumid=" + bolum.getId());
+            st.executeUpdate("update bolumler set bolumadi='" + bolum.getBolumadi() + "',  fakulteid='" + bolum.getFakulte().getId()+ "' where bolumid=" + bolum.getId());
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -76,7 +80,8 @@ public class BolumDAO extends Connector {
             ResultSet rs = st.executeQuery("select * from bolumler where bolumid="+id);
 
             while (rs.next()) {
-               entity = new Bolum(rs.getLong("bolumid"), rs.getLong("fakulteid"), rs.getString("bolumadi"));
+               Fakulte f=this.getDao().getFakulteAdi(rs.getInt("fakulteid"));
+               entity = new Bolum(rs.getLong("bolumid"), f, rs.getString("bolumadi"));
             }
 
         } catch (SQLException ex) {
@@ -99,6 +104,17 @@ public class BolumDAO extends Connector {
             Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return veriSayisi;
+    }
+
+    public FakulteDAO getDao() {
+        if(this.dao==null){
+            this.dao=new FakulteDAO();
+        }
+        return dao;
+    }
+
+    public void setDao(FakulteDAO dao) {
+        this.dao = dao;
     }
 
 }

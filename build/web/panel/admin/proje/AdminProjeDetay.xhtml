@@ -18,10 +18,10 @@
                         <h:outputText value="#{projeBean.entity.projeAdi}" />
 
                         <h:outputText value="Proje Kategorisi:" />
-                        <h:outputText value="#{kategoriBean.getTitle(projeBean.entity.kategoriId)}" />
+                        <h:outputText value="#{projeBean.entity.kategori.kategoriAdi}" />
 
                         <h:outputText value="Proje Sahibi:" />
-                        <h:outputText value="#{ogrenciBean.getFromOgrenci(projeBean.entity.sahipOgrenciId)}" />
+                        <h:outputText value="#{projeBean.entity.sahipOgrenciId.ad}" />
 
                         <h:outputText value="Proje Açıklaması:" />
                         <h:outputText value="#{projeBean.entity.projeAciklamasi}" />

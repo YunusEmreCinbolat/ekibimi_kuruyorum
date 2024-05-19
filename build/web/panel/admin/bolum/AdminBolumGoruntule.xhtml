@@ -30,7 +30,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             <ui:repeat value="#{bolumBean.list}" var="e" >
                                 <tr>
                                     <td>#{e.id}</td>
-                                    <td>#{fakulteBean.getFakulteAdi(e.fakulteid)}</td>
+                                    <td>#{e.fakulte.fakulteadi}</td>
                                     <td>#{e.bolumadi}</td>
                                     <td>
                                         <h:commandButton styleClass="btn btn-danger" action="#{bolumBean.delete(e.id)}" value="SİL"/>

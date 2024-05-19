@@ -4,6 +4,8 @@
  */
 package entity;
 
+import java.util.Objects;
+
 /**
  *
  * @author Dell
@@ -13,27 +15,27 @@ public class Proje {
     private String projeAdi;
     private String projeAciklamasi;
     private String kullanilanTeknolojiler;
-    private Long sahipOgrenciId;
-    private Long kategoriId;
+    private Ogrenci sahipOgrenciId;
+    private Kategori kategori;
 
     public Proje() {
     }
 
-    public Proje(Long id, String projeAdi, String projeAciklamasi, String kullanilanTeknolojiler, Long sahipOgrenciId, Long kategoriId) {
+    public Proje(String projeAdi, String projeAciklamasi, String kullanilanTeknolojiler, Ogrenci sahipOgrenciId, Kategori kategori) {
+        this.projeAdi = projeAdi;
+        this.projeAciklamasi = projeAciklamasi;
+        this.kullanilanTeknolojiler = kullanilanTeknolojiler;
+        this.sahipOgrenciId = sahipOgrenciId;
+        this.kategori = kategori;
+    }
+
+    public Proje(Long id, String projeAdi, String projeAciklamasi, String kullanilanTeknolojiler, Ogrenci sahipOgrenciId, Kategori kategori) {
         this.id = id;
         this.projeAdi = projeAdi;
         this.projeAciklamasi = projeAciklamasi;
         this.kullanilanTeknolojiler = kullanilanTeknolojiler;
         this.sahipOgrenciId = sahipOgrenciId;
-        this.kategoriId = kategoriId;
-    }
-
-    public Proje(String projeAdi, String projeAciklamasi, String kullanilanTeknolojiler, Long sahipOgrenciId, Long kategoriId) {
-        this.projeAdi = projeAdi;
-        this.projeAciklamasi = projeAciklamasi;
-        this.kullanilanTeknolojiler = kullanilanTeknolojiler;
-        this.sahipOgrenciId = sahipOgrenciId;
-        this.kategoriId = kategoriId;
+        this.kategori = kategori;
     }
 
     public Long getId() {
@@ -68,20 +70,45 @@ public class Proje {
         this.kullanilanTeknolojiler = kullanilanTeknolojiler;
     }
 
-    public Long getSahipOgrenciId() {
+    public Ogrenci getSahipOgrenciId() {
         return sahipOgrenciId;
     }
 
-    public void setSahipOgrenciId(Long sahipOgrenciId) {
+    public void setSahipOgrenciId(Ogrenci sahipOgrenciId) {
         this.sahipOgrenciId = sahipOgrenciId;
     }
 
-    public Long getKategoriId() {
-        return kategoriId;
+    public Kategori getKategori() {
+        return kategori;
     }
 
-    public void setKategoriId(Long kategoriId) {
-        this.kategoriId = kategoriId;
+    public void setKategori(Kategori kategori) {
+        this.kategori = kategori;
+    }
+
+    
+    
+    
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Proje other = (Proje) obj;
+        return Objects.equals(this.id, other.id);
     }
     
     

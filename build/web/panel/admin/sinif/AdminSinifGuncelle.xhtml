@@ -20,8 +20,8 @@
 
                         <div class="mb-3">
                             <label>Bölüm</label>
-                            <h:selectOneMenu value="#{sinifBean.entity.bolumid}" styleClass="form-control">
-                                <f:selectItems value="#{bolumBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.bolumadi}" />
+                            <h:selectOneMenu value="#{sinifBean.entity.bolum}" converter="bolumConverter" styleClass="form-control">
+                                <f:selectItems value="#{bolumBean.list}" var="c" itemValue="#{c}" itemLabel="#{c.bolumadi}" />
                             </h:selectOneMenu>
                         </div>
                      

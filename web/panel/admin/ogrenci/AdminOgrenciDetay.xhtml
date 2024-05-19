@@ -31,13 +31,13 @@
                             <dd class="col-sm-9">#{ogrenciBean.entity.universite}</dd>
 
                             <dt class="col-sm-3">Fakülte:</dt>
-                            <dd class="col-sm-9">#{fakulteBean.getFromOgrenciFakulteAdi(ogrenciBean.entity.bolumid)}</dd>
+                            <dd class="col-sm-9">#{fakulteBean.getFromOgrenciFakulteAdi(ogrenciBean.entity.bolum.id)}</dd>
 
                             <dt class="col-sm-3">Bölüm:</dt>
-                            <dd class="col-sm-9">#{bolumBean.getTitle(ogrenciBean.entity.bolumid)}</dd>
+                            <dd class="col-sm-9">#{ogrenciBean.entity.bolum.bolumadi}</dd>
 
                             <dt class="col-sm-3">Sınıf:</dt>
-                            <dd class="col-sm-9">#{sinifBean.getSinifAdi(ogrenciBean.entity.sinifid)}</dd>
+                            <dd class="col-sm-9">#{sinifBean.getSinifAdi(ogrenciBean.entity.sinif.id)}</dd>
                         </dl>
                         <h:form>
                             <div class="mb-3">

@@ -5,6 +5,7 @@
 package dao;
 
 import entity.Admin;
+import entity.Bolum;
 import entity.Sinif;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,10 +22,12 @@ import util.Connector;
  */
 public class SinifDAO extends Connector {
     
+    private BolumDAO dao;
+    
        public void create(Sinif sinif) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("insert into siniflar (bolumid,sinifadi) values('" +sinif.getBolumid()+ "', '" +sinif.getSinifadi()+ "' )");
+            st.executeUpdate("insert into siniflar (bolumid,sinifadi) values('" +sinif.getBolum().getId()+ "', '" +sinif.getSinifadi()+ "' )");
         } catch (SQLException ex) {
             Logger.getLogger(SinifDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -48,7 +51,8 @@ public class SinifDAO extends Connector {
             ResultSet rs = st.executeQuery("select * from siniflar LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
 
             while (rs.next()) {
-                list.add(new Sinif(rs.getLong("sinifid"),rs.getLong("bolumid"),rs.getInt("sinifadi")));
+                Bolum b=this.getDao().getTitle(rs.getInt("bolumid"));
+                list.add(new Sinif(rs.getLong("sinifid"),b,rs.getInt("sinifadi")));
             }
 
         } catch (SQLException ex) {
@@ -59,7 +63,7 @@ public class SinifDAO extends Connector {
            public void update(Sinif sinif) {
          try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update siniflar set sinifadi='"+sinif.getSinifadi()+"',  bolumid='"+sinif.getBolumid()+"' where sinifid="+sinif.getId());
+            st.executeUpdate("update siniflar set sinifadi='"+sinif.getSinifadi()+"',  bolumid='"+sinif.getBolum().getId()+"' where sinifid="+sinif.getId());
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -76,7 +80,8 @@ public class SinifDAO extends Connector {
             ResultSet rs = st.executeQuery("select * from siniflar where sinifid = "+sinifid);
 
             while (rs.next()) {
-                entity=new Sinif(rs.getLong("sinifid"),rs.getLong("bolumid"),rs.getInt("sinifadi"));
+                  Bolum b=this.getDao().getTitle(rs.getInt("bolumid"));
+                entity=new Sinif(rs.getLong("sinifid"),b,rs.getInt("sinifadi"));
             }
 
         } catch (SQLException ex) {
@@ -100,6 +105,17 @@ public class SinifDAO extends Connector {
             Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return veriSayisi;
+    }
+
+    public BolumDAO getDao() {
+        if(this.dao==null){
+            this.dao=new BolumDAO();
+        }
+        return dao;
+    }
+
+    public void setDao(BolumDAO dao) {
+        this.dao = dao;
     }
     
 }

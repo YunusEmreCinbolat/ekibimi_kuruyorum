@@ -6,6 +6,8 @@ package dao;
 
 import entity.Admin;
 import entity.EkipUye;
+import entity.Ogrenci;
+import entity.Proje;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,6 +23,10 @@ import util.Connector;
  */
 public class EkipUyeDAO extends Connector {
     
+    private OgrenciDAO odao;
+    private ProjeDAO pdao;
+    
+    
     public List<EkipUye> readList(int hangiSayfa,int gorunenVeri) {
         List<EkipUye> list = new ArrayList<>();
 
@@ -30,7 +36,9 @@ public class EkipUyeDAO extends Connector {
            ResultSet rs = st.executeQuery("SELECT * FROM ekipuyeleri LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
 
            while (rs.next()) {
-                list.add(new EkipUye(rs.getLong("ekipuyeid"), rs.getLong("ogrenciid"), rs.getLong("projeid"),rs.getString("ekiprolu")));
+               Ogrenci o=this.getOdao().getFromOgrenci(rs.getInt("ogrenciid"));
+               Proje p =this.getPdao().getTitle(rs.getInt("projeid"));
+                list.add(new EkipUye(rs.getLong("ekipuyeid"), o ,p,rs.getString("ekiprolu")));
             }
 
         } catch (SQLException ex) {
@@ -42,7 +50,7 @@ public class EkipUyeDAO extends Connector {
     public void create(EkipUye ekipuye) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("insert into ekipuyeleri (ogrenciid,projeid,ekiprolu) values('" + ekipuye.getOgrenciid() + "' ,'" + ekipuye.getProjeid() + "' , '" + ekipuye.getEkiprolu()  + "' )");
+            st.executeUpdate("insert into ekipuyeleri (ogrenciid,projeid,ekiprolu) values('" + ekipuye.getOgrenci().getId()+ "' ,'" + ekipuye.getProje().getId() + "' , '" + ekipuye.getEkiprolu()  + "' )");
         } catch (SQLException ex) {
             Logger.getLogger(EkipUyeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -60,7 +68,7 @@ public class EkipUyeDAO extends Connector {
     public void update(EkipUye ekipuye) {
          try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update ekipuyeleri set ogrenciid='"+ ekipuye.getOgrenciid()+"', projeid='"+ekipuye.getProjeid()+"', ekiprolu='"+ekipuye.getEkiprolu() + "' ,   where ekipuyeid="+ekipuye.getId());
+            st.executeUpdate("update ekipuyeleri set ogrenciid='"+ ekipuye.getOgrenci().getId()+"', projeid='"+ekipuye.getProje().getId()+"', ekiprolu='"+ekipuye.getEkiprolu() + "' ,   where ekipuyeid="+ekipuye.getId());
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -82,6 +90,30 @@ public class EkipUyeDAO extends Connector {
         }
         return veriSayisi;
     }
+
+    public OgrenciDAO getOdao() {
+        if(this.odao==null){
+            this.odao=new OgrenciDAO();
+        }
+        return odao;
+    }
+
+    public void setOdao(OgrenciDAO odao) {
+        this.odao = odao;
+    }
+
+    public ProjeDAO getPdao() {
+        if(this.pdao==null){
+            this.pdao=new ProjeDAO();
+        }
+        return pdao;
+    }
+
+    public void setPdao(ProjeDAO pdao) {
+        this.pdao = pdao;
+    }
+       
+       
 }
 
 

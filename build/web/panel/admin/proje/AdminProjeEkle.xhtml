@@ -19,8 +19,8 @@
                         <h:form>
                             <div class="mb-3">
                                 <label>Kategori</label>
-                                <h:selectOneMenu value="#{projeBean.entity.kategoriId}" styleClass="form-control">
-                                    <f:selectItems value="#{kategoriBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.kategoriAdi}" />
+                                <h:selectOneMenu value="#{projeBean.entity.kategori}" converter="kategoriConverter" styleClass="form-control">
+                                    <f:selectItems value="#{kategoriBean.list}" var="c" itemValue="#{c}" itemLabel="#{c.kategoriAdi}" />
                                 </h:selectOneMenu>
                             </div>
                             <div class="mb-3">
@@ -40,8 +40,8 @@
                             </div>
                             <div class="mb-3">
                                 <label>Proje Sahibi</label>
-                                <h:selectOneMenu value="#{projeBean.entity.sahipOgrenciId}" styleClass="form-control">
-                                    <f:selectItems value="#{ogrenciBean.list}" var="c" itemValue="#{c.id}" itemLabel="#{c.ad}" />
+                                <h:selectOneMenu value="#{projeBean.entity.sahipOgrenciId}" converter="ogrenciConverter" styleClass="form-control">
+                                    <f:selectItems value="#{ogrenciBean.list}" var="c" itemValue="#{c}" itemLabel="#{c.ad}" />
                                 </h:selectOneMenu>
                             </div>
                             <div class="mb-3">

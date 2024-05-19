@@ -68,7 +68,7 @@ public class ProjeController extends BaseController<Proje ,ProjeDAO> implements 
 
        public String setEntity(Proje entity) {
         this.entity = entity;
-         return "/panel/admin/proje/AdminProjeEkle.xhtml?faces-redirect=true";
+         return "/panel/admin/proje/AdminProjeDetay.xhtml?faces-redirect=true";
     }
     
    

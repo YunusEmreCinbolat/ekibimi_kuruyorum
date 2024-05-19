@@ -4,30 +4,28 @@
  */
 package entity;
 
+import java.util.Objects;
+
 /**
  *
  * @author Dell
  */
 public class Bolum {
     private Long id;
-    private Long fakulteid;
+    private Fakulte fakulte;
     private String bolumadi;
 
     public Bolum() {
     }
 
-    public Bolum(Long id, Long fakulteid, String bolumadi) {
+    public Bolum(Fakulte fakulte, String bolumadi) {
+        this.fakulte = fakulte;
+        this.bolumadi = bolumadi;
+    }
+
+    public Bolum(Long id, Fakulte fakulte, String bolumadi) {
         this.id = id;
-        this.fakulteid = fakulteid;
-        this.bolumadi = bolumadi;
-    }
-
-    public Bolum(Long fakulteid, String bolumadi) {
-        this.fakulteid = fakulteid;
-        this.bolumadi = bolumadi;
-    }
-
-    public Bolum(String bolumadi) {
+        this.fakulte = fakulte;
         this.bolumadi = bolumadi;
     }
 
@@ -39,12 +37,12 @@ public class Bolum {
         this.id = id;
     }
 
-    public Long getFakulteid() {
-        return fakulteid;
+    public Fakulte getFakulte() {
+        return fakulte;
     }
 
-    public void setFakulteid(Long fakulteid) {
-        this.fakulteid = fakulteid;
+    public void setFakulte(Fakulte fakulte) {
+        this.fakulte = fakulte;
     }
 
     public String getBolumadi() {
@@ -54,7 +52,31 @@ public class Bolum {
     public void setBolumadi(String bolumadi) {
         this.bolumadi = bolumadi;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 13 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Bolum other = (Bolum) obj;
+        return Objects.equals(this.id, other.id);
+    }
+
     
+  
     
     
 }

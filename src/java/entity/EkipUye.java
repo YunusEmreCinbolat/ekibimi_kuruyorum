@@ -10,23 +10,23 @@ package entity;
  */
 public class EkipUye {
     private Long id;
-    private Long ogrenciid;
-    private Long projeid;
+    private Ogrenci ogrenci;
+    private Proje proje;
     private String ekiprolu;
 
     public EkipUye() {
     }
 
-    public EkipUye(Long id, Long ogrenciid, Long projeid, String ekiprolu) {
-        this.id = id;
-        this.ogrenciid = ogrenciid;
-        this.projeid = projeid;
+    public EkipUye(Ogrenci ogrenci, Proje proje, String ekiprolu) {
+        this.ogrenci = ogrenci;
+        this.proje = proje;
         this.ekiprolu = ekiprolu;
     }
 
-    public EkipUye(Long ogrenciid, Long projeid, String ekiprolu) {
-        this.ogrenciid = ogrenciid;
-        this.projeid = projeid;
+    public EkipUye(Long id, Ogrenci ogrenci, Proje proje, String ekiprolu) {
+        this.id = id;
+        this.ogrenci = ogrenci;
+        this.proje = proje;
         this.ekiprolu = ekiprolu;
     }
 
@@ -38,20 +38,20 @@ public class EkipUye {
         this.id = id;
     }
 
-    public Long getOgrenciid() {
-        return ogrenciid;
+    public Ogrenci getOgrenci() {
+        return ogrenci;
     }
 
-    public void setOgrenciid(Long ogrenciid) {
-        this.ogrenciid = ogrenciid;
+    public void setOgrenci(Ogrenci ogrenci) {
+        this.ogrenci = ogrenci;
     }
 
-    public Long getProjeid() {
-        return projeid;
+    public Proje getProje() {
+        return proje;
     }
 
-    public void setProjeid(Long projeid) {
-        this.projeid = projeid;
+    public void setProje(Proje proje) {
+        this.proje = proje;
     }
 
     public String getEkiprolu() {
@@ -61,5 +61,8 @@ public class EkipUye {
     public void setEkiprolu(String ekiprolu) {
         this.ekiprolu = ekiprolu;
     }
+
+   
+    
     
 }

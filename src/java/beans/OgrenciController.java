@@ -61,7 +61,7 @@ public class OgrenciController extends BaseController<Ogrenci,OgrenciDAO> implem
 
      public String setEntity(Ogrenci entity) {
         this.entity = entity;
-         return "/panel/admin/ogrenci/AdminOgrenciKaydet.xhtml?faces-redirect=true";
+         return "/panel/admin/ogrenci/AdminOgrenciDetay.xhtml?faces-redirect=true";
     }
     
    

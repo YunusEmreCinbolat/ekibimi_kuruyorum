@@ -18,14 +18,14 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="fakulte">Ogrenci</label>
-                                <h:selectOneMenu id="Ogrenci" value="#{ekipuyeBean.entity.ogrenciid}" styleClass="form-control">
-                                    <f:selectItems value="#{ogrenciBean.list}" var="ogrenci" itemValue="#{ogrenci.id}" itemLabel="#{ogrenci.ad}" />
+                                <h:selectOneMenu id="Ogrenci" value="#{ekipuyeBean.entity.ogrenci}" converter="ogrenciConverter" styleClass="form-control">
+                                    <f:selectItems value="#{ogrenciBean.list}" var="ogrenci" itemValue="#{ogrenci}" itemLabel="#{ogrenci.ad}" />
                                 </h:selectOneMenu>
                             </div>
                             <div class="mb-3">
                                 <label for="Proje">Proje</label>
-                                <h:selectOneMenu id="Proje" value="#{ekipuyeBean.entity.projeid}" styleClass="form-control">
-                                    <f:selectItems value="#{projeBean.list}" var="proje" itemValue="#{proje.id}" itemLabel="#{proje.projeAdi}" />
+                                <h:selectOneMenu id="Proje" value="#{ekipuyeBean.entity.proje}" converter="projeConverter" styleClass="form-control">
+                                    <f:selectItems value="#{projeBean.list}" var="proje" itemValue="#{proje}" itemLabel="#{proje.projeAdi}" />
                                 </h:selectOneMenu>
                             </div>
                             <div class="mb-3">

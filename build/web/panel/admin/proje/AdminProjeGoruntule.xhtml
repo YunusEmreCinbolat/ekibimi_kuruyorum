@@ -29,8 +29,8 @@
                                     <tr>
                                         <td>#{e.id}</td>
                                         <td>#{e.projeAdi}</td>
-                                        <td>#{kategoriBean.getTitle(e.kategoriId)}</td>
-                                        <td>#{ogrenciBean.getFromOgrenci(e.sahipOgrenciId)}</td>
+                                        <td>#{e.kategori.kategoriAdi}</td>
+                                        <td>#{e.sahipOgrenciId.ad}</td>
                                         <td>
                                             <h:commandButton class="btn-danger" action="#{projeBean.delete(e.id)}" value="SİL"/>
                                         </td>
