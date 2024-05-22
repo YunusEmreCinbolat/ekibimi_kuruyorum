@@ -1,52 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <h:head>
-        <title>Öğrenci Detay Sayfası</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    <ui:composition template="../AdminPanelNavbar.xhtml">
-        <ui:define name="content">
-            <div class="container">
-                <h1 class="mt-3">Öğrenci Detayları</h1>
-                <hr />
-                <div class="row">
-                    <div class="col-md-6">
-                        <dl class="row">
-                            <dt class="col-sm-3">Ad:</dt>
-                            <dd class="col-sm-9">#{ogrenciBean.entity.ad}</dd>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://xmlns.jcp.org/jsf/html"
+                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                 template="../AdminPanelNavbar.xhtml">
+    <ui:define name="content">
+        <div class="container">
+            <h1 class="mt-3">Öğrenci Detayları</h1>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-3">Ad:</dt>
+                        <dd class="col-sm-9">#{ogrenciBean.entity.ad}</dd>
 
-                            <dt class="col-sm-3">Soyad:</dt>
-                            <dd class="col-sm-9">#{ogrenciBean.entity.soyad}</dd>
+                        <dt class="col-sm-3">Soyad:</dt>
+                        <dd class="col-sm-9">#{ogrenciBean.entity.soyad}</dd>
 
-                            <dt class="col-sm-3">Kullanıcı Adı:</dt>
-                            <dd class="col-sm-9">#{ogrenciBean.entity.kullaniciadi}</dd>
+                        <dt class="col-sm-3">Kullanıcı Adı:</dt>
+                        <dd class="col-sm-9">#{ogrenciBean.entity.kullaniciadi}</dd>
 
-                            <dt class="col-sm-3">E-posta:</dt>
-                            <dd class="col-sm-9">#{ogrenciBean.entity.email}</dd>
+                        <dt class="col-sm-3">E-posta:</dt>
+                        <dd class="col-sm-9">#{ogrenciBean.entity.email}</dd>
 
-                            <dt class="col-sm-3">Üniversite:</dt>
-                            <dd class="col-sm-9">#{ogrenciBean.entity.universite}</dd>
+                        <dt class="col-sm-3">Üniversite:</dt>
+                        <dd class="col-sm-9">#{ogrenciBean.entity.universite}</dd>
 
-                            <dt class="col-sm-3">Fakülte:</dt>
-                            <dd class="col-sm-9">#{fakulteBean.getFromOgrenciFakulteAdi(ogrenciBean.entity.bolum.id)}</dd>
+                        <dt class="col-sm-3">Fakülte:</dt>
+                        <dd class="col-sm-9">#{fakulteBean.getFromOgrenciFakulteAdi(ogrenciBean.entity.bolum.id)}</dd>
 
-                            <dt class="col-sm-3">Bölüm:</dt>
-                            <dd class="col-sm-9">#{ogrenciBean.entity.bolum.bolumadi}</dd>
+                        <dt class="col-sm-3">Bölüm:</dt>
+                        <dd class="col-sm-9">#{ogrenciBean.entity.bolum.bolumadi}</dd>
 
-                            <dt class="col-sm-3">Sınıf:</dt>
-                            <dd class="col-sm-9">#{sinifBean.getSinifAdi(ogrenciBean.entity.sinif.id)}</dd>
-                        </dl>
-                        <h:form>
-                            <div class="mb-3">
-                                <h:commandButton class="btn btn-secondary" action="/panel/admin/ogrenci/AdminOgrenciKaydet.xhtml?faces-redirect=true" value="Öğrenciyi Güncelle"/>
-                            </div>
-                        </h:form>
-                    </div>
+                        <dt class="col-sm-3">Sınıf:</dt>
+                        <dd class="col-sm-9">#{sinifBean.getSinifAdi(ogrenciBean.entity.sinif.id)}</dd>
+                    </dl>
+
+                    <h:form enctype="multipart/form-data" class="mb-3">
+
+                        <label  class="form-label">CV:</label>
+                        <h:inputFile  value="#{dosyaController.dosya}" class="form-control"/>
+                        <h:commandButton styleClass="btn btn-primary btn-block" action="#{dosyaController.create}" value="Dosya Ekle" />
+
+                        <div class="mb-3">
+                        </div>
+                    </h:form>
+                    
+                     <h:form class="mb-3">
+
+                        <h:commandButton styleClass="btn btn-primary btn-block" action="#{dosyaController.create}" value="Dosya Ekle" />
+
+                        <div class="mb-3">
+                        </div>
+                    </h:form>
+
+                    <h:form>
+                        <div class="mb-3">
+                            <h:commandButton class="btn btn-secondary" action="/panel/admin/ogrenci/AdminOgrenciKaydet.xhtml?faces-redirect=true" value="Öğrenciyi Güncelle"/>
+                        </div>
+                    </h:form>
                 </div>
             </div>
-        </ui:define>
-    </ui:composition>
-</html>
+        </div>
+    </ui:define>
+</ui:composition>

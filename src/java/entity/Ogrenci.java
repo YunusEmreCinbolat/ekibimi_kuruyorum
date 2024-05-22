@@ -4,13 +4,14 @@
  */
 package entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author Dell
  */
-public class Ogrenci {
+public class Ogrenci implements Serializable{
     
     private Long id;
     private String kullaniciadi;

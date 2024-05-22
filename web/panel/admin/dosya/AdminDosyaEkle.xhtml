@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Öğrenci Detay Sayfası</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+  
+            <h:form enctype="multipart/form-data">
+            File : <h:inputFile value="#{dosyaBean.dosya}"/><br></br>
+
+            <h:commandButton action="#{dosyaBean.create}" value="Yükle" />
+
+        </h:form>
+
+</html>
