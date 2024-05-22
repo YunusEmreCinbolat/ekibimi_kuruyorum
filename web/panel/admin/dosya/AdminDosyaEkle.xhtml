@@ -7,12 +7,16 @@
         <title>Öğrenci Detay Sayfası</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
-  
-            <h:form enctype="multipart/form-data">
-            File : <h:inputFile value="#{dosyaBean.dosya}"/><br></br>
 
-            <h:commandButton action="#{dosyaBean.create}" value="Yükle" />
+    <h:form enctype="multipart/form-data" >
 
-        </h:form>
+        <label  class="form-label">CV:</label>
+        <h:inputFile  value="#{dosyaController.dosya}" class="form-control"/>
+        <h:commandButton styleClass="btn btn-primary btn-block" action="#{dosyaController.create}" value="Dosya Ekle" />
+
+        <div class="mb-3">
+        </div>
+    </h:form>
+
 
 </html>

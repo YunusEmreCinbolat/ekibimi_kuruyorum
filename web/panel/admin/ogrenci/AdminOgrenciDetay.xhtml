@@ -36,24 +36,8 @@
                         <dd class="col-sm-9">#{sinifBean.getSinifAdi(ogrenciBean.entity.sinif.id)}</dd>
                     </dl>
 
-                    <h:form enctype="multipart/form-data" class="mb-3">
-
-                        <label  class="form-label">CV:</label>
-                        <h:inputFile  value="#{dosyaController.dosya}" class="form-control"/>
-                        <h:commandButton styleClass="btn btn-primary btn-block" action="#{dosyaController.create}" value="Dosya Ekle" />
-
-                        <div class="mb-3">
-                        </div>
-                    </h:form>
+                  
                     
-                     <h:form class="mb-3">
-
-                        <h:commandButton styleClass="btn btn-primary btn-block" action="#{dosyaController.create}" value="Dosya Ekle" />
-
-                        <div class="mb-3">
-                        </div>
-                    </h:form>
-
                     <h:form>
                         <div class="mb-3">
                             <h:commandButton class="btn btn-secondary" action="/panel/admin/ogrenci/AdminOgrenciKaydet.xhtml?faces-redirect=true" value="Öğrenciyi Güncelle"/>
