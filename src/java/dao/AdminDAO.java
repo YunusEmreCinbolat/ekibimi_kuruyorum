@@ -81,4 +81,23 @@ public class AdminDAO extends Connector {
         }
         return veriSayisi;
     }
+
+    public List<Admin> allList() {
+         List<Admin> list = new ArrayList<>();
+
+        Statement st;
+        try {
+            st = this.getConnect().createStatement();
+           ResultSet rs = st.executeQuery("SELECT * FROM admins");
+
+           while (rs.next()) {
+                list.add(new Admin(rs.getLong("id"), rs.getString("name"), rs.getString("surname"), rs.getString("username"), rs.getString("email"), rs.getString("password")));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+
+    }
 }

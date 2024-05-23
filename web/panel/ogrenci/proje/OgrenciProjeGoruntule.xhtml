@@ -7,7 +7,7 @@
         <title>Proje Görüntüleme Sayfası</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
-    <ui:composition template="../AdminPanelNavbar.xhtml">
+    <ui:composition template="../OgrenciPanelNavbar.xhtml">
         <ui:define name="content">
             <h:body>
                 <div class="container">
@@ -20,7 +20,7 @@
                                     <th>PROJE ADI</th>
                                     <th>PROJE KATEGORİSİ</th>
                                     <th>PROJE SAHİBİ</th>
-                                    <th>SİL</th>
+                                    <th>Başvur</th>
                                     <th>Detaylar</th>
                                 </tr>
                             </thead>
@@ -31,31 +31,37 @@
                                         <td>#{e.projeAdi}</td>
                                         <td>#{e.kategori.kategoriAdi}</td>
                                         <td>#{e.sahipOgrenciId.ad}</td>
-                                    
-                                        <td>
-                                            <h:commandButton class="btn-secondary" action="#{projeBean.setEntity(e)}" value="Detaylar"/>
+                                        
+                                         <td>
+                                            <h:commandButton class="btn-Primary"  value="Başvur"/>
                                         </td>
+
+                                        <td>
+                                            <h:commandButton  class="btn-secondary" action="#{projeBean.setEntity(e)}" value="Detaylar"/>
+                                        </td>
+                                   
                                     </tr>
                                 </ui:repeat>
-                          
+
                             </tbody>
                         </table>
-                           <!-- İleri ve Geri Butonları -->
-                <div class="text-center">
-                    <div class="d-inline-block mr-2">
-                        <h:form>
-                            <h:commandButton action="#{projeBean.prev()}" value="Geri"/>
-                        </h:form>
-                    </div>
-                    <div class="d-inline-block">
-                        <h:form>
-                            <h:commandButton action="#{projeBean.next()}"  value="İleri"/>
-                        </h:form>
-                    </div>
-                </div>
+                        <!-- İleri ve Geri Butonları -->
+                        <div class="text-center">
+                            <div class="d-inline-block mr-2">
+                                <h:form>
+                                    <h:commandButton action="#{projeBean.prev()}" value="Geri"/>
+                                </h:form>
+                            </div>
+                            <div class="d-inline-block">
+                                <h:form>
+                                    <h:commandButton action="#{projeBean.next()}"  value="İleri"/>
+                                </h:form>
+                            </div>
+                        </div>
                     </h:form>
-                    
+
                 </div>
+                
             </h:body>
         </ui:define>
     </ui:composition>

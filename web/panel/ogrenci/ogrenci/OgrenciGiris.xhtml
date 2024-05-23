@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Öğrenci Kaydolma Sayfası</title>
+        <title>Öğrenci Girişi</title>
     </h:head>
     <ui:composition template="OgrenciAnasayfa.xhtml">
         <ui:define name="content">
@@ -14,22 +14,24 @@
                 <div class="container mt-5">
                     <h1 class="center">Öğrenci Girişi</h1>
                     <hr />
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="email" class="form-label">E-Mail</label>
-                                <input type="email" id="email" class="form-control" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Şifre</label>
-                                <input type="password" id="password" class="form-control" />
-                            </div>
-                            <div class="mb-3">
-                                <!-- AJAX isteği göndermek için bir düğme -->
-                                <button onclick="submitForm()" class="btn btn-primary">Giriş Yap</button>
+                    <h:form>
+                        <h:messages globalOnly="true" layout="table"/>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Kullanıcı Adı</label>
+                                    <h:inputText id="email" value="#{loginController.o.kullaniciadi}" class="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Şifre</label>
+                                    <h:inputSecret id="password" value="#{loginController.o.sifre}" class="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <h:commandButton action="#{loginController.loginOgrenci}" value="Giriş Yap" class="btn btn-primary"/>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </h:form>
                 </div>
             </h:body>
         </ui:define>

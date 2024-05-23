@@ -128,6 +128,23 @@ public class OgrenciDAO extends Connector {
     public void setBdao(BolumDAO bdao) {
         this.bdao = bdao;
     }
+
+    public List<Ogrenci> allList() {
+        List<Ogrenci> list = new ArrayList<>();
+        try {
+            Statement st = this.getConnect().createStatement();
+            ResultSet rs = st.executeQuery("Select * from ogrenciler");
+
+            while (rs.next()) {
+                Sinif s=this.getSdao().getSinifAdi(rs.getInt("sinifid"));
+                Bolum b=this.getBdao().getTitle(rs.getInt("bolumid"));
+                list.add(new Ogrenci(rs.getLong("ogrenciid"), rs.getString("kullaniciadi"), rs.getString("eposta"), rs.getString("sifre"), rs.getString("ad"), rs.getString("soyad"), rs.getString("universite"), s, b));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OgrenciDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
       
       
 }
