@@ -21,6 +21,10 @@ import java.util.List;
 @SessionScoped
 public class ProjeController extends BaseController<Proje ,ProjeDAO> implements Serializable,Controller {
      private Proje entity;
+     
+     protected List<Proje> someProject;
+     
+     protected List<Proje> aliciFromOgrenci;
     
     public ProjeController() {
         super(Proje.class,ProjeDAO.class);
@@ -34,6 +38,7 @@ public class ProjeController extends BaseController<Proje ,ProjeDAO> implements 
     
     }
     
+   
      @Override
     public void create(){
         this.getDao().create(entity);
@@ -70,9 +75,26 @@ public class ProjeController extends BaseController<Proje ,ProjeDAO> implements 
         this.entity = entity;
          return "/panel/admin/proje/AdminProjeDetay.xhtml?faces-redirect=true";
     }
+
+    public List<Proje> getSomeProject(int id) {
+        this.someProject=this.getDao().ogrenciFromProject(this.hangiSayfa, this.gorunenVeri, id);
+        return someProject;
+    }
+
+    public void setSomeProject(List<Proje> someProject) {
+        this.someProject = someProject;
+    }
+
+    public List<Proje> getAliciFromOgrenci(int id) {
+        this.aliciFromOgrenci=this.getDao().aliciogrenciFromProject(id);
+        return aliciFromOgrenci;
+    }
+
+    public void setAliciFromOgrenci(List<Proje> aliciFromOgrenci) {
+        this.aliciFromOgrenci = aliciFromOgrenci;
+    }
     
    
-
   
 
    

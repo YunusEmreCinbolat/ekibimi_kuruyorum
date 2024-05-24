@@ -9,7 +9,7 @@
         <title>Proje Kaydetme Sayfası</title>
     </h:head>
 
-    <ui:composition template="../AdminPanelNavbar.xhtml">
+    <ui:composition template="../OgrenciPanelNavbar.xhtml">
         <ui:define name="content">
             <div class="container">
                 <h1 class="text-center mt-3">Proje Kaydetme</h1>
@@ -38,12 +38,14 @@
                                 <h:inputTextarea value="#{projeBean.entity.kullanilanTeknolojiler}" styleClass="form-control" rows="5" required="true"/>
                                 <h:message for="ad" style="color: red" />
                             </div>
-                            <div class="mb-3">
+
+                            <div class="mb-3" style="display: none;">
                                 <label>Proje Sahibi</label>
                                 <h:selectOneMenu value="#{projeBean.entity.sahipOgrenciId}" converter="ogrenciConverter" styleClass="form-control">
-                                    <f:selectItems value="#{ogrenciBean.list}" var="c" itemValue="#{c}" itemLabel="#{c.ad}" />
+                                    <f:selectItem itemValue="#{ogrenciBean.entity}" itemLabel="#{ogrenciBean.entity != null ? ogrenciBean.entity.ad : 'Seçilmemiş'}" />
                                 </h:selectOneMenu>
                             </div>
+
                             <div class="mb-3">
                                 <h:commandButton class="btn-primary" action="#{projeBean.create}" value="Kayıt Et" rendered="#{projeBean.entity.id==null}"/>
                                 <h:commandButton class="btn-primary" action="#{projeBean.update}" value="Güncelle" rendered="#{projeBean.entity.id!=null}"/>

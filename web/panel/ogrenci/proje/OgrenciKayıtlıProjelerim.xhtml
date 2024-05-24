@@ -14,7 +14,7 @@
                 <div class="container">
                     <h1 class="text-center my-4">PROJE LİSTESİ</h1>
                     <h:form>
-                        <ui:repeat value="#{projeBean.getSomeProject(ogrenciBean.entity.id)}" var="e">
+                        <ui:repeat value="#{projeBean.getAliciFromOgrenci(ogrenciBean.entity.id)}" var="e">
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <h2>Proje Adı: #{e.projeAdi}</h2>
@@ -25,24 +25,12 @@
                                     <p><strong>Proje Sahibi:</strong> #{e.sahipOgrenciId.ad}</p>
                                     <p><strong>Proje Açıklaması:</strong> #{e.projeAciklamasi}</p>
                                     <p><strong>Proje İsterleri:</strong> #{e.kullanilanTeknolojiler}</p>
-                                    <h:commandButton class="btn btn-primary" value="Başvur"/>
                                 </div>
                             </div>
                         </ui:repeat>
                     </h:form>
                     <!-- İleri ve Geri Butonları -->
-                    <div class="text-center my-4">
-                        <div class="d-inline-block mr-2">
-                            <h:form>
-                                <h:commandButton action="#{projeBean.prev()}" value="Geri"/>
-                            </h:form>
-                        </div>
-                        <div class="d-inline-block">
-                            <h:form>
-                                <h:commandButton action="#{projeBean.next()}" value="İleri"/>
-                            </h:form>
-                        </div>
-                    </div>
+                  
                 </div>
             </h:body>
         </ui:define>

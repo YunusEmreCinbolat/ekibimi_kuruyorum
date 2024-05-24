@@ -1,15 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
--->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Bildirimler</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    </h:head>
+    <ui:composition template="../OgrenciPanelNavbar.xhtml">
+        <ui:define name="content">
+            <h:body>
+                <div class="container">
+                    <h1 class="text-center my-4">Bildirimler</h1>
+                    <h:form>
+                        <ui:repeat value="#{bildirimBean.readFromAlici(ogrenciBean.entity.id)}" var="bildirim">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h2>Gönderen: #{bildirim.gonderenOgrenci.ad}</h2>
+                                    <h6>Gönderilme Tarihi: #{bildirim.tarihSaat}</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Alıcı: </strong>#{bildirim.aliciOgrenci.ad}</p>
+                                    <p><strong>Proje: </strong>#{bildirim.proje.projeAdi}</p>
+                                    <p><strong>İçerik: </strong>#{bildirim.bidirimIcerigi}</p>
+                                    <h:commandButton class="btn btn-success"  value="İletişim Bilgilerini Göster" action="#{ogrenciBean.detailOgrenci(bildirim.gonderenOgrenci)}"/>
+                                </div>
+                            </div>
+                        </ui:repeat>
+                    </h:form>
+                    <!-- İleri ve Geri Butonları -->
+                    <div class="text-center my-4">
+                        <div class="d-inline-block mr-2">
+                            <h:form>
+                                <h:commandButton action="#{bildirimBean.prev()}" value="Geri"/>
+                            </h:form>
+                        </div>
+                        <div class="d-inline-block">
+                            <h:form>
+                                <h:commandButton action="#{bildirimBean.next()}" value="İleri"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </h:body>
+        </ui:define>
+    </ui:composition>
 </html>

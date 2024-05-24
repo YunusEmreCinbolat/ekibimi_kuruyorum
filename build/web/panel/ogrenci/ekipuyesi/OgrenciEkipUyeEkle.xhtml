@@ -16,7 +16,7 @@
                 <h:form>
                     <div class="row justify-content-center">
                         <div class="col-md-6">
-                            <div class="mb-3">
+                            <div class="mb-3 ">
                                 <label for="fakulte">Ogrenci</label>
                                 <h:selectOneMenu id="Ogrenci" value="#{ekipuyeBean.entity.ogrenci}" converter="ogrenciConverter" styleClass="form-control">
                                     <f:selectItems value="#{ogrenciBean.list}" var="ogrenci" itemValue="#{ogrenci}" itemLabel="#{ogrenci.ad}" />
@@ -25,7 +25,7 @@
                             <div class="mb-3">
                                 <label for="Proje">Proje</label>
                                 <h:selectOneMenu id="Proje" value="#{ekipuyeBean.entity.proje}" converter="projeConverter" styleClass="form-control">
-                                    <f:selectItems value="#{projeBean.list}" var="proje" itemValue="#{proje}" itemLabel="#{proje.projeAdi}" />
+                                    <f:selectItems value="#{projeBean.getSomeProject(ogrenciBean.entity.id)}" var="proje" itemValue="#{proje}" itemLabel="#{proje.projeAdi}" />
                                 </h:selectOneMenu>
                             </div>
                             <div class="mb-3">

@@ -22,6 +22,7 @@ import java.util.List;
 public class OgrenciController extends BaseController<Ogrenci,OgrenciDAO> implements Serializable,Controller {
 
      private Ogrenci entity;
+     private Ogrenci projeOgrenci;
     public OgrenciController() {
         super(Ogrenci.class,OgrenciDAO.class);
     }
@@ -62,6 +63,22 @@ public class OgrenciController extends BaseController<Ogrenci,OgrenciDAO> implem
      public String setEntity(Ogrenci entity) {
         this.entity = entity;
          return "/panel/admin/ogrenci/AdminOgrenciDetay.xhtml?faces-redirect=true";
+    }
+     
+     public String detailOgrenci(Ogrenci o){
+         this.projeOgrenci=o;
+         return "/panel/ogrenci/ogrenci/OgrenciBilgileriniGoster.xhtml?faces-redirect=true";
+     }
+
+    public Ogrenci getProjeOgrenci() {
+        if(this.projeOgrenci==null){
+            this.projeOgrenci=new Ogrenci();
+        }
+        return projeOgrenci;
+    }
+
+    public void setProjeOgrenci(Ogrenci projeOgrenci) {
+        this.projeOgrenci = projeOgrenci;
     }
     
    

@@ -11,7 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <title>Ekip Üye Listesi Sayfası</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
-    <ui:composition template="../AdminPanelNavbar.xhtml">
+    <ui:composition template="../OgrenciPanelNavbar.xhtml">
         <ui:define name="content">
             <div class="container">
                 <h1 class="text-center mt-3 mb-4">Ekip Üye Listesi</h1>
@@ -28,7 +28,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             </tr>
                         </thead>
                         <tbody>
-                            <ui:repeat value="#{ekipuyeBean.list}" var="e" >
+                            <ui:repeat value="#{ekipuyeBean.getFromAOgrenci(ogrenciBean.entity.id)}" var="e" >
                                 <tr>
                                     <td>#{e.id}</td>
                                     <td>#{e.ogrenci.ad}</td>

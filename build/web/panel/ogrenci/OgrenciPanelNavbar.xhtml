@@ -21,14 +21,22 @@
     <h:body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">   
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <!-- Proje Ekle itemi en sola eklenmiştir -->
-                    <li class="nav-item">
-                        <h:link outcome="#{navigationBean.goToPage('/panel/ogrenci/proje/OgrenciProjeEkle.xhtml')}" styleClass="nav-link" value="Proje Ekle"/>
+                <ul class="navbar-nav ms-auto">
+                    <!-- Profilim dropdownu en sağa eklenmiştir -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Proje İşlemleri
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <h:link outcome="#{navigationBean.goToPage('/panel/ogrenci/proje/OgrenciProjeEkle.xhtml')}" styleClass="dropdown-item" value="Proje Ekle"/>
+                            <h:link outcome="#{navigationBean.goToPage('/panel/ogrenci/proje/OgrenciProjelerim.xhtml')}" styleClass="dropdown-item" value="Projelerim"/>
+                            <h:link outcome="#{navigationBean.goToPage('/panel/ogrenci/proje/OgrenciKayıtlıProjelerim.xhtml')}" styleClass="dropdown-item" value="Kayıtlı Olduğum Projelerim"/>
+                            <h:link outcome="#{navigationBean.goToPage('/panel/ogrenci/ekipuyesi/OgrenciEkipUyeEkle.xhtml')}" styleClass="dropdown-item" value="Ekip Üyesi Ekle"/>
+                               <h:link outcome="#{navigationBean.goToPage('/panel/ogrenci/ekipuyesi/OgrenciEkipUyeGoruntule.xhtml')}" styleClass="dropdown-item" value="Ekip Üyesi Görüntüle"/>
+                            
+                        </div>
                     </li>
-                
                 </ul>
-
                 <ul class="navbar-nav ms-auto">
                     <!-- Profilim dropdownu en sağa eklenmiştir -->
                     <li class="nav-item dropdown">
@@ -37,7 +45,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                             <h:link outcome="#{navigationBean.goToPage('/panel/ogrenci/profil/OgrenciProfilGoruntule.xhtml')}" styleClass="dropdown-item" value="Profilime Git"/>
-                            <h:link outcome="#{navigationBean.goToPage('/panel/ogrenci/bildirimler/OgrenciBildirimGoruntule.xhtml')}" styleClass="dropdown-item" value="Bildirimler"/>
+                            <h:link outcome="#{navigationBean.goToPage('/panel/ogrenci/bildirimler/OgrenciBildirimGoruntule.xhtml')}" styleClass="dropdown-item" value="Bildirimler ( #{bildirimBean.getBildirimCount(ogrenciBean.entity.id)} )" />
                             <h:link outcome="" styleClass="dropdown-item" value="Çıkış Yap"/>
                         </div>
                     </li>

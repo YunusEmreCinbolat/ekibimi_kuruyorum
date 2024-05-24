@@ -4,6 +4,7 @@ import dao.AdminDAO;
 import dao.OgrenciDAO;
 import entity.Admin;
 import entity.Ogrenci;
+import entity.Proje;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import jakarta.faces.application.FacesMessage;
@@ -27,6 +28,7 @@ public class LoginController implements Serializable {
    @Inject
    private AdminController autha;
    
+   private Proje projeEntity;
    
     private String role;
 
@@ -130,5 +132,6 @@ public class LoginController implements Serializable {
         this.a = a;
     }
 
+  
 
 }

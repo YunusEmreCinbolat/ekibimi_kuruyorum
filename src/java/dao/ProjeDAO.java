@@ -22,6 +22,7 @@ import util.Connector;
  * @author admın
  */
 public class ProjeDAO extends Connector {
+
     private OgrenciDAO odao;
     private KategoriDAO kdao;
 
@@ -34,9 +35,9 @@ public class ProjeDAO extends Connector {
             ResultSet rs = st.executeQuery("select * from projeler LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
 
             while (rs.next()) {
-                Ogrenci o=this.getOdao().getFromOgrenci(rs.getInt("sahipogrenciid"));
-                Kategori k=this.getKdao().getTitle(rs.getInt("kategoriid"));
-                list.add(new Proje(rs.getLong("projeid"), rs.getString("projeadi"), rs.getString("projeaciklamasi"), rs.getString("kullanilanteknolojiler"), o,k));
+                Ogrenci o = this.getOdao().getFromOgrenci(rs.getInt("sahipogrenciid"));
+                Kategori k = this.getKdao().getTitle(rs.getInt("kategoriid"));
+                list.add(new Proje(rs.getLong("projeid"), rs.getString("projeadi"), rs.getString("projeaciklamasi"), rs.getString("kullanilanteknolojiler"), o, k));
             }
 
         } catch (SQLException ex) {
@@ -48,7 +49,7 @@ public class ProjeDAO extends Connector {
     public void create(Proje proje) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("insert into projeler (projeadi,projeaciklamasi,kullanilanteknolojiler,sahipogrenciid,kategoriid) values('" + proje.getProjeAdi() + "' ,'" + proje.getProjeAciklamasi() + "' , '" + proje.getKullanilanTeknolojiler() + "', '" + proje.getSahipOgrenciId().getId()+ "','" + proje.getKategori().getId()+ "' )");
+            st.executeUpdate("insert into projeler (projeadi,projeaciklamasi,kullanilanteknolojiler,sahipogrenciid,kategoriid) values('" + proje.getProjeAdi() + "' ,'" + proje.getProjeAciklamasi() + "' , '" + proje.getKullanilanTeknolojiler() + "', '" + proje.getSahipOgrenciId().getId() + "','" + proje.getKategori().getId() + "' )");
         } catch (SQLException ex) {
             Logger.getLogger(ProjeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -66,7 +67,7 @@ public class ProjeDAO extends Connector {
     public void update(Proje proje) {
         try {
             Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update projeler set projeadi='" + proje.getProjeAdi() + "', projeaciklamasi='" + proje.getProjeAciklamasi() + "', kullanilanteknolojiler='" + proje.getKullanilanTeknolojiler() + "', sahipogrenciid='" + proje.getSahipOgrenciId().getId()+ ", kategoriid='" + proje.getKategori().getId() + "  where projeid=" + proje.getId());
+            st.executeUpdate("update projeler set projeadi='" + proje.getProjeAdi() + "', projeaciklamasi='" + proje.getProjeAciklamasi() + "', kullanilanteknolojiler='" + proje.getKullanilanTeknolojiler() + "', sahipogrenciid='" + proje.getSahipOgrenciId().getId() + ", kategoriid='" + proje.getKategori().getId() + "  where projeid=" + proje.getId());
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -74,22 +75,22 @@ public class ProjeDAO extends Connector {
     }
 
     public Proje getTitle(int id) {
-        
-         Proje entity = null;
+
+        Proje entity = null;
         try {
             Statement st = this.getConnect().createStatement();
             ResultSet rs = st.executeQuery("Select * from projeler where projeid=" + id);
 
             while (rs.next()) {
-                Ogrenci o=this.getOdao().getFromOgrenci(rs.getInt("sahipogrenciid"));
-                Kategori k=this.getKdao().getTitle(rs.getInt("kategoriid"));
-                entity = new Proje(rs.getLong("projeid"), rs.getString("projeadi"), rs.getString("projeaciklamasi"), rs.getString("kullanilanteknolojiler"), o,k);
+                Ogrenci o = this.getOdao().getFromOgrenci(rs.getInt("sahipogrenciid"));
+                Kategori k = this.getKdao().getTitle(rs.getInt("kategoriid"));
+                entity = new Proje(rs.getLong("projeid"), rs.getString("projeadi"), rs.getString("projeaciklamasi"), rs.getString("kullanilanteknolojiler"), o, k);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProjeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return entity;
-   
+
     }
 
     public int getProjeCount() {
@@ -108,9 +109,62 @@ public class ProjeDAO extends Connector {
         return veriSayisi;
     }
 
+    public List<Proje> ogrenciFromProject(int hangiSayfa, int gorunenVeri, int id) {
+        List<Proje> list = new ArrayList<>();
+
+        Statement st;
+        try {
+            st = this.getConnect().createStatement();
+
+            String query = "SELECT * FROM projeler WHERE sahipogrenciid = " + id
+                    + " LIMIT " + gorunenVeri
+                    + " OFFSET " + ((hangiSayfa - 1) * gorunenVeri);
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                Ogrenci o = this.getOdao().getFromOgrenci(rs.getInt("sahipogrenciid"));
+                Kategori k = this.getKdao().getTitle(rs.getInt("kategoriid"));
+                list.add(new Proje(rs.getLong("projeid"), rs.getString("projeadi"), rs.getString("projeaciklamasi"), rs.getString("kullanilanteknolojiler"), o, k));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public List<Proje> aliciogrenciFromProject( int id) {
+        List<Proje> list = new ArrayList<>();
+
+        Statement st;
+        try {
+            st = this.getConnect().createStatement();
+
+            String query = "SELECT\n"
+                    + "    p.*\n"
+                    + "FROM\n"
+                    + "    public.projeler p\n"
+                    + "    JOIN public.ekipuyeleri eu ON p.projeid = eu.projeid\n"
+                    + "WHERE\n"
+                    + "    eu.ogrenciid =" + id;
+                  
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                Ogrenci o = this.getOdao().getFromOgrenci(rs.getInt("sahipogrenciid"));
+                Kategori k = this.getKdao().getTitle(rs.getInt("kategoriid"));
+                list.add(new Proje(rs.getLong("projeid"), rs.getString("projeadi"), rs.getString("projeaciklamasi"), rs.getString("kullanilanteknolojiler"), o, k));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
     public OgrenciDAO getOdao() {
-        if(this.odao==null){
-            this.odao=new OgrenciDAO();
+        if (this.odao == null) {
+            this.odao = new OgrenciDAO();
         }
         return odao;
     }
@@ -120,8 +174,8 @@ public class ProjeDAO extends Connector {
     }
 
     public KategoriDAO getKdao() {
-          if(this.kdao==null){
-            this.kdao=new KategoriDAO();
+        if (this.kdao == null) {
+            this.kdao = new KategoriDAO();
         }
         return kdao;
     }
@@ -129,5 +183,5 @@ public class ProjeDAO extends Connector {
     public void setKdao(KategoriDAO kdao) {
         this.kdao = kdao;
     }
-    
+
 }

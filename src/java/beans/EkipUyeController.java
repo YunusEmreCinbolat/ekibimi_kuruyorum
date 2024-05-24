@@ -42,6 +42,10 @@ public class EkipUyeController extends BaseController<EkipUye, EkipUyeDAO> imple
         this.getDao().delete(id);
 
     }
+    
+    public List<EkipUye> getFromAOgrenci(int id){
+        return this.getDao().getFromAOgrenci(id);
+    }
 
     public List<EkipUye> getList() {
         this.list = this.getDao().readList(this.hangiSayfa, this.gorunenVeri);
