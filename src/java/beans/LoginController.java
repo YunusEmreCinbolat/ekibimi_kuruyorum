@@ -18,23 +18,23 @@ import java.util.logging.Logger;
 @Named(value = "loginController")
 @SessionScoped
 public class LoginController implements Serializable {
+
     private OgrenciDAO ogrenciDao;
     private AdminDAO adminDao;
     private Ogrenci o;
     private Admin a;
-   
+
     @Inject
     private OgrenciController autho;
-   
+
     @Inject
     private AdminController autha;
-   
+
     private Proje projeEntity;
-   
+
     private String role;
 
     // Getters and setters
-
     public String loginOgrenci() {
         List<Ogrenci> ogrenciler = this.getOgrenciDao().allList();
         for (Ogrenci ogrenci : ogrenciler) {
@@ -44,24 +44,24 @@ public class LoginController implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", ogrenci);
 
                 FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Giriş başarılı", null));
-                
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Giriş başarılı", null));
+
                 try {
                     Thread.sleep(5000);
-                
+
                 } catch (InterruptedException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 // JavaScript kullanarak bekleme ve yönlendirme
-                    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+                FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
                 return "/panel/ogrenci/proje/OgrenciProjeGoruntule?faces-redirect=true&includeViewParams=true";
             }
         }
 
         // Hata mesajı ekleyin
         FacesContext.getCurrentInstance().addMessage(null,
-            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Giriş Hatası", "Kullanıcı adı veya şifre yanlış"));
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Giriş Hatası", "Kullanıcı adı veya şifre yanlış"));
         return "/panel/ogrenci/ogrenci/OgrenciGiris?faces-redirect=true";
     }
 
@@ -73,7 +73,7 @@ public class LoginController implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", admin);
                 this.autha.setEntity(admin);
                 FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Giriş başarılı, yönlendiriliyorsunuz...", null));
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Giriş başarılı, yönlendiriliyorsunuz...", null));
 
                 // JavaScript kullanarak bekleme ve yönlendirme
                 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
@@ -83,21 +83,23 @@ public class LoginController implements Serializable {
 
         // Hata mesajı ekleyin
         FacesContext.getCurrentInstance().addMessage(null,
-            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Giriş Hatası", "Kullanıcı adı veya şifre yanlış"));
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Giriş Hatası", "Kullanıcı adı veya şifre yanlış"));
         return "/panel/admin/admin/AdminGiris?faces-redirect=true";
     }
 
     public String logoutAdmin() {
         role = null;
         FacesContext.getCurrentInstance().addMessage(null,
-            new FacesMessage(FacesMessage.SEVERITY_INFO, "Başarılı Çıkış", "Başarıyla çıkış yaptınız"));
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Başarılı Çıkış", "Başarıyla çıkış yaptınız"));
+        this.autha.setEntity(null);
         return "/panel/admin/admin/AdminGiris?faces-redirect=true";
     }
 
     public String logoutOgrenci() {
         role = null;
         FacesContext.getCurrentInstance().addMessage(null,
-            new FacesMessage(FacesMessage.SEVERITY_INFO, "Başarılı Çıkış", "Başarıyla çıkış yaptınız"));
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Başarılı Çıkış", "Başarıyla çıkış yaptınız"));
+        this.autho.setEntity(null);
         return "/panel/ogrenci/ogrenci/OgrenciGiris?faces-redirect=true";
     }
 
