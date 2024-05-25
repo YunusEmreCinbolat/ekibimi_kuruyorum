@@ -12,23 +12,24 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Named(value = "loginController")
 @SessionScoped
 public class LoginController implements Serializable {
     private OgrenciDAO ogrenciDao;
     private AdminDAO adminDao;
-   private Ogrenci o;
-  
-   private Admin a;
+    private Ogrenci o;
+    private Admin a;
    
-   @Inject
-   private OgrenciController autho;
-  
-   @Inject
-   private AdminController autha;
+    @Inject
+    private OgrenciController autho;
    
-   private Proje projeEntity;
+    @Inject
+    private AdminController autha;
+   
+    private Proje projeEntity;
    
     private String role;
 
@@ -39,15 +40,29 @@ public class LoginController implements Serializable {
         for (Ogrenci ogrenci : ogrenciler) {
             if (this.o.getKullaniciadi().equals(ogrenci.getKullaniciadi()) && this.o.getSifre().equals(ogrenci.getSifre())) {
                 role = "student";
-                autho.setEntity(ogrenci);
-                  FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", ogrenci);
-                return "/panel/ogrenci/proje/OgrenciProjeGoruntule?faces-redirect=true";
+                this.autho.setEntity(ogrenci);
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", ogrenci);
+
+                FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Giriş başarılı", null));
+                
+                try {
+                    Thread.sleep(5000);
+                
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                // JavaScript kullanarak bekleme ve yönlendirme
+                    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+                return "/panel/ogrenci/proje/OgrenciProjeGoruntule?faces-redirect=true&includeViewParams=true";
             }
         }
+
         // Hata mesajı ekleyin
         FacesContext.getCurrentInstance().addMessage(null,
             new FacesMessage(FacesMessage.SEVERITY_ERROR, "Giriş Hatası", "Kullanıcı adı veya şifre yanlış"));
-        return "panel/ogrenci/ogrenci/OgrenciGiris?faces-redirect=true";
+        return "/panel/ogrenci/ogrenci/OgrenciGiris?faces-redirect=true";
     }
 
     public String loginAdmin() {
@@ -55,29 +70,35 @@ public class LoginController implements Serializable {
         for (Admin admin : adminler) {
             if (this.a.getKullaniciadi().equals(admin.getKullaniciadi()) && this.a.getSifre().equals(admin.getSifre())) {
                 role = "admin";
-                autha.setEntity(admin);
-                  FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", admin);
-                return "panel/admin/admin/AdminAnasayfa?faces-redirect=true";
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", admin);
+                this.autha.setEntity(admin);
+                FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Giriş başarılı, yönlendiriliyorsunuz...", null));
+
+                // JavaScript kullanarak bekleme ve yönlendirme
+                FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+                return "/panel/admin/anasayfa/AdminPanelAnasayfa?faces-redirect=true&includeViewParams=true";
             }
         }
+
         // Hata mesajı ekleyin
         FacesContext.getCurrentInstance().addMessage(null,
             new FacesMessage(FacesMessage.SEVERITY_ERROR, "Giriş Hatası", "Kullanıcı adı veya şifre yanlış"));
-        return "panel/admin/admin/AdminGiris?faces-redirect=true";
+        return "/panel/admin/admin/AdminGiris?faces-redirect=true";
     }
 
     public String logoutAdmin() {
         role = null;
         FacesContext.getCurrentInstance().addMessage(null,
             new FacesMessage(FacesMessage.SEVERITY_INFO, "Başarılı Çıkış", "Başarıyla çıkış yaptınız"));
-        return "panel/admin/admin/AdminGiris?faces-redirect=true";
+        return "/panel/admin/admin/AdminGiris?faces-redirect=true";
     }
 
     public String logoutOgrenci() {
         role = null;
         FacesContext.getCurrentInstance().addMessage(null,
             new FacesMessage(FacesMessage.SEVERITY_INFO, "Başarılı Çıkış", "Başarıyla çıkış yaptınız"));
-        return "panel/ogrenci/ogrenci/OgrenciGiris?faces-redirect=true";
+        return "/panel/ogrenci/ogrenci/OgrenciGiris?faces-redirect=true";
     }
 
     public OgrenciDAO getOgrenciDao() {
@@ -111,8 +132,8 @@ public class LoginController implements Serializable {
     }
 
     public Ogrenci getO() {
-        if(this.o==null){
-            this.o=new Ogrenci();
+        if (this.o == null) {
+            this.o = new Ogrenci();
         }
         return o;
     }
@@ -122,8 +143,8 @@ public class LoginController implements Serializable {
     }
 
     public Admin getA() {
-          if(this.a==null){
-            this.a=new Admin();
+        if (this.a == null) {
+            this.a = new Admin();
         }
         return a;
     }
@@ -131,7 +152,4 @@ public class LoginController implements Serializable {
     public void setA(Admin a) {
         this.a = a;
     }
-
-  
-
 }

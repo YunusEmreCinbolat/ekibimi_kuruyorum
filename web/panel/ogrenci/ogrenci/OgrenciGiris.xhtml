@@ -19,15 +19,21 @@
                         <div class="row justify-content-center">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Kullanıcı Adı</label>
-                                    <h:inputText id="email" value="#{loginController.o.kullaniciadi}" class="form-control"/>
+                                    <label for="kullaniciadi" class="form-label">Kullanıcı Adı</label>
+                                    <h:inputText id="kullaniciadi" value="#{loginController.o.kullaniciadi}" class="form-control" required="true" requiredMessage="Kullanıcı Adı gerekli"/>
+                                    <h:message for="kullaniciadi" style="color: red"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Şifre</label>
-                                    <h:inputSecret id="password" value="#{loginController.o.sifre}" class="form-control"/>
+                                    <label for="sifre" class="form-label">Şifre</label>
+                                    <h:inputSecret id="sifre" value="#{loginController.o.sifre}" class="form-control" required="true" requiredMessage="Şifre gerekli">
+                                        <f:validateLength minimum="5" maximum="10" />
+                                    </h:inputSecret>
+                                    <h:message for="sifre" style="color: red"/>
                                 </div>
                                 <div class="mb-3">
-                                    <h:commandButton action="#{loginController.loginOgrenci}" value="Giriş Yap" class="btn btn-primary"/>
+                                    <h:commandButton action="#{loginController.loginOgrenci}" value="Giriş Yap" class="btn btn-primary">
+                                        <f:ajax execute="@form" render="@form"/>
+                                    </h:commandButton>
                                 </div>
                             </div>
                         </div>

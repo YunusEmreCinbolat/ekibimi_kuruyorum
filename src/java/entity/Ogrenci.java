@@ -22,6 +22,7 @@ public class Ogrenci implements Serializable{
     private String universite;
     private Sinif sinif;
     private Bolum bolum;
+    private String sifreTekrar;
 
     public Ogrenci() {
     }
@@ -120,6 +121,16 @@ public class Ogrenci implements Serializable{
     public void setBolum(Bolum bolum) {
         this.bolum = bolum;
     }
+
+    public String getSifreTekrar() {
+        return sifreTekrar;
+    }
+
+    public void setSifreTekrar(String sifreTekrar) {
+        this.sifreTekrar = sifreTekrar;
+    }
+    
+    
 
     @Override
     public int hashCode() {

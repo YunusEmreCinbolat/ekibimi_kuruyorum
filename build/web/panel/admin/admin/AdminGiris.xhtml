@@ -27,11 +27,9 @@
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
                         if (xhr.status === 200) {
-                            
                             console.log(xhr.responseText);
                             // Burada isteğe göre yanıtı işleyebilirsiniz
                         } else {
-                            // Yanıt alınamadığında veya hata durumunda burası çalışır
                             console.error('Form gönderilirken hata oluştu.');
                         }
                     }
@@ -41,30 +39,35 @@
         </script>
     </h:head>
 
-
-
-  
-     <h:body>
-    <div class="container mt-5">
-        <h1 class="center">Admin Girişi</h1>
-        <hr />
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label for="email" class="form-label">E-Mail</label>
-                    <input type="email" id="email" class="form-control" />
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Şifre</label>
-                    <input type="password" id="password" class="form-control" />
-                </div>
-                <div class="mb-3">
-                    <!-- AJAX isteği göndermek için bir düğme -->
-                    <button onclick="submitForm()" class="btn btn-primary">Giriş Yap</button>
+    <h:body>
+        <div class="container mt-5">
+            <h1 class="center">Admin Girişi</h1>
+            <hr />
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <h:form>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-Mail</label>
+                            <h:inputText id="email" value="#{adminBean.entity.email}" styleClass="form-control" required="true" requiredMessage="E-Mail gerekli" validatorMessage="Geçerli bir E-Mail giriniz">
+                                <f:validateRegex pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$" />
+                            </h:inputText>
+                            <h:message for="email" style="color: red" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Şifre</label>
+                            <h:inputSecret id="password" value="#{adminBean.entity.sifre}" styleClass="form-control" required="true" requiredMessage="Şifre gerekli">
+                                <f:validateLength minimum="5" maximum="10" />
+                            </h:inputSecret>
+                            <h:message for="password" style="color: red" />
+                        </div>
+                        <div class="mb-3">
+                            <h:commandButton value="Giriş Yap" action="#{loginController.loginAdmin}" styleClass="btn btn-primary">
+                                <f:ajax execute="@form" render="@form" />
+                            </h:commandButton>
+                        </div>
+                    </h:form>
                 </div>
             </div>
         </div>
-    </div>
-</h:body>
-
+    </h:body>
 </html>
