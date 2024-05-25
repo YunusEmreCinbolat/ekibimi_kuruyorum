@@ -40,14 +40,14 @@ public class LoginController implements Serializable {
         for (Ogrenci ogrenci : ogrenciler) {
             if (this.o.getKullaniciadi().equals(ogrenci.getKullaniciadi()) && this.o.getSifre().equals(ogrenci.getSifre())) {
                 role = "student";
-                this.autho.setEntity(ogrenci);
+                autho.setEntity(ogrenci);
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", ogrenci);
 
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Giriş başarılı", null));
 
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(3000);
 
                 } catch (InterruptedException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,11 +71,18 @@ public class LoginController implements Serializable {
             if (this.a.getKullaniciadi().equals(admin.getKullaniciadi()) && this.a.getSifre().equals(admin.getSifre())) {
                 role = "admin";
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", admin);
-                this.autha.setEntity(admin);
+                autha.setEntity(admin);
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Giriş başarılı, yönlendiriliyorsunuz...", null));
 
                 // JavaScript kullanarak bekleme ve yönlendirme
+                try {
+                    Thread.sleep(3000);
+
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
                 return "/panel/admin/anasayfa/AdminPanelAnasayfa?faces-redirect=true&includeViewParams=true";
             }
@@ -88,19 +95,11 @@ public class LoginController implements Serializable {
     }
 
     public String logoutAdmin() {
-        role = null;
-        FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "Başarılı Çıkış", "Başarıyla çıkış yaptınız"));
-        this.autha.setEntity(null);
-        return "/panel/admin/admin/AdminGiris?faces-redirect=true";
+        return "a";
     }
 
     public String logoutOgrenci() {
-        role = null;
-        FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "Başarılı Çıkış", "Başarıyla çıkış yaptınız"));
-        this.autho.setEntity(null);
-        return "/panel/ogrenci/ogrenci/OgrenciGiris?faces-redirect=true";
+      return "a";
     }
 
     public OgrenciDAO getOgrenciDao() {
