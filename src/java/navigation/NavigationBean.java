@@ -3,13 +3,13 @@ package navigation;
 
 
 import jakarta.inject.Named;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 @Named(value = "navigationBean")
-@SessionScoped
+@ViewScoped
 public class NavigationBean implements Serializable {
 
     private String activePage;

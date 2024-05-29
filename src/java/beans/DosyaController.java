@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 
 
-@Named
+@Named(value="dosyaController")
 @SessionScoped
 public class DosyaController extends BaseController<Dosya, DosyaDAO> implements Serializable, Controller {
 
