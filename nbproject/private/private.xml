@@ -4,10 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Dell/Documents/sinif3/ekibimi_kuruyorum/web/panel/admin/AdminPanelNavbar.xhtml</file>
-            <file>file:/C:/Users/Dell/Documents/sinif3/ekibimi_kuruyorum/src/java/filter/LoginFilter.java</file>
+            <file>file:/C:/Users/Dell/Documents/sinif3/ekibimi_kuruyorum/src/java/beans/LoginController.java</file>
+            <file>file:/C:/Users/Dell/Documents/sinif3/ekibimi_kuruyorum/web/panel/ogrenci/OgrenciPanelNavbar.xhtml</file>
             <file>file:/C:/Users/Dell/Documents/sinif3/ekibimi_kuruyorum/src/java/beans/AdminController.java</file>
-            <file>file:/C:/Users/Dell/Documents/sinif3/ekibimi_kuruyorum/src/java/navigation/NavigationBean.java</file>
+            <file>file:/C:/Users/Dell/Documents/sinif3/ekibimi_kuruyorum/web/panel/admin/admin/AdminAnasayfa.xhtml</file>
             <file>file:/C:/Users/Dell/Documents/sinif3/ekibimi_kuruyorum/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Dell/Documents/sinif3/ekibimi_kuruyorum/web/panel/admin/admin/AdminGiris.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/sinif3/ekibimi_kuruyorum/src/java/navigation/NavigationBean.java</file>
+            <file>file:/C:/Users/Dell/Documents/sinif3/ekibimi_kuruyorum/web/panel/ogrenci/ogrenci/OgrenciGiris.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/sinif3/ekibimi_kuruyorum/web/logout.xhtml</file>
+            <file>file:/C:/Users/Dell/Documents/sinif3/ekibimi_kuruyorum/web/index.xhtml</file>
         </group>
     </open-files>
 </project-private>

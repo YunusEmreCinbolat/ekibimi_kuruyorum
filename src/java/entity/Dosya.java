@@ -33,6 +33,15 @@ public class Dosya {
         this.ftype = ftype;
     }
 
+    public Dosya(Long id, String fpath, String fname, String ftype) {
+        this.id = id;
+        this.fpath = fpath;
+        this.fname = fname;
+        this.ftype = ftype;
+    }
+    
+    
+    
     public Long getId() {
         return id;
     }

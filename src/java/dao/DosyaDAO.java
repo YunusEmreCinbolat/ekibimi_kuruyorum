@@ -40,12 +40,44 @@ public class DosyaDAO extends Connector {
 
     }
 
-    public List<Dosya> readList() {
+    public void update(Dosya dosya) {
+        try {
+            String sql = "UPDATE dosyalar SET fpath = ?, fname = ?, ftype = ?, ogrenci_id = ? WHERE id = ?";
+
+            PreparedStatement pstmt = this.getConnect().prepareStatement(sql);
+            pstmt.setString(1, dosya.getFpath());
+            pstmt.setString(2, dosya.getFname());
+            pstmt.setString(3, dosya.getFtype());
+            pstmt.setLong(4, dosya.getOgrenci().getId());
+            pstmt.setLong(5, dosya.getId());
+
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DosyaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void delete(int dosyaId) {
+        try {
+            String sql = "DELETE FROM dosyalar WHERE id = ?";
+
+            PreparedStatement pstmt = this.getConnect().prepareStatement(sql);
+            pstmt.setInt(1, dosyaId);
+
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DosyaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<Dosya> readList(Long id) {
         List<Dosya> list = new ArrayList();
         try {
             Statement st = this.getConnect().createStatement();
 
-            ResultSet rs = st.executeQuery("Select * from dosyalar");
+            ResultSet rs = st.executeQuery("SELECT d.*\n"
+                    + "FROM public.dosyalar d \n"
+                    + "JOIN public.ogrenciler o ON d.ogrenci_id = " + id);
 
             while (rs.next()) {
                 Ogrenci o = this.getDao().getFromOgrenci(rs.getInt("ogrenci_id"));
@@ -64,7 +96,9 @@ public class DosyaDAO extends Connector {
         try {
             Statement st = this.getConnect().createStatement();
 
-            ResultSet rs = st.executeQuery("Select * from files dosalar id=" + id);
+            ResultSet rs = st.executeQuery("SELECT d.*\n"
+                    + "FROM public.dosyalar d \n"
+                    + "JOIN public.ogrenciler o ON d.ogrenci_id = " + id);
 
             while (rs.next()) {
                 Ogrenci o = this.getDao().getFromOgrenci(rs.getInt("ogrenci_id"));

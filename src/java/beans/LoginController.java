@@ -41,18 +41,12 @@ public class LoginController implements Serializable {
             if (this.o.getKullaniciadi().equals(ogrenci.getKullaniciadi()) && this.o.getSifre().equals(ogrenci.getSifre())) {
                 role = "student";
                 autho.setEntity(ogrenci);
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", ogrenci);
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("loginController", this);
 
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Giriş başarılı", null));
 
-                try {
-                    Thread.sleep(3000);
-
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
+               
                 // JavaScript kullanarak bekleme ve yönlendirme
                 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
                 return "/panel/ogrenci/proje/OgrenciProjeGoruntule?faces-redirect=true&includeViewParams=true";
@@ -70,18 +64,13 @@ public class LoginController implements Serializable {
         for (Admin admin : adminler) {
             if (this.a.getKullaniciadi().equals(admin.getKullaniciadi()) && this.a.getSifre().equals(admin.getSifre())) {
                 role = "admin";
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", admin);
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("loginController", this);
                 autha.setEntity(admin);
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Giriş başarılı, yönlendiriliyorsunuz...", null));
 
                 // JavaScript kullanarak bekleme ve yönlendirme
-                try {
-                    Thread.sleep(3000);
-
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            
 
                 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
                 return "/panel/admin/anasayfa/AdminPanelAnasayfa?faces-redirect=true&includeViewParams=true";
@@ -95,15 +84,17 @@ public class LoginController implements Serializable {
     }
 
     public String logoutAdmin() {
-        return "a";
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/panel/admin/admin/AdminGiris.xhtml?faces-redirect=true";
     }
 
     public String logoutOgrenci() {
-      return "a";
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/panel/ogrenci/ogrenci/OgrenciGiris.xhtml?faces-redirect=true";
     }
 
     public OgrenciDAO getOgrenciDao() {
-        if (this.ogrenciDao == null) {
+        if (ogrenciDao == null) {
             this.ogrenciDao = new OgrenciDAO();
         }
         return ogrenciDao;
@@ -114,7 +105,7 @@ public class LoginController implements Serializable {
     }
 
     public AdminDAO getAdminDao() {
-        if (this.adminDao == null) {
+        if (adminDao == null) {
             this.adminDao = new AdminDAO();
         }
         return adminDao;
@@ -122,14 +113,6 @@ public class LoginController implements Serializable {
 
     public void setAdminDao(AdminDAO adminDao) {
         this.adminDao = adminDao;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public Ogrenci getO() {
@@ -152,5 +135,24 @@ public class LoginController implements Serializable {
 
     public void setA(Admin a) {
         this.a = a;
+    }
+
+    public Proje getProjeEntity() {
+        if (this.projeEntity == null) {
+            this.projeEntity = new Proje();
+        }
+        return projeEntity;
+    }
+
+    public void setProjeEntity(Proje projeEntity) {
+        this.projeEntity = projeEntity;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

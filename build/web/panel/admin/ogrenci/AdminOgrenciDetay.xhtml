@@ -36,6 +36,37 @@
 
                         <dt class="col-sm-3">Sınıf:</dt>
                         <dd class="col-sm-9">#{sinifBean.getSinifAdi(ogrenciBean.entity.sinif.id)}</dd>
+
+                        <dt class="col-sm-3">CV</dt>
+                        <dd class="col-sm-9"> 
+                            <h:form enctype="multipart/form-data" >
+                                <h:inputFile  value="#{dosyaController.dosya}" class="form-control"/>
+                                <h:commandButton styleClass="btn btn-primary btn-block"  action="#{dosyaController.create}" value="Dosya Ekle" />
+                              
+
+                            </h:form>
+                            <h:dataTable value="#{dosyaController.list}" var="d" >
+
+                                <h:column>
+                                    <h:panelGroup layout="block" rendered="#{d.ftype.contains('application')}">
+                                        <h:outputLink value="/ekibimi_kuruyorum/file/#{d.id}">
+                                            CV Göster
+                                        </h:outputLink>
+                                        <h:form>
+                                        <h:commandButton action="#{dosyaController.delete(d.id)}" value="sil"/>
+                                        </h:form>
+                                    </h:panelGroup>
+
+                                    <!-- Create a link to download the file -->
+
+
+                                </h:column>
+
+                            </h:dataTable>
+
+                        </dd>
+
+
                     </dl>
 
                     <h:form>

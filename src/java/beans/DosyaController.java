@@ -23,6 +23,9 @@ import java.util.logging.Logger;
 public class DosyaController extends BaseController<Dosya, DosyaDAO> implements Serializable, Controller {
 
     private Dosya entity;
+    
+    @Inject
+    private OgrenciController o;
 
     @Inject
     private OgrenciController oController;
@@ -35,9 +38,21 @@ public class DosyaController extends BaseController<Dosya, DosyaDAO> implements 
 
     @Override
     public void update() {
-        // Güncelleme kodu
+         try {
+            System.out.println("-------------------------");
+            System.out.println("DosyaController create method triggered.");
+            InputStream in = dosya.getInputStream();
+            File f = new File(uploadPath + dosya.getSubmittedFileName());
+            Files.copy(in, f.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            Dosya d = new Dosya(oController.getEntity(), uploadPath, f.getName(), dosya.getContentType());
+            System.out.println(d.getOgrenci().getId() + " " + d.getFname() + d.getFpath() + f.getPath());
+            this.getDao().update(d);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
-
+    
+   
     @Override
     public void create() {
         System.out.println("-------------");
@@ -57,11 +72,12 @@ public class DosyaController extends BaseController<Dosya, DosyaDAO> implements 
 
     @Override
     public void delete(int id) {
-        // Silme kodu
+        this.getDao().delete(id);
+
     }
 
     public List<Dosya> getList() {
-        this.list = this.getDao().readList();
+        this.list = this.getDao().readList(o.getEntity().getId());
         return this.list;
     }
 
