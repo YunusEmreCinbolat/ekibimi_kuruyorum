@@ -46,7 +46,7 @@
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                             <h:link outcome="#{navigationBean.goToPage('/panel/ogrenci/profil/OgrenciProfilGoruntule.xhtml')}" styleClass="dropdown-item" value="Profilime Git"/>
                             <h:link outcome="#{navigationBean.goToPage('/panel/ogrenci/bildirimler/OgrenciBildirimGoruntule.xhtml')}" styleClass="dropdown-item" value="Bildirimler ( #{bildirimBean.getBildirimCount(ogrenciBean.entity.id)} )" />
-                            <h:link outcome="#{loginController.logoutOgrenci()}" styleClass="dropdown-item" value="Çıkış Yap"/>
+                            <h:link outcome="/logout.xhtml" styleClass="dropdown-item" value="Çıkış Yap"/>
                         </div>
                     </li>
                 </ul>

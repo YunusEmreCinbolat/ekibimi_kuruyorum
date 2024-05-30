@@ -29,7 +29,7 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/admin/AdminKaydet.xhtml')}" 
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/admin/AdminKaydet?faces-redirect=true')}" 
                                     styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/admin/AdminKaydet.xhtml') ? 'active' : ''}" 
                                     value="Admin Ekle"/>
 
@@ -95,7 +95,7 @@
                         </li>
                     </li>
                     <li class="nav-item">
-                        <h:link  styleClass="nav-link" value="Çıkış Yap"/>
+                        <h:link  styleClass="nav-link" outcome="/logout.xhtml" value="Çıkış Yap"/>
                     </li>
                       
                 </ul>

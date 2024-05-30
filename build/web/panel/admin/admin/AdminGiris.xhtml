@@ -47,22 +47,19 @@
                 <div class="col-md-6">
                     <h:form>
                         <div class="mb-3">
-                            <label for="email" class="form-label">E-Mail</label>
-                            <h:inputText id="email" value="#{adminBean.entity.email}" styleClass="form-control" required="true" requiredMessage="E-Mail gerekli" validatorMessage="Geçerli bir E-Mail giriniz">
-                                <f:validateRegex pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$" />
+                            <label for="email" class="form-label">kullanıci adı</label>
+                            <h:inputText id="email" value="#{loginController.a.kullaniciadi}" styleClass="form-control" required="true" requiredMessage="E-Mail gerekli" validatorMessage="Geçerli bir E-Mail giriniz">
                             </h:inputText>
                             <h:message for="email" style="color: red" />
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Şifre</label>
-                            <h:inputSecret id="password" value="#{adminBean.entity.sifre}" styleClass="form-control" required="true" requiredMessage="Şifre gerekli">
-                                <f:validateLength minimum="5" maximum="10" />
+                            <h:inputSecret id="password" value="#{loginController.a.sifre}" styleClass="form-control" required="true" requiredMessage="Şifre gerekli">
                             </h:inputSecret>
                             <h:message for="password" style="color: red" />
                         </div>
                         <div class="mb-3">
                             <h:commandButton value="Giriş Yap" action="#{loginController.loginAdmin}" styleClass="btn btn-primary">
-                                <f:ajax execute="@form" render="@form" />
                             </h:commandButton>
                         </div>
                     </h:form>
