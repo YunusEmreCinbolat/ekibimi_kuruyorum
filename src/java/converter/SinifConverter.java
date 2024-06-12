@@ -6,25 +6,30 @@ package converter;
 
 import dao.SinifDAO;
 import entity.Sinif;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
 import jakarta.faces.convert.FacesConverter;
+import jakarta.inject.Named;
+import java.io.Serializable;
 
 /**
  *
  * @author Dell
  */
-
-@FacesConverter("sinifConverter")
-public class SinifConverter implements Converter {
-    
+@Named
+@RequestScoped
+@FacesConverter(value="sinifConverter",managed = true)
+public class SinifConverter implements Converter,Serializable {
+    @EJB
     private SinifDAO dao;
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         int id=Integer.valueOf(string);
-        Sinif f= this.getDao().getSinifAdi(id);
+        Sinif f= this.dao.getSinifAdi(id);
         return f;
     }
 

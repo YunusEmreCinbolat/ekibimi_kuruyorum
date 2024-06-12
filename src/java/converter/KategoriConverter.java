@@ -6,25 +6,30 @@ package converter;
 
 import dao.KategoriDAO;
 import entity.Kategori;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
 import jakarta.faces.convert.FacesConverter;
+import jakarta.inject.Named;
+import java.io.Serializable;
 
 /**
  *
  * @author Dell
  */
-
-@FacesConverter("kategoriConverter")
-public class KategoriConverter implements Converter {
-    
+@Named
+@RequestScoped
+@FacesConverter(value="kategoriConverter",managed=true)
+public class KategoriConverter implements Converter,Serializable {
+    @EJB
     private KategoriDAO dao;
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         int id=Integer.valueOf(string);
-        Kategori f= this.getDao().getTitle(id);
+        Kategori f= this.dao.getTitle(id);
         return f;
     }
 

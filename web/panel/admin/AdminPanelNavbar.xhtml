@@ -6,35 +6,38 @@
 
     <h:head>
         <title>JSF Navbar</title>
-        <h:outputStylesheet library="css" name="bootstrap.min.css" />
-        <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
-        <h:outputScript library="js" name="bootstrap.min.js" target="head" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+      
         <style>
             .footer {
                 position: fixed;
                 bottom: 0;
                 width: 100%;
             }
-
         </style>
     </h:head>
 
     <h:body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">   
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Admin İşlemleri
                         </a>
-
                         <div class="dropdown-menu" aria-labelledby="adminDropdown">
                             <h:link outcome="#{navigationBean.goToPage('/panel/admin/admin/AdminKaydet?faces-redirect=true')}" 
                                     styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/admin/AdminKaydet.xhtml') ? 'active' : ''}" 
                                     value="Admin Ekle"/>
-
-                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/admin/AdminGoruntule.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/admin/AdminGoruntule.xhtml') ? 'active' : ''}" value="Adminleri Görüntüle"/>
-                            <!-- Add more dropdown items as needed -->
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/admin/AdminGoruntule.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/admin/AdminGoruntule.xhtml') ? 'active' : ''}" 
+                                    value="Adminleri Görüntüle"/>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -42,71 +45,85 @@
                             Öğrenci İşlemleri
                         </a>
                         <div class="dropdown-menu" aria-labelledby="studentDropdown">
-                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/ogrenci/AdminOgrenciKaydet.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/ogrenci/AdminOgrenciKaydet.xhtml') ? 'active' : ''}" value="Öğrenci Ekle"/>
-                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/ogrenci/AdminOgrenciGoruntule.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/ogrenci/AdminOgrenciGoruntule.xhtml') ? 'active' : ''}" value="Öğrencileri Görüntüle"/>
-                            <!-- Add more dropdown items as needed -->
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/ogrenci/AdminOgrenciKaydet.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/ogrenci/AdminOgrenciKaydet.xhtml') ? 'active' : ''}" 
+                                    value="Öğrenci Ekle"/>
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/ogrenci/AdminOgrenciGoruntule.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/ogrenci/AdminOgrenciGoruntule.xhtml') ? 'active' : ''}" 
+                                    value="Öğrencileri Görüntüle"/>
                         </div>
                     </li>
-
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="facultyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Fakülte İşlemleri
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="studentDropdown">
-                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/fakultee/AdminFakulteEkle.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/fakultee/AdminFakulteEkle.xhtml') ? 'active' : ''}" value="Fakülte Ekle"/>
-                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/fakultee/AdminFakulteGoruntule.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/fakultee/AdminFakulteGoruntule.xhtml') ? 'active' : ''}" value="Fakülteleri Görüntüle"/>
-                            <!-- Add more dropdown items as needed -->
+                        <div class="dropdown-menu" aria-labelledby="facultyDropdown">
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/fakultee/AdminFakulteEkle.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/fakultee/AdminFakulteEkle.xhtml') ? 'active' : ''}" 
+                                    value="Fakülte Ekle"/>
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/fakultee/AdminFakulteGoruntule.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/fakultee/AdminFakulteGoruntule.xhtml') ? 'active' : ''}" 
+                                    value="Fakülteleri Görüntüle"/>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="departmentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Bölüm İşlemleri
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="studentDropdown">
-                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/bolum/AdminBolumEkle.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/bolum/AdminBolumEkle.xhtml') ? 'active' : ''}" value="Bölüm Ekle"/>
-                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/bolum/AdminBolumGoruntule.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/bolum/AdminBolumGoruntule.xhtml') ? 'active' : ''}" value="Bölümleri Görüntüle"/>
-                            <!-- Add more dropdown items as needed -->
+                        <div class="dropdown-menu" aria-labelledby="departmentDropdown">
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/bolum/AdminBolumEkle.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/bolum/AdminBolumEkle.xhtml') ? 'active' : ''}" 
+                                    value="Bölüm Ekle"/>
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/bolum/AdminBolumGoruntule.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/bolum/AdminBolumGoruntule.xhtml') ? 'active' : ''}" 
+                                    value="Bölümleri Görüntüle"/>
                         </div>
                     </li>
-
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="classDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Sınıf İşlemleri
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="studentDropdown">
-                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/sinif/AdminSinifEkle.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/sinif/AdminSinifEkle.xhtml') ? 'active' : ''}" value="Sınıf Ekle"/>
-                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/sinif/AdminSinifGoruntule.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/sinif/AdminSinifGoruntule.xhtml') ? 'active' : ''}" value="Sınıfları Görüntüle"/>
-                            <!-- Add more dropdown items as needed -->
+                        <div class="dropdown-menu" aria-labelledby="classDropdown">
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/sinif/AdminSinifEkle.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/sinif/AdminSinifEkle.xhtml') ? 'active' : ''}" 
+                                    value="Sınıf Ekle"/>
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/sinif/AdminSinifGoruntule.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/sinif/AdminSinifGoruntule.xhtml') ? 'active' : ''}" 
+                                    value="Sınıfları Görüntüle"/>
                         </div>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="studentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Proje İşlemleri
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="studentDropdown">
-                                <h:link outcome="#{navigationBean.goToPage('/panel/admin/kategori/AdminProjeKategoriEkle.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/kategori/AdminProjeKategoriEkle.xhtml') ? 'active' : ''}" value="Proje Kategorisi Ekle"/>
-                                <h:link outcome="#{navigationBean.goToPage('/panel/admin/kategori/AdminProjeKategoriGoruntule.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/kategori/AdminProjeKategoriGoruntule.xhtml') ? 'active' : ''}" value="Proje Kategorileri Görüntüle"/>
-                                <!-- Add more dropdown items as needed -->
-                                <h:link outcome="#{navigationBean.goToPage('/panel/admin/proje/AdminProjeEkle.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/proje/AdminProjeEkle.xhtml') ? 'active' : ''}" value="Proje Ekle"/>
-                                <h:link outcome="#{navigationBean.goToPage('/panel/admin/proje/AdminProjeGoruntule.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/proje/AdminProjeGoruntule.xhtml') ? 'active' : ''}" value="Proje Goruntule"/>
-                                <h:link outcome="#{navigationBean.goToPage('/panel/admin/ekipuye/AdminEkipUyeEkle.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/ekipuye/AdminEkipUyeEkle') ? 'active' : ''}" value="Ekip Uyesi Ekle"/>
-                                <h:link outcome="#{navigationBean.goToPage('/panel/admin/ekipuye/AdminEkipUyeGoruntule.xhtml')}" styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/ekipuye/AdminEkipUyeGoruntule.xhtml') ? 'active' : ''}" value="Ekip Uyesi Göruntule"/>
-                                <!-- Add more dropdown items as needed -->
-                            </div>
-                        </li>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="projectDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Proje İşlemleri
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="projectDropdown">
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/kategori/AdminProjeKategoriEkle.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/kategori/AdminProjeKategoriEkle.xhtml') ? 'active' : ''}" 
+                                    value="Proje Kategorisi Ekle"/>
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/kategori/AdminProjeKategoriGoruntule.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/kategori/AdminProjeKategoriGoruntule.xhtml') ? 'active' : ''}" 
+                                    value="Proje Kategorileri Görüntüle"/>
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/proje/AdminProjeEkle.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/proje/AdminProjeEkle.xhtml') ? 'active' : ''}" 
+                                    value="Proje Ekle"/>
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/proje/AdminProjeGoruntule.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/proje/AdminProjeGoruntule.xhtml') ? 'active' : ''}" 
+                                    value="Proje Görüntüle"/>
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/ekipuye/AdminEkipUyeEkle.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/ekipuye/AdminEkipUyeEkle.xhtml') ? 'active' : ''}" 
+                                    value="Ekip Üyesi Ekle"/>
+                            <h:link outcome="#{navigationBean.goToPage('/panel/admin/ekipuye/AdminEkipUyeGoruntule.xhtml')}" 
+                                    styleClass="dropdown-item #{navigationBean.pageStates.get('/panel/admin/ekipuye/AdminEkipUyeGoruntule.xhtml') ? 'active' : ''}" 
+                                    value="Ekip Üyesi Görüntüle"/>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <h:link  styleClass="nav-link" outcome="/logout.xhtml" value="Çıkış Yap"/>
+                        <h:link styleClass="nav-link" outcome="/logout.xhtml" value="Çıkış Yap"/>
                     </li>
-                      
                 </ul>
             </div>
         </nav>
 
         <ui:insert name="content"/>
-    
-
-        <!-- Bootstrap Bundle with Popper.js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha512-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX==" crossorigin="anonymous"></script>
-
     </h:body>
 </html>

@@ -7,27 +7,39 @@ package entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- *
- * @author Dell
- */
+import jakarta.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
+
+@Entity
+@Table(name = "ogrenci")
 public class Ogrenci implements Serializable{
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String kullaniciadi;
     private String email;
     private String sifre;
     private String ad;
     private String soyad;
     private String universite;
+
+    @ManyToOne
+    @JoinColumn(name = "sinif_id")
     private Sinif sinif;
+
+    @ManyToOne
+    @JoinColumn(name = "bolum_id")
     private Bolum bolum;
+
     private String sifreTekrar;
 
     public Ogrenci() {
     }
 
-    public Ogrenci(String kullaniciadi, String email, String sifre, String ad, String soyad, String universite, Sinif sinif, Bolum bolumid) {
+    public Ogrenci(String kullaniciadi, String email, String sifre, String ad, String soyad, String universite, Sinif sinif, Bolum bolum) {
         this.kullaniciadi = kullaniciadi;
         this.email = email;
         this.sifre = sifre;
@@ -35,7 +47,7 @@ public class Ogrenci implements Serializable{
         this.soyad = soyad;
         this.universite = universite;
         this.sinif = sinif;
-        this.bolum = bolumid;
+        this.bolum = bolum;
     }
 
     public Ogrenci(Long id, String kullaniciadi, String email, String sifre, String ad, String soyad, String universite, Sinif sinif, Bolum bolum) {
@@ -129,8 +141,8 @@ public class Ogrenci implements Serializable{
     public void setSifreTekrar(String sifreTekrar) {
         this.sifreTekrar = sifreTekrar;
     }
-    
-    
+
+  
 
     @Override
     public int hashCode() {
@@ -153,10 +165,4 @@ public class Ogrenci implements Serializable{
         final Ogrenci other = (Ogrenci) obj;
         return Objects.equals(this.id, other.id);
     }
-    
-    
-    
-
-    
-    
 }

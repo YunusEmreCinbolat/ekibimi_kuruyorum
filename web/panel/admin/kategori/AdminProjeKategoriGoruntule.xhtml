@@ -28,7 +28,7 @@
                                         <tr>
                                             <td>#{e.id}</td>
                                             <td>#{e.kategoriAdi}</td>
-                                            <td><h:commandButton class="btn btn-danger" action="#{kategoriBean.delete(e.id)}" value="SİL"/></td>
+                                            <td><h:commandButton class="btn btn-danger" action="#{kategoriBean.delete(e)}" value="SİL"/></td>
                                             <td><h:commandButton class="btn btn-secondary" action="#{kategoriBean.setEntity(e)}" value="Detaylar"/></td>
                                         </tr>
                                     </ui:repeat>

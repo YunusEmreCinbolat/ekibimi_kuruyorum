@@ -16,15 +16,15 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6">
                         <h:form>
-                            <div class="mb-3">
+                                 <div class="mb-3">
                                 <label for="fakulte">Fakülte</label>
-                                <h:selectOneMenu id="fakulte" value="#{bolumBean.entity.fakulte.id}" styleClass="form-control">
-                                    <f:selectItems value="#{fakulteBean.list}" var="fakulte" itemValue="#{fakulte.id}" itemLabel="#{fakulte.fakulteadi}" />
+                                <h:selectOneMenu id="fakulte" value="#{bolumBean.entity.fakulte}" converter="fakulteConverter" styleClass="form-control">
+                                    <f:selectItems value="#{fakulteBean.list}" var="fakulte" itemValue="#{fakulte}" itemLabel="#{fakulte.fakulteadi}" />
                                 </h:selectOneMenu>
                             </div>
                             <div class="mb-3">
                                 <label for="bolumadi">Bölüm Adı</label>
-                                <h:inputText id="bolumadi" value="#{bolumBean.entity.bolumadi}" styleClass="form-control" required="true"/>
+                                <h:inputText id="bolumadi" value="#{bolumBean.entity.bolumAdi}" styleClass="form-control" required="true"/>
                                 <h:message for="bolumadi" style="color: red" />
                             </div>
                             <div class="mb-3">

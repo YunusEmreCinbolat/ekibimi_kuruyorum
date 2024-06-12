@@ -1,21 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entity;
 
-/**
- *
- * @author Dell
- */
-public class Admin {
+import jakarta.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "admin")
+public class Admin implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String ad;
     private String soyad;
     private String kullaniciadi;
     private String email;
     private String sifre;
-     private String sifretekrar;
+    private String sifretekrar;
 
     public Admin() {
     }
@@ -92,6 +93,6 @@ public class Admin {
     public void setSifretekrar(String sifretekrar) {
         this.sifretekrar = sifretekrar;
     }
-    
+
     
 }

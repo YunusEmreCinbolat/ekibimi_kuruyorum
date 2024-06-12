@@ -6,25 +6,31 @@ package converter;
 
 import dao.FakulteDAO;
 import entity.Fakulte;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
 import jakarta.faces.convert.FacesConverter;
+import jakarta.inject.Named;
+import java.io.Serializable;
 
 /**
  *
  * @author Dell
  */
-
-@FacesConverter("fakulteConverter")
-public class FakulteConverter implements Converter {
+@Named
+@RequestScoped
+@FacesConverter(value="fakulteConverter",managed=true)
+public class FakulteConverter implements Converter, Serializable {
     
+    @EJB
     private FakulteDAO dao;
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         int id=Integer.valueOf(string);
-        Fakulte f= this.getDao().getFakulteAdi(id);
+        Fakulte f= this.dao.getFakulteAdi(id);
         return f;
     }
 

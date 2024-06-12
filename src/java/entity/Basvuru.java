@@ -4,14 +4,25 @@
  */
 package entity;
 
-/**
- *
- * @author Dell
- */
-public class Basvuru {
+import jakarta.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "basvuru")
+public class Basvuru  implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "ogrenci_id")
     private Ogrenci ogrenci;
+
+    @ManyToOne
+    @JoinColumn(name = "proje_id")
     private Proje proje;
+
     private String durum;
 
     public Basvuru() {
@@ -69,7 +80,5 @@ public class Basvuru {
     }
     
     
-    
-    
-    
+
 }

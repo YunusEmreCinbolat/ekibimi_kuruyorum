@@ -1,151 +1,77 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import entity.Bildirim;
 import entity.Ogrenci;
-import entity.Proje;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import util.Connector;
 
-/**
- *
- * @author admın
- */
-public class BildirimDAO extends Connector {
+@Stateless
+public class BildirimDAO {
 
-    private OgrenciDAO odao;
-    private ProjeDAO pdao;
+    @PersistenceContext(unitName = "ekibimi_kuruyorumPU")
+    private EntityManager em;
+
+    public void create(Bildirim entity) {
+        Ogrenci gonderen = em.find(Ogrenci.class, entity.getGonderenOgrenci().getId());
+        Ogrenci alici = em.find(Ogrenci.class, entity.getAliciOgrenci().getId());
+
+        if (gonderen != null && alici != null) {
+            entity.setGonderenOgrenci(gonderen);
+            entity.setAliciOgrenci(alici);
+            em.persist(entity);
+        } else {
+            throw new IllegalArgumentException("Gonderen or Alici not found");
+        }
+    }
+
+    public void update(Bildirim entity) {
+        em.merge(entity);
+    }
+
+    @Transactional
+    public void delete(Bildirim entity) {
+         try {
+            if (entity != null) {
+              	em.remove(em.merge(entity));
+                em.flush();
+            } else {
+                // Log that the entity was not found
+                System.err.println("Admin entity with id " + entity.getId() + " not found.");
+            }
+        } catch (Exception e) {
+            System.err.println("Exception in delete method: DAO" + e.getMessage());
+            throw e;
+        }
+    }
 
     public List<Bildirim> readList(int hangiSayfa, int gorunenVeri) {
-        List<Bildirim> list = new ArrayList<>();
-
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM bildirimler LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
-
-            while (rs.next()) {
-                Ogrenci aliciOgrenci = this.getOdao().getFromOgrenci(rs.getInt("aliciogrenciid"));
-                Proje proje = this.getPdao().getTitle(rs.getInt("proje_id"));
-                Ogrenci gondericiOgrenci = this.getOdao().getFromOgrenci(rs.getInt("gonderenogrenciid"));
-
-                list.add(new Bildirim(rs.getLong("bildirimid"), aliciOgrenci, rs.getString("bildirimicerigi"), rs.getDate("bildirimtarihivesaati"), proje, gondericiOgrenci));
-
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(BildirimDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-    }
-    
-     public List<Bildirim> readFromAlici(int id) {
-        List<Bildirim> list = new ArrayList<>();
-
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM bildirimler where aliciogrenciid="+id);
-
-            while (rs.next()) {
-                Ogrenci aliciOgrenci = this.getOdao().getFromOgrenci(rs.getInt("aliciogrenciid"));
-                Proje proje = this.getPdao().getTitle(rs.getInt("projeid"));
-                Ogrenci gondericiOgrenci = this.getOdao().getFromOgrenci(rs.getInt("gonderenogrenciid"));
-                System.out.println("dao"+id);
-                list.add(new Bildirim(rs.getLong("bildirimid"), aliciOgrenci, rs.getString("bildirimicerigi"), rs.getDate("bildirimtarihivesaati"), proje, gondericiOgrenci));
-
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(BildirimDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
+        return em.createQuery("SELECT b FROM Bildirim b", Bildirim.class)
+                 .setFirstResult((hangiSayfa - 1) * gorunenVeri)
+                 .setMaxResults(gorunenVeri)
+                 .getResultList();
     }
 
-
-   
-    public void delete(int id) {
-        try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("DELETE from bildirimler where bildirimid=" + id);
-        } catch (SQLException ex) {
-            Logger.getLogger(BildirimDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public List<Bildirim> readFromAlici(int id) {
+        return em.createQuery("SELECT b FROM Bildirim b WHERE b.alici.id = :id", Bildirim.class)
+                 .setParameter("id", id)
+                 .getResultList();
     }
-
-  
 
     public int getBildirimCount(int id) {
-        int veriSayisi = 0;
-        Statement st;
+        return ((Long) em.createQuery("SELECT COUNT(b) FROM Bildirim b WHERE b.alici.id = :id")
+                         .setParameter("id", id)
+                         .getSingleResult()).intValue();
+    }
+    @Transactional
+    public void truncate() {
         try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select count(bildirimid) as bildirimSayisi from bildirimler where aliciogrenciid= "+id);
-
-            rs.next();
-            veriSayisi = rs.getInt("bildirimSayisi");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(BildirimDAO.class.getName()).log(Level.SEVERE, null, ex);
+            em.createQuery("DELETE FROM Bildirim").executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Exception in truncate method: " + e.getMessage());
+            throw e;
         }
-        return veriSayisi;
     }
-
-    public List<Bildirim> allList() {
-        List<Bildirim> list = new ArrayList<>();
-
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM bildirimler");
-
-                while (rs.next()) {
-                    Ogrenci aliciOgrenci = this.getOdao().getFromOgrenci(rs.getInt("aliciogrenciid"));
-                    Proje proje = this.getPdao().getTitle(rs.getInt("proje_id"));
-                    Ogrenci gondericiOgrenci = this.getOdao().getFromOgrenci(rs.getInt("gonderenogrenciid"));
-
-                    list.add(new Bildirim(rs.getLong("bildirimid"), aliciOgrenci, rs.getString("bildirimicerigi"), rs.getDate("bildirimtarihivesaati"), proje, gondericiOgrenci));
-
-                    
-                }
-
-
-        } catch (SQLException ex) {
-            Logger.getLogger(BildirimDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-
-    }
-
-    public OgrenciDAO getOdao() {
-        if (this.odao == null) {
-            this.odao = new OgrenciDAO();
-        }
-        return odao;
-    }
-
-    public void setOdao(OgrenciDAO odao) {
-        this.odao = odao;
-    }
-
-    public ProjeDAO getPdao() {
-        if (this.pdao == null) {
-            this.pdao = new ProjeDAO();
-        }
-        return pdao;
-    }
-
-    public void setPdao(ProjeDAO pdao) {
-        this.pdao = pdao;
-    }
-
 }

@@ -1,126 +1,65 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import entity.Dosya;
 import entity.Ogrenci;
-import java.sql.SQLException;
-import java.sql.*;
-import java.util.ArrayList;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import util.Connector;
 
-/**
- *
- * @author Dell
- */
-public class DosyaDAO extends Connector {
+@Stateless
+public class DosyaDAO {
 
-    private OgrenciDAO dao;
+    @PersistenceContext(unitName = "ekibimi_kuruyorumPU")
+    private EntityManager em;
 
-    public void create(Dosya dosya) {
-
-        try {
-            String sql = "INSERT INTO dosyalar (fpath, fname, ftype, ogrenci_id) VALUES ('"
-                    + dosya.getFpath() + "', '"
-                    + dosya.getFname() + "', '"
-                    + dosya.getFtype() + "', "
-                    + dosya.getOgrenci().getId() + ")";
-
-            Statement stmt = this.getConnect().createStatement();
-            stmt.executeUpdate(sql);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DosyaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    public void update(Dosya dosya) {
-        try {
-            String sql = "UPDATE dosyalar SET fpath = ?, fname = ?, ftype = ?, ogrenci_id = ? WHERE id = ?";
-
-            PreparedStatement pstmt = this.getConnect().prepareStatement(sql);
-            pstmt.setString(1, dosya.getFpath());
-            pstmt.setString(2, dosya.getFname());
-            pstmt.setString(3, dosya.getFtype());
-            pstmt.setLong(4, dosya.getOgrenci().getId());
-            pstmt.setLong(5, dosya.getId());
-
-            pstmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(DosyaDAO.class.getName()).log(Level.SEVERE, null, ex);
+    public void create(Dosya entity) {
+         Ogrenci ogrenci = em.find(Ogrenci.class, entity.getOgrenci().getId());
+        if (ogrenci != null) {
+            entity.setOgrenci(ogrenci);
+            em.persist(entity);
+        } else {
+            throw new IllegalArgumentException("Ogrenci not found");
         }
     }
 
-    public void delete(int dosyaId) {
-        try {
-            String sql = "DELETE FROM dosyalar WHERE id = ?";
-
-            PreparedStatement pstmt = this.getConnect().prepareStatement(sql);
-            pstmt.setInt(1, dosyaId);
-
-            pstmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(DosyaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void update(Dosya entity) {
+        em.merge(entity);
     }
 
-    public List<Dosya> readList(Long id) {
-        List<Dosya> list = new ArrayList();
-        try {
-            Statement st = this.getConnect().createStatement();
-
-            ResultSet rs = st.executeQuery("SELECT d.*\n"
-                    + "FROM public.dosyalar d \n"
-                    + "JOIN public.ogrenciler o ON d.ogrenci_id = " + id);
-
-            while (rs.next()) {
-                Ogrenci o = this.getDao().getFromOgrenci(rs.getInt("ogrenci_id"));
-
-                list.add(new Dosya(rs.getLong("id"), o, rs.getString("fpath"), rs.getString("fname"), rs.getString("ftype")));
+    @Transactional
+    public void delete(Dosya entity) {
+       try {
+            if (entity != null) {
+              	em.remove(em.merge(entity));
+                em.flush();
+            } else {
+                // Log that the entity was not found
+                System.err.println("Admin entity with id " + entity.getId() + " not found.");
             }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DosyaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            System.err.println("Exception in delete method: DAO" + e.getMessage());
+            throw e;
         }
-        return list;
+    }
+
+    public List<Dosya> readList(Long ogrenciId) {
+        return em.createQuery("SELECT d FROM Dosya d WHERE d.ogrenci.id = :ogrenciId", Dosya.class)
+                .setParameter("ogrenciId", ogrenciId)
+                .getResultList();
     }
 
     public Dosya readDosya(Long id) {
-        Dosya entity = new Dosya();
+        return em.find(Dosya.class, id);
+    }
+        @Transactional
+    public void truncate() {
         try {
-            Statement st = this.getConnect().createStatement();
-
-            ResultSet rs = st.executeQuery("SELECT d.*\n"
-                    + "FROM public.dosyalar d \n"
-                    + "JOIN public.ogrenciler o ON d.ogrenci_id = " + id);
-
-            while (rs.next()) {
-                Ogrenci o = this.getDao().getFromOgrenci(rs.getInt("ogrenci_id"));
-
-                entity = new Dosya(rs.getLong("id"), o, rs.getString("fname"), rs.getString("fpath"), rs.getString("ftype"));
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DosyaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            em.createQuery("DELETE FROM Durum").executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Exception in truncate method: " + e.getMessage());
+            throw e;
         }
-        return entity;
     }
-
-    public OgrenciDAO getDao() {
-        if (this.dao == null) {
-            this.dao = new OgrenciDAO();
-        }
-        return dao;
-    }
-
-    public void setDao(OgrenciDAO dao) {
-        this.dao = dao;
-    }
-
 }

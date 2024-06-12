@@ -6,13 +6,18 @@ package entity;
 
 import java.util.Objects;
 
-/**
- *
- * @author Dell
- */
-public class Kategori {
-    
+import jakarta.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
+
+@Entity
+@Table(name = "kategori")
+public class Kategori implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String kategoriAdi;
     private String aciklama;
 
@@ -54,6 +59,7 @@ public class Kategori {
         this.aciklama = aciklama;
     }
 
+   
     @Override
     public int hashCode() {
         int hash = 7;
@@ -75,7 +81,4 @@ public class Kategori {
         final Kategori other = (Kategori) obj;
         return Objects.equals(this.id, other.id);
     }
-    
-    
-    
 }

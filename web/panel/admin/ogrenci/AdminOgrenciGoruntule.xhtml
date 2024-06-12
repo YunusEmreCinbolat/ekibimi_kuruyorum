@@ -30,12 +30,12 @@
                                 <tr>
                                     <td>#{e.id}</td>
                                     <td>#{e.ad}</td>
-                                    <td>#{fakulteBean.getFromOgrenciFakulteAdi(e.bolum.id)}</td>
-                                    <td>#{e.bolum.bolumadi}</td>
-                                    <td>#{e.sinif.sinifadi}</td>
+                                    <td>#{e.bolum.fakulte.fakulteadi}</td>
+                                    <td>#{e.bolum.bolumAdi}</td>
+                                    <td>#{e.sinif.sinifAdi}</td>
                                     <td>
                                         <h:form>
-                                            <h:commandButton class="btn btn-danger" action="#{ogrenciBean.delete(e.id)}" value="Sil"/>
+                                            <h:commandButton class="btn btn-danger" action="#{ogrenciBean.delete(e)}" value="Sil"/>
                                         </h:form>
                                     </td>
                                     <td>

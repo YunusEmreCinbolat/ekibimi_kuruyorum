@@ -1,104 +1,61 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import entity.Kategori;
-import entity.Kategori;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import util.Connector;
 
-/**
- *
- * @author Dell
- */
-public class KategoriDAO extends Connector {
+@Stateless
+public class KategoriDAO {
 
-    public void create(Kategori kategori) {
-        try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("insert into kategoriler (kategoriadi,aciklama) values('" + kategori.getKategoriAdi() + "', '" + kategori.getAciklama() + "' )");
-        } catch (SQLException ex) {
-            Logger.getLogger(KategoriDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    @PersistenceContext(unitName = "ekibimi_kuruyorumPU")
+    private EntityManager em;
+
+    public void create(Kategori entity) {
+        em.persist(entity);
     }
 
-    public void delete(int id) {
-        try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("DELETE from kategoriler where kategoriid=" + id);
-        } catch (SQLException ex) {
-            Logger.getLogger(KategoriDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void update(Kategori entity) {
+        em.merge(entity);
     }
 
-    public List<Kategori> readList(int hangiSayfa, int gorunenVeri) {
-        List<Kategori> list = new ArrayList<>();
-
-        Statement st;
+    @Transactional
+    public void delete(Kategori entity) {
         try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select * from kategoriler LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
-
-            while (rs.next()) {
-                list.add(new Kategori(rs.getLong("kategoriid"), rs.getString("kategoriadi"), rs.getString("aciklama")));
+            if (entity != null) {
+              	em.remove(em.merge(entity));
+                em.flush();
+            } else {
+                // Log that the entity was not found
+                System.err.println("Admin entity with id " + entity.getId() + " not found.");
             }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(KategoriDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-    }
-
-    public void update(Kategori kategori) {
-        try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update kategoriler set kategoriadi='" + kategori.getKategoriAdi() + "',  aciklama='" + kategori.getAciklama() + "' where kategoriid=" + kategori.getId());
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        } catch (Exception e) {
+            System.err.println("Exception in delete method: DAO" + e.getMessage());
+            throw e;
         }
     }
 
     public Kategori getTitle(int id) {
-        Kategori entity = null;
-
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select * from kategoriler where kategoriid=" + id);
-
-            while (rs.next()) {
-                entity = new Kategori(rs.getLong("kategoriid"), rs.getString("kategoriadi"), rs.getString("aciklama"));
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(KategoriDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return entity;
+        return em.createQuery("SELECT k FROM Kategori k WHERE k.id = :id", Kategori.class)
+                 .setParameter("id", id)
+                 .getSingleResult();
     }
 
-    public int getKaetegoriCount() {
-        int veriSayisi = 0;
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select count(kategoriid) as kategoriSayisi from kategoriler");
-
-            rs.next();
-            veriSayisi = rs.getInt("kategoriSayisi");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return veriSayisi;
+    public List<Kategori> readList(int hangiSayfa, int gorunenVeri) {
+        return em.createQuery("SELECT k FROM Kategori k", Kategori.class)
+                 .setFirstResult((hangiSayfa - 1) * gorunenVeri)
+                 .setMaxResults(gorunenVeri)
+                 .getResultList();
     }
-
+      @Transactional
+    public void truncate() {
+        try {
+            em.createQuery("DELETE FROM Kategori").executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Exception in truncate method: " + e.getMessage());
+            throw e;
+        }
+    }
 }

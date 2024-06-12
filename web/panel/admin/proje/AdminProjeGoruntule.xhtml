@@ -32,7 +32,7 @@
                                         <td>#{e.kategori.kategoriAdi}</td>
                                         <td>#{e.sahipOgrenciId.ad}</td>
                                         <td>
-                                            <h:commandButton class="btn-danger" action="#{projeBean.delete(e.id)}" value="SİL"/>
+                                            <h:commandButton class="btn-danger" action="#{projeBean.delete(e)}" value="SİL"/>
                                         </td>
                                         <td>
                                             <h:commandButton class="btn-secondary" action="#{projeBean.setEntity(e)}" value="Detaylar"/>

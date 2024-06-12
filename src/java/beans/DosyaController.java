@@ -2,6 +2,8 @@ package beans;
 
 import dao.DosyaDAO;
 import entity.Dosya;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -16,19 +18,20 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
-@Named(value="dosyaController")
+@Named(value = "dosyaController")
 @SessionScoped
-public class DosyaController extends BaseController<Dosya, DosyaDAO> implements Serializable, Controller {
+public class DosyaController extends BaseController<Dosya, DosyaDAO> implements Serializable, Controller<Dosya> {
 
     private Dosya entity;
-    
-    @Inject
-    private OgrenciController o;
+    private List<Dosya> list;
 
     @Inject
-    private OgrenciController oController;
+    private OgrenciController o;
+    
+    @EJB
+    private DosyaDAO DD;
+    
+
     private Part dosya;
     private String uploadPath = "C:\\Users\\Dell\\Desktop\\Yukle\\";
 
@@ -38,51 +41,48 @@ public class DosyaController extends BaseController<Dosya, DosyaDAO> implements 
 
     @Override
     public void update() {
-         try {
-            System.out.println("-------------------------");
-            System.out.println("DosyaController create method triggered.");
+        try {
+            System.out.println("DosyaController update method triggered.");
             InputStream in = dosya.getInputStream();
             File f = new File(uploadPath + dosya.getSubmittedFileName());
             Files.copy(in, f.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            Dosya d = new Dosya(oController.getEntity(), uploadPath, f.getName(), dosya.getContentType());
-            System.out.println(d.getOgrenci().getId() + " " + d.getFname() + d.getFpath() + f.getPath());
-            this.getDao().update(d);
+            Dosya d = new Dosya(o.getEntity(), uploadPath, f.getName(), dosya.getContentType());
+            System.out.println(d.getOgrenci().getId() + " " + d.getFname() + " " + d.getFpath() + " " + f.getPath());
+            DD.update(d);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            Logger.getLogger(DosyaController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-   
+
     @Override
     public void create() {
-        System.out.println("-------------");
         try {
-            System.out.println("-------------------------");
             System.out.println("DosyaController create method triggered.");
             InputStream in = dosya.getInputStream();
             File f = new File(uploadPath + dosya.getSubmittedFileName());
             Files.copy(in, f.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            Dosya d = new Dosya(oController.getEntity(), uploadPath, f.getName(), dosya.getContentType());
-            System.out.println(d.getOgrenci().getId() + " " + d.getFname() + d.getFpath() + f.getPath());
-            this.getDao().create(d);
+            Dosya d = new Dosya(o.getEntity(), uploadPath, f.getName(), dosya.getContentType());
+            System.out.println(d.getOgrenci().getId() + " " + d.getFname() + " " + d.getFpath() + " " + f.getPath());
+            DD.create(d);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            Logger.getLogger(DosyaController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
-    public void delete(int id) {
-        this.getDao().delete(id);
-
+    public void delete(Dosya entity) {
+        DD.delete(entity);
     }
 
     public List<Dosya> getList() {
-        this.list = this.getDao().readList(o.getEntity().getId());
-        return this.list;
+        if (list == null) {
+            list = DD.readList(o.getEntity().getId());
+        }
+        return list;
     }
 
     public Dosya readDosya(Long id) {
-        return this.getDao().readDosya(id);
+        return DD.readDosya(id);
     }
 
     public Dosya getEntity() {

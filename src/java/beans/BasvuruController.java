@@ -1,25 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package beans;
 
 import dao.BasvuruDAO;
 import entity.Basvuru;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
-import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- *
- * @author Dell
- */
 @Named(value = "basvuruBean")
-@SessionScoped
-public class BasvuruController extends BaseController<Basvuru, BasvuruDAO> implements Serializable, Controller {
+@Stateless
+public class BasvuruController extends BaseController<Basvuru, BasvuruDAO> implements Serializable, Controller<Basvuru> {
 
     private Basvuru entity;
+    private List<Basvuru> list;
+    
+    @EJB
+    private BasvuruDAO bd;
 
     public BasvuruController() {
         super(Basvuru.class, BasvuruDAO.class);
@@ -27,24 +25,25 @@ public class BasvuruController extends BaseController<Basvuru, BasvuruDAO> imple
 
     @Override
     public void update() {
-        this.getDao().update(entity);
-        this.entity = entity;
+        bd.update(this.entity);
+        this.entity = new Basvuru();
     }
 
-    
-    public void create(int oid,int pid ){
-        this.getDao().create(oid,pid );
+    public void create(int oid, int pid) {
+        bd.create(entity,oid, pid);
         this.entity = new Basvuru();
     }
 
     @Override
-    public void delete(int id) {
-        this.getDao().delete(id);
-
+    public void delete(Basvuru entity) {
+        bd.delete(entity);
+        this.entity = new Basvuru(); // after deletion, reset the entity
     }
 
     public List<Basvuru> getList() {
-        this.list = this.getDao().readList(this.hangiSayfa, this.gorunenVeri);
+        if (this.list == null) {
+            this.list = bd.readList(this.hangiSayfa, this.gorunenVeri);
+        }
         return this.list;
     }
 
@@ -62,7 +61,6 @@ public class BasvuruController extends BaseController<Basvuru, BasvuruDAO> imple
 
     @Override
     public void create() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Implement if needed
     }
-
 }

@@ -1,84 +1,68 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package beans;
 
-import dao.AdminDAO;
 import dao.FakulteDAO;
 import entity.Fakulte;
-import jakarta.inject.Named;
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Dell
- */
 @Named(value = "fakulteBean")
 @SessionScoped
-public class FakulteController extends BaseController<Fakulte , FakulteDAO> implements Serializable,Controller {
+public class FakulteController extends BaseController<Fakulte, FakulteDAO> implements Serializable, Controller<Fakulte> {
 
-     private Fakulte entity;
+    private Fakulte entity;
+    
+    @EJB
+    private FakulteDAO FD;
+
     public FakulteController() {
-        super(Fakulte.class,FakulteDAO.class);
+        super(Fakulte.class, FakulteDAO.class);
     }
 
-     @Override
+    @Override
     public void create() {
-        this.getDao().create(entity);
+        FD.create(entity);
         this.entity = new Fakulte();
     }
 
-     @Override
-    public void delete(int id) {
-        this.getDao().delete(id);
-
+    @Override
+    public void delete(Fakulte entity) {
+        FD.delete(entity);
     }
 
     public String getFakulteAdi(int fakulteid) {
-        Fakulte f = this.getDao().getFakulteAdi(fakulteid);
+        Fakulte f = FD.getFakulteAdi(fakulteid);
         return f.getFakulteadi();
-
     }
-    
-      public String getFromOgrenciFakulteAdi(int fakulteid) {
-        Fakulte f = this.getDao().getFromOgrenciFakulteAdi(fakulteid);
+
+    public String getFromOgrenciFakulteAdi(int fakulteid) {
+         System.out.println("cont"+fakulteid);
+        Fakulte f = FD.getFromOgrenciFakulteAdi(fakulteid);
         return f.getFakulteadi();
-
     }
-    
-    
 
-     @Override
+    @Override
     public void update() {
-        this.getDao().update(entity);
+        FD.update(entity);
         this.entity = new Fakulte();
     }
 
-    
-
     public List<Fakulte> getList() {
-        this.list = this.getDao().readList(this.hangiSayfa,this.gorunenVeri);
+        this.list = FD.readList(this.hangiSayfa, this.gorunenVeri);
         return list;
     }
 
     public Fakulte getEntity() {
-        if(this.entity==null){
-            this.entity=new Fakulte();
+        if (this.entity == null) {
+            this.entity = new Fakulte();
         }
         return entity;
     }
 
-       public String setEntity(Fakulte entity) {
+    public String setEntity(Fakulte entity) {
         this.entity = entity;
-         return "/panel/admin/fakultee/AdminFakulteGuncelle.xhtml?faces-redirect=true";
+        return "/panel/admin/fakultee/AdminFakulteGuncelle.xhtml?faces-redirect=true";
     }
-    
-   
-
-   
-
 }

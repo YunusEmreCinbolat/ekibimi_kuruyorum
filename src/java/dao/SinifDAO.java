@@ -1,121 +1,59 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
-import entity.Admin;
 import entity.Bolum;
 import entity.Sinif;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import util.Connector;
 
-/**
- *
- * @author Dell
- */
-public class SinifDAO extends Connector {
-    
-    private BolumDAO dao;
-    
-       public void create(Sinif sinif) {
-        try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("insert into siniflar (bolumid,sinifadi) values('" +sinif.getBolum().getId()+ "', '" +sinif.getSinifadi()+ "' )");
-        } catch (SQLException ex) {
-            Logger.getLogger(SinifDAO.class.getName()).log(Level.SEVERE, null, ex);
+@Stateless
+public class SinifDAO {
+
+    @PersistenceContext(unitName = "ekibimi_kuruyorumPU")
+    private EntityManager em;
+
+    public void create(Sinif entity) {
+        Bolum bolum = em.find(Bolum.class, entity.getBolum().getId());
+        if (bolum != null) {
+            entity.setBolum(bolum);
+            em.persist(entity);
+        } else {
+            throw new IllegalArgumentException("Bolum not found");
         }
     }
-       
-        public void delete (int  id){
+
+    public void update(Sinif entity) {
+        em.merge(entity);
+    }
+
+    
+    public void delete(Sinif entity) {
         try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("DELETE from siniflar where sinifid="+ id);
-        } catch (SQLException ex) {
-            Logger.getLogger(SinifDAO.class.getName()).log(Level.SEVERE, null, ex);
+            if (entity != null) {
+              	em.remove(em.merge(entity));
+                em.flush();
+            } else {
+                // Log that the entity was not found
+                System.err.println("Admin entity with id " + entity.getId() + " not found.");
+            }
+        } catch (Exception e) {
+            System.err.println("Exception in delete method: DAO" + e.getMessage());
+            throw e;
         }
     }
+
+    public Sinif getSinifAdi(int id) {
+             return em.createQuery("SELECT s FROM Sinif s WHERE s.id = :id", Sinif.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+    public List<Sinif> readList(int hangiSayfa, int gorunenVeri) {
         
-         public List<Sinif> readList(int hangiSayfa,int gorunenVeri) {
-        List<Sinif> list = new ArrayList<>();
-
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select * from siniflar LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
-
-            while (rs.next()) {
-                Bolum b=this.getDao().getTitle(rs.getInt("bolumid"));
-                list.add(new Sinif(rs.getLong("sinifid"),b,rs.getInt("sinifadi")));
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(SinifDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
+        return em.createQuery("SELECT s FROM Sinif s", Sinif.class)
+                 .setFirstResult((hangiSayfa - 1) * gorunenVeri)
+                 .setMaxResults(gorunenVeri)
+                 .getResultList();
     }
-           public void update(Sinif sinif) {
-         try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update siniflar set sinifadi='"+sinif.getSinifadi()+"',  bolumid='"+sinif.getBolum().getId()+"' where sinifid="+sinif.getId());
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    public Sinif getSinifAdi(int sinifid) {
-          
-        Sinif entity = null;
-
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select * from siniflar where sinifid = "+sinifid);
-
-            while (rs.next()) {
-                  Bolum b=this.getDao().getTitle(rs.getInt("bolumid"));
-                entity=new Sinif(rs.getLong("sinifid"),b,rs.getInt("sinifadi"));
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(SinifDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return entity;
-    
-    }
-    
-      public int getSinifCount() {
-              int veriSayisi=0;
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select count(sinifid) as sinifSayisi from siniflar");
-
-          rs.next();
-          veriSayisi=rs.getInt("sinifSayisi");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return veriSayisi;
-    }
-
-    public BolumDAO getDao() {
-        if(this.dao==null){
-            this.dao=new BolumDAO();
-        }
-        return dao;
-    }
-
-    public void setDao(BolumDAO dao) {
-        this.dao = dao;
-    }
-    
 }

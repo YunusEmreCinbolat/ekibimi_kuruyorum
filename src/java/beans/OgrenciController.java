@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package beans;
 
 import dao.OgrenciDAO;
-import entity.Fakulte;
 import entity.Ogrenci;
-import entity.Sinif;
+import jakarta.ejb.EJB;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -19,60 +14,65 @@ import java.util.List;
  */
 @Named(value = "ogrenciBean")
 @SessionScoped
-public class OgrenciController extends BaseController<Ogrenci,OgrenciDAO> implements Serializable,Controller {
+public class OgrenciController extends BaseController<Ogrenci, OgrenciDAO> implements Serializable, Controller<Ogrenci> {
 
-     private Ogrenci entity;
-     private Ogrenci projeOgrenci;
-    public OgrenciController() {
-        super(Ogrenci.class,OgrenciDAO.class);
-    }
+    private Ogrenci entity;
+    private Ogrenci projeOgrenci;
     
-    public String getFromOgrenci(int id){
-        Ogrenci o = this.getDao().getFromOgrenci(id);
+    @EJB
+    private OgrenciDAO OD;
+    
+    public OgrenciController() {
+        super(Ogrenci.class, OgrenciDAO.class);
+    }
+
+    public String getFromOgrenci(int id) {
+        Ogrenci o = OD.getFromOgrenci(id);
         return o.getAd();
     }
-     @Override
-    public void create() {
-        this.getDao().create(entity);
-        this.entity = new Ogrenci();
-    }
-    
-     @Override
-      public void delete(int id) {
-        this.getDao().delete(id);
 
-    }
-     @Override
-        public void update() {
-        this.getDao().update(entity);
+    @Override
+    public void create() {
+         OD.create(entity);
         this.entity = new Ogrenci();
     }
-    
+
+    @Override
+    public void delete(Ogrenci entity) {
+        OD.delete(entity);
+    }
+
+    @Override
+    public void update() {
+        OD.update(entity);
+        this.entity = new Ogrenci();
+    }
+
     public List<Ogrenci> getList() {
-        this.list = this.getDao().readList(this.hangiSayfa,this.gorunenVeri);
+        this.list = OD.readList(this.hangiSayfa, this.gorunenVeri);
         return list;
     }
 
     public Ogrenci getEntity() {
-        if(this.entity==null){
-            this.entity=new Ogrenci();
+        if (this.entity == null) {
+            this.entity = new Ogrenci();
         }
         return entity;
     }
 
-     public String setEntity(Ogrenci entity) {
+    public String setEntity(Ogrenci entity) {
         this.entity = entity;
-         return "/panel/admin/ogrenci/AdminOgrenciDetay.xhtml?faces-redirect=true";
+        return "/panel/admin/ogrenci/AdminOgrenciDetay.xhtml?faces-redirect=true";
     }
-     
-     public String detailOgrenci(Ogrenci o){
-         this.projeOgrenci=o;
-         return "/panel/ogrenci/ogrenci/OgrenciBilgileriniGoster.xhtml?faces-redirect=true";
-     }
+
+    public String detailOgrenci(Ogrenci o) {
+        this.projeOgrenci = o;
+        return "/panel/ogrenci/ogrenci/OgrenciBilgileriniGoster.xhtml?faces-redirect=true";
+    }
 
     public Ogrenci getProjeOgrenci() {
-        if(this.projeOgrenci==null){
-            this.projeOgrenci=new Ogrenci();
+        if (this.projeOgrenci == null) {
+            this.projeOgrenci = new Ogrenci();
         }
         return projeOgrenci;
     }
@@ -80,9 +80,4 @@ public class OgrenciController extends BaseController<Ogrenci,OgrenciDAO> implem
     public void setProjeOgrenci(Ogrenci projeOgrenci) {
         this.projeOgrenci = projeOgrenci;
     }
-    
-   
-   
-
-   
 }

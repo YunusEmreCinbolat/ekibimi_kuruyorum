@@ -6,25 +6,31 @@ package converter;
 
 import dao.ProjeDAO;
 import entity.Proje;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
 import jakarta.faces.convert.FacesConverter;
+import jakarta.inject.Named;
+import java.io.Serializable;
 
 /**
  *
  * @author Dell
  */
-
-@FacesConverter("projeConverter")
-public class ProjeConverter implements Converter {
+@Named
+@RequestScoped
+@FacesConverter(value="projeConverter",managed = true)
+public class ProjeConverter implements Converter,Serializable {
     
+    @EJB
     private ProjeDAO dao;
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         int id=Integer.valueOf(string);
-        Proje f= this.getDao().getTitle(id);
+        Proje f= this.dao.getTitle(id);
         return f;
     }
 

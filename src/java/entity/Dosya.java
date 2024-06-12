@@ -4,13 +4,21 @@
  */
 package entity;
 
-/**
- *
- * @author Dell
- */
-public class Dosya {
+import jakarta.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "dosya")
+public class Dosya  implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "ogrenci_id")
     private Ogrenci ogrenci;
+
     private String fpath;
     private String fname;
     private String ftype;
@@ -39,9 +47,9 @@ public class Dosya {
         this.fname = fname;
         this.ftype = ftype;
     }
-    
-    
-    
+
+  
+
     public Long getId() {
         return id;
     }
@@ -81,7 +89,4 @@ public class Dosya {
     public void setFtype(String ftype) {
         this.ftype = ftype;
     }
-    
-    
-    
 }

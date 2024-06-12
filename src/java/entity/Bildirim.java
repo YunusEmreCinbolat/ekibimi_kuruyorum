@@ -4,18 +4,32 @@
  */
 package entity;
 
+import jakarta.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
-/**
- *
- * @author Dell
- */
-public class Bildirim {
+@Entity
+@Table(name = "bildirim")
+public class Bildirim   implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "alici_ogrenci_id")
     private Ogrenci aliciOgrenci;
+
     private String bidirimIcerigi;
+
     private Date tarihSaat;
+
+    @ManyToOne
+    @JoinColumn(name = "proje_id")
     private Proje proje;
+
+    @ManyToOne
+    @JoinColumn(name = "gonderen_ogrenci_id")
     private Ogrenci gonderenOgrenci;
 
     public Bildirim() {
@@ -85,9 +99,6 @@ public class Bildirim {
     public void setGonderenOgrenci(Ogrenci gonderenOgrenci) {
         this.gonderenOgrenci = gonderenOgrenci;
     }
-    
-    
-    
-    
-    
+
+
 }

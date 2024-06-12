@@ -4,29 +4,36 @@
  */
 package entity;
 
+import jakarta.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
-/**
- *
- * @author Dell
- */
-public class Bolum {
+@Entity
+@Table(name = "bolum")
+public class Bolum  implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String bolumAdi;
+
+    @ManyToOne
+    @JoinColumn(name = "fakulte_id")
     private Fakulte fakulte;
-    private String bolumadi;
 
     public Bolum() {
     }
 
-    public Bolum(Fakulte fakulte, String bolumadi) {
+    public Bolum(String bolumAdi, Fakulte fakulte) {
+        this.bolumAdi = bolumAdi;
         this.fakulte = fakulte;
-        this.bolumadi = bolumadi;
     }
 
-    public Bolum(Long id, Fakulte fakulte, String bolumadi) {
+    public Bolum(Long id, String bolumAdi, Fakulte fakulte) {
         this.id = id;
+        this.bolumAdi = bolumAdi;
         this.fakulte = fakulte;
-        this.bolumadi = bolumadi;
     }
 
     public Long getId() {
@@ -37,6 +44,14 @@ public class Bolum {
         this.id = id;
     }
 
+    public String getBolumAdi() {
+        return bolumAdi;
+    }
+
+    public void setBolumAdi(String bolumAdi) {
+        this.bolumAdi = bolumAdi;
+    }
+
     public Fakulte getFakulte() {
         return fakulte;
     }
@@ -45,18 +60,10 @@ public class Bolum {
         this.fakulte = fakulte;
     }
 
-    public String getBolumadi() {
-        return bolumadi;
-    }
-
-    public void setBolumadi(String bolumadi) {
-        this.bolumadi = bolumadi;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 13 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 43 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -74,9 +81,4 @@ public class Bolum {
         final Bolum other = (Bolum) obj;
         return Objects.equals(this.id, other.id);
     }
-
-    
-  
-    
-    
 }

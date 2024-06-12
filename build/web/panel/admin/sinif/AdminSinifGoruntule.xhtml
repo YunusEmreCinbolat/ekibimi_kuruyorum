@@ -49,13 +49,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                             #{e.id}
                                         </td>
                                         <td>
-                                            #{e.bolum.bolumadi}
+                                            #{e.bolum.bolumAdi}
                                         </td>
                                         <td>
-                                            #{e.sinifadi}
+                                            #{e.sinifAdi}
                                         </td>
                                         <td>
-                                            <h:commandButton action="#{sinifBean.delete(e.id)}" value="SİL"/>
+                                            <h:commandButton action="#{sinifBean.delete(e)}" value="SİL"/>
                                         </td>
                                         <td>
                                             <h:commandButton action="#{sinifBean.setEntity(e)}" value="Detaylar" />

@@ -1,25 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package beans;
 
 import dao.AdminDAO;
 import entity.Admin;
-import jakarta.inject.Named;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- *
- * @author Dell
- */
 @Named(value = "adminBean")
 @SessionScoped
-public class AdminController extends BaseController<Admin, AdminDAO> implements Serializable, Controller {
+public class AdminController extends BaseController<Admin, AdminDAO> implements Serializable, Controller<Admin> {
 
     private Admin entity;
+    private List<Admin> list;
+    
+    @EJB
+    private AdminDAO AD;
 
     public AdminController() {
         super(Admin.class, AdminDAO.class);
@@ -27,24 +25,38 @@ public class AdminController extends BaseController<Admin, AdminDAO> implements 
 
     @Override
     public void update() {
-        this.getDao().update(entity);
-        this.entity = entity;
+        try {
+            AD.update(this.entity);
+            this.entity = new Admin();
+        } catch (Exception e) {
+            System.err.println("Exception in update method: " + e.getMessage());
+        }
     }
 
     @Override
     public void create() {
-        this.getDao().create(entity);
-        this.entity = new Admin();
+        try {
+            AD.create(this.entity);
+            this.entity = new Admin();
+        } catch (Exception e) {
+            System.err.println("Exception in create method: " + e.getMessage());
+        }
     }
 
     @Override
-    public void delete(int id) {
-        this.getDao().delete(id);
-
+    public void delete(Admin entity) {
+        try {
+            AD.delete(entity);
+            this.entity = new Admin(); // after deletion, reset the entity
+        } catch (Exception e) {
+            System.err.println("Exception in delete method: " + e.getMessage());
+        }
     }
 
     public List<Admin> getList() {
-        this.list = this.getDao().readList(this.hangiSayfa, this.gorunenVeri);
+        if (this.list == null) {
+            this.list = AD.readList(this.hangiSayfa, this.gorunenVeri);
+        }
         return this.list;
     }
 
@@ -59,5 +71,4 @@ public class AdminController extends BaseController<Admin, AdminDAO> implements 
         this.entity = entity;
         return "/panel/admin/admin/AdminGuncelle.xhtml?faces-redirect=true";
     }
-
 }

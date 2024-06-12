@@ -29,10 +29,10 @@
                         <dd class="col-sm-9">#{ogrenciBean.entity.universite}</dd>
 
                         <dt class="col-sm-3">Fakülte:</dt>
-                        <dd class="col-sm-9">#{fakulteBean.getFromOgrenciFakulteAdi(ogrenciBean.entity.bolum.id)}</dd>
+                        <dd class="col-sm-9">#{ogrenciBean.entity.bolum.fakulte.fakulteadi}</dd>
 
                         <dt class="col-sm-3">Bölüm:</dt>
-                        <dd class="col-sm-9">#{ogrenciBean.entity.bolum.bolumadi}</dd>
+                        <dd class="col-sm-9">#{ogrenciBean.entity.bolum.bolumAdi}</dd>
 
                         <dt class="col-sm-3">Sınıf:</dt>
                         <dd class="col-sm-9">#{sinifBean.getSinifAdi(ogrenciBean.entity.sinif.id)}</dd>

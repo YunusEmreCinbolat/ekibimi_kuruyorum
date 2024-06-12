@@ -1,48 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package beans;
 
 import dao.BildirimDAO;
 import entity.Bildirim;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
-import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Dell
- */
 @Named(value = "bildirimBean")
-@SessionScoped
-public class BildirimController extends BaseController<Bildirim, BildirimDAO> implements Serializable, Controller {
+@Stateless
+public class BildirimController extends BaseController<Bildirim, BildirimDAO> implements Serializable, Controller<Bildirim> {
 
     private Bildirim entity;
+    private List<Bildirim> list;
 
+    @EJB
+    private BildirimDAO BD;
+    
     public BildirimController() {
         super(Bildirim.class, BildirimDAO.class);
     }
 
-   
- 
     @Override
-    public void delete(int id) {
-        this.getDao().delete(id);
-
+    public void delete(Bildirim entity) {
+        BD.delete(entity);
     }
 
     public List<Bildirim> getList() {
-        this.list = this.getDao().readList(this.hangiSayfa, this.gorunenVeri);
+        if (this.list == null) {
+            this.list = BD.readList(this.hangiSayfa, this.gorunenVeri);
+        }
         return this.list;
     }
-    
-    public List<Bildirim> readFromAlici(int id){
-        System.out.println("cont "+id);
-        List<Bildirim> gorunenList=  this.getDao().readFromAlici( id);
-        return gorunenList;
+
+    public List<Bildirim> readFromAlici(int id) {
+        System.out.println("cont " + id);
+        return BD.readFromAlici(id);
     }
 
     public Bildirim getEntity() {
@@ -59,17 +54,15 @@ public class BildirimController extends BaseController<Bildirim, BildirimDAO> im
 
     @Override
     public void create() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Implement if needed
     }
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-    public int getBildirimCount(int id){
-        
-        return this.getDao().getBildirimCount(id);
+        throw new UnsupportedOperationException("Not supported yet."); // Implement if needed
     }
 
+    public int getBildirimCount(int id) {
+        return this.getDao().getBildirimCount(id);
+    }
 }

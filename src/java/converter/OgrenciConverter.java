@@ -6,25 +6,30 @@ package converter;
 
 import dao.OgrenciDAO;
 import entity.Ogrenci;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
 import jakarta.faces.convert.FacesConverter;
+import jakarta.inject.Named;
+import java.io.Serializable;
 
 /**
  *
  * @author Dell
  */
-
-@FacesConverter("ogrenciConverter")
-public class OgrenciConverter implements Converter {
-    
+@Named
+@RequestScoped
+@FacesConverter(value="ogrenciConverter",managed = true)
+public class OgrenciConverter implements Converter,Serializable {
+    @EJB
     private OgrenciDAO dao;
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         int id=Integer.valueOf(string);
-        Ogrenci f= this.getDao().getFromOgrenci(id);
+        Ogrenci f= this.dao.getFromOgrenci(id);
         return f;
     }
 

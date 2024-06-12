@@ -1,150 +1,76 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import entity.Bolum;
 import entity.Ogrenci;
 import entity.Sinif;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import util.Connector;
 
-/**
- *
- * @author admın
- */
-public class OgrenciDAO extends Connector {
-    
-    private SinifDAO sdao;
-    private BolumDAO bdao;
+@Stateless
+public class OgrenciDAO {
 
-    public List<Ogrenci> readList(int hangiSayfa,int gorunenVeri) {
-        List<Ogrenci> list = new ArrayList<>();
-        try {
-            Statement st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("Select * from ogrenciler LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
+    @PersistenceContext(unitName = "ekibimi_kuruyorumPU")
+    private EntityManager em;
 
-            while (rs.next()) {
-                Sinif s=this.getSdao().getSinifAdi(rs.getInt("sinifid"));
-                Bolum b=this.getBdao().getTitle(rs.getInt("bolumid"));
-                list.add(new Ogrenci(rs.getLong("ogrenciid"), rs.getString("kullaniciadi"), rs.getString("eposta"), rs.getString("sifre"), rs.getString("ad"), rs.getString("soyad"), rs.getString("universite"), s, b));
+    public void create(Ogrenci entity) {
+          Bolum bolum = em.find(Bolum.class, entity.getBolum().getId());
+        Sinif sinif = em.find(Sinif.class, entity.getSinif().getId());
+
+        if (bolum != null && sinif != null) {
+            entity.setBolum(bolum);
+            entity.setSinif(sinif);
+            em.persist(entity);
+        } else {
+            throw new IllegalArgumentException("Bolum or Sinif not found");
+        }
+    }
+
+    public void update(Ogrenci entity) {
+        em.merge(entity);
+    }
+
+    @Transactional
+    public void delete(Ogrenci entity) {
+         try {
+            if (entity != null) {
+              	em.remove(em.merge(entity));
+                em.flush();
+            } else {
+                // Log that the entity was not found
+                System.err.println("Admin entity with id " + entity.getId() + " not found.");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(OgrenciDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            System.err.println("Exception in delete method: DAO" + e.getMessage());
+            throw e;
         }
-        return list;
-    }
-
-    public void create(Ogrenci ogrenci) {
-        try {
-            Statement st = this.getConnect().createStatement();
-
-            st.executeUpdate("insert into ogrenciler (kullaniciadi,eposta,sifre,ad,soyad,universite,sinifid,bolumid) values ('" + ogrenci.getKullaniciadi() + "' , '" + ogrenci.getEmail() + "' , '" + ogrenci.getSifre() + "', '" + ogrenci.getAd() + "' , '" + ogrenci.getSoyad() + "' , '" + ogrenci.getUniversite() + "' ,'" + ogrenci.getSinif().getId()+ "' , '" + ogrenci.getBolum().getId()+ "')");
-        } catch (SQLException ex) {
-            Logger.getLogger(OgrenciDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    public void update(Ogrenci ogrenci) {
-        try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update ogrenciler set kullaniciadi='" + ogrenci.getKullaniciadi() + "' , eposta='" + ogrenci.getEmail() + "' , sifre='" + ogrenci.getSifre() + "' , ad= '" + ogrenci.getAd() + "' , soyad= '" + ogrenci.getSoyad() + "' , universite= '" + ogrenci.getUniversite() + "' , sinifid='" + ogrenci.getSinif().getId()+ "' , bolumid='" + ogrenci.getBolum().getId()+ "' where ogrenciid=" + ogrenci.getId());
-        } catch (SQLException ex) {
-            Logger.getLogger(OgrenciDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    public void delete(int id) {
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            st.executeUpdate("delete from ogrenciler where ogrenciid=" + id);
-        } catch (SQLException ex) {
-            Logger.getLogger(OgrenciDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
     public Ogrenci getFromOgrenci(int id) {
-        Ogrenci entity = null;
-        try {
-            Statement st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("Select * from ogrenciler where ogrenciid=" + id);
-
-            while (rs.next()) {
-                 Sinif s=this.getSdao().getSinifAdi(rs.getInt("sinifid"));
-                Bolum b=this.getBdao().getTitle(rs.getInt("bolumid"));
-                entity = new Ogrenci(rs.getLong("ogrenciid"), rs.getString("kullaniciadi"), rs.getString("eposta"), rs.getString("sifre"), rs.getString("ad"), rs.getString("soyad"), rs.getString("universite"), s,b);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(OgrenciDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return entity;
-    }
-    
-      public int getOgrenciCount() {
-              int veriSayisi=0;
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select count(ogrenciid) as ogrenciSayisi from ogrenciler");
-
-          rs.next();
-          veriSayisi=rs.getInt("ogrenciSayisi");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return veriSayisi;
+        return em.createQuery("SELECT o FROM Ogrenci o WHERE o.id = :id", Ogrenci.class)
+                 .setParameter("id", id)
+                 .getSingleResult();
     }
 
-    public SinifDAO getSdao() {
-        if(this.sdao==null){
-            this.sdao=new SinifDAO();
-        }
-        return sdao;
+    public List<Ogrenci> readList(int hangiSayfa, int gorunenVeri) {
+        return em.createQuery("SELECT o FROM Ogrenci o", Ogrenci.class)
+                 .setFirstResult((hangiSayfa - 1) * gorunenVeri)
+                 .setMaxResults(gorunenVeri)
+                 .getResultList();
     }
-
-    public void setSdao(SinifDAO sdao) {
-        this.sdao = sdao;
-    }
-
-    public BolumDAO getBdao() {
-        if(this.bdao==null){
-            this.bdao=new BolumDAO();
-        }
-        return bdao;
-    }
-
-    public void setBdao(BolumDAO bdao) {
-        this.bdao = bdao;
-    }
-
     public List<Ogrenci> allList() {
-        List<Ogrenci> list = new ArrayList<>();
+    return em.createQuery("SELECT o FROM Ogrenci o", Ogrenci.class)
+             .getResultList();
+}
+  @Transactional
+    public void truncate() {
         try {
-            Statement st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("Select * from ogrenciler");
-
-            while (rs.next()) {
-                Sinif s=this.getSdao().getSinifAdi(rs.getInt("sinifid"));
-                Bolum b=this.getBdao().getTitle(rs.getInt("bolumid"));
-                list.add(new Ogrenci(rs.getLong("ogrenciid"), rs.getString("kullaniciadi"), rs.getString("eposta"), rs.getString("sifre"), rs.getString("ad"), rs.getString("soyad"), rs.getString("universite"), s, b));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(OgrenciDAO.class.getName()).log(Level.SEVERE, null, ex);
+            em.createQuery("DELETE FROM Ogrenci").executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Exception in truncate method: " + e.getMessage());
+            throw e;
         }
-        return list;
     }
-      
-      
 }

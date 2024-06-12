@@ -8,10 +8,10 @@ package beans;
  *
  * @author Dell
  */
-public interface Controller {
+public interface Controller<T> {
     
     public void create();
-    public void delete(int id);
+    public void delete(T id);
     public void update();
   
     

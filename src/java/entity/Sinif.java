@@ -6,28 +6,36 @@ package entity;
 
 import java.util.Objects;
 
-/**
- *
- * @author Dell
- */
-public class Sinif {
+import jakarta.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
+
+@Entity
+@Table(name = "sinif")
+public class Sinif  implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "bolum_id")
     private Bolum bolum;
-    private int sinifadi;
-    
+
+    private String sinifAdi;
 
     public Sinif() {
     }
 
-    public Sinif(Bolum bolum, int sinifadi) {
+    public Sinif(Bolum bolum, String sinifAdi) {
         this.bolum = bolum;
-        this.sinifadi = sinifadi;
+        this.sinifAdi = sinifAdi;
     }
 
-    public Sinif(Long id, Bolum bolum, int sinifadi) {
+    public Sinif(Long id, Bolum bolum, String sinifAdi) {
         this.id = id;
         this.bolum = bolum;
-        this.sinifadi = sinifadi;
+        this.sinifAdi = sinifAdi;
     }
 
     public Long getId() {
@@ -46,12 +54,12 @@ public class Sinif {
         this.bolum = bolum;
     }
 
-    public int getSinifadi() {
-        return sinifadi;
+    public String getSinifAdi() {
+        return sinifAdi;
     }
 
-    public void setSinifadi(int sinifadi) {
-        this.sinifadi = sinifadi;
+    public void setSinifAdi(String sinifAdi) {
+        this.sinifAdi = sinifAdi;
     }
 
     @Override
@@ -75,7 +83,4 @@ public class Sinif {
         final Sinif other = (Sinif) obj;
         return Objects.equals(this.id, other.id);
     }
-
-  
-    
 }

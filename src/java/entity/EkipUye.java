@@ -4,14 +4,25 @@
  */
 package entity;
 
-/**
- *
- * @author Dell
- */
-public class EkipUye {
+import jakarta.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "ekip_uye")
+public class EkipUye  implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "ogrenci_id")
     private Ogrenci ogrenci;
+
+    @ManyToOne
+    @JoinColumn(name = "proje_id")
     private Proje proje;
+
     private String ekiprolu;
 
     public EkipUye() {
@@ -29,6 +40,8 @@ public class EkipUye {
         this.proje = proje;
         this.ekiprolu = ekiprolu;
     }
+
+   
 
     public Long getId() {
         return id;
@@ -61,8 +74,4 @@ public class EkipUye {
     public void setEkiprolu(String ekiprolu) {
         this.ekiprolu = ekiprolu;
     }
-
-   
-    
-    
 }

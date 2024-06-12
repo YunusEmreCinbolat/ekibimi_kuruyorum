@@ -1,120 +1,61 @@
-    /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
-import entity.Admin;
 import entity.Bolum;
-import entity.Fakulte;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import util.Connector;
 
-/**
- *
- * @author Dell
- */
-public class BolumDAO extends Connector {
-    
-    private FakulteDAO dao;
+@Stateless
+public class BolumDAO {
 
-    public void create(Bolum bolum) {
-        try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("insert into bolumler (bolumadi,fakulteid) values('" + bolum.getBolumadi() + "', '" + bolum.getFakulte().getId()+ "' )");
-        } catch (SQLException ex) {
-            Logger.getLogger(BolumDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    @PersistenceContext(unitName = "ekibimi_kuruyorumPU")
+    private EntityManager em;
+
+    public void create(Bolum entity) {
+        em.persist(entity);
     }
 
-    public void delete(int id) {
-        try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("DELETE from bolumler where bolumid=" + id);
-        } catch (SQLException ex) {
-            Logger.getLogger(BolumDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void update(Bolum entity) {
+        em.merge(entity);
     }
 
-    public List<Bolum> readList(int hangiSayfa,int gorunenVeri) {
-        List<Bolum> list = new ArrayList<>();
-
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select * from bolumler LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
-
-            while (rs.next()) {
-                Fakulte f=this.getDao().getFakulteAdi(rs.getInt("fakulteid"));
-                list.add(new Bolum(rs.getLong("bolumid"), f , rs.getString("bolumadi")));
+    @Transactional
+    public void delete(Bolum entity) {
+       try {
+            if (entity != null) {
+              	em.remove(em.merge(entity));
+                em.flush();
+            } else {
+                // Log that the entity was not found
+                System.err.println("Admin entity with id " + entity.getId() + " not found.");
             }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(BolumDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-    }
-
-    public void update(Bolum bolum) {
-        try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update bolumler set bolumadi='" + bolum.getBolumadi() + "',  fakulteid='" + bolum.getFakulte().getId()+ "' where bolumid=" + bolum.getId());
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        } catch (Exception e) {
+            System.err.println("Exception in delete method: DAO" + e.getMessage());
+            throw e;
         }
     }
 
     public Bolum getTitle(int id) {
-        Bolum entity =  null;
+        return em.createQuery("SELECT b FROM Bolum b WHERE b.id = :id", Bolum.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 
-        Statement st;
+    public List<Bolum> readList(int hangiSayfa, int gorunenVeri) {
+        return em.createQuery("SELECT b FROM Bolum b", Bolum.class)
+                .setFirstResult((hangiSayfa - 1) * gorunenVeri)
+                .setMaxResults(gorunenVeri)
+                .getResultList();
+    }
+       @Transactional
+    public void truncate() {
         try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select * from bolumler where bolumid="+id);
-
-            while (rs.next()) {
-               Fakulte f=this.getDao().getFakulteAdi(rs.getInt("fakulteid"));
-               entity = new Bolum(rs.getLong("bolumid"), f, rs.getString("bolumadi"));
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(BolumDAO.class.getName()).log(Level.SEVERE, null, ex);
+            em.createQuery("DELETE FROM Bolum").executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Exception in truncate method: " + e.getMessage());
+            throw e;
         }
-        return entity;
     }
-    
-      public int getBolumCount() {
-              int veriSayisi=0;
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select count(bolumid) as bolumSayisi from bolumler");
-
-          rs.next();
-          veriSayisi=rs.getInt("bolumSayisi");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return veriSayisi;
-    }
-
-    public FakulteDAO getDao() {
-        if(this.dao==null){
-            this.dao=new FakulteDAO();
-        }
-        return dao;
-    }
-
-    public void setDao(FakulteDAO dao) {
-        this.dao = dao;
-    }
-
 }

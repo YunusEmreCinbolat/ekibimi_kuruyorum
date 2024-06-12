@@ -31,9 +31,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                 <tr>
                                     <td>#{e.id}</td>
                                     <td>#{e.fakulte.fakulteadi}</td>
-                                    <td>#{e.bolumadi}</td>
+                                    <td>#{e.bolumAdi}</td>
                                     <td>
-                                        <h:commandButton styleClass="btn btn-danger" action="#{bolumBean.delete(e.id)}" value="SİL"/>
+                                        <h:commandButton styleClass="btn btn-danger" action="#{bolumBean.delete(e)}" value="SİL"/>
                                     </td>
                                     <td>
                                         <h:commandButton styleClass="btn btn-primary" action="#{bolumBean.setEntity(e)}" value="GÜNCELLE" />

@@ -5,6 +5,7 @@ import dao.OgrenciDAO;
 import entity.Admin;
 import entity.Ogrenci;
 import entity.Proje;
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import jakarta.faces.application.FacesMessage;
@@ -19,8 +20,12 @@ import java.util.logging.Logger;
 @SessionScoped
 public class LoginController implements Serializable {
 
+    @EJB
     private OgrenciDAO ogrenciDao;
+
+    @EJB
     private AdminDAO adminDao;
+
     private Ogrenci o;
     private Admin a;
 
@@ -34,9 +39,11 @@ public class LoginController implements Serializable {
 
     private String role;
 
+    private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
+
     // Getters and setters
     public String loginOgrenci() {
-        List<Ogrenci> ogrenciler = this.getOgrenciDao().allList();
+        List<Ogrenci> ogrenciler = ogrenciDao.allList();
         for (Ogrenci ogrenci : ogrenciler) {
             if (this.o.getKullaniciadi().equals(ogrenci.getKullaniciadi()) && this.o.getSifre().equals(ogrenci.getSifre())) {
                 role = "student";
@@ -46,7 +53,6 @@ public class LoginController implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Giriş başarılı", null));
 
-               
                 // JavaScript kullanarak bekleme ve yönlendirme
                 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
                 return "/panel/ogrenci/proje/OgrenciProjeGoruntule?faces-redirect=true&includeViewParams=true";
@@ -60,59 +66,29 @@ public class LoginController implements Serializable {
     }
 
     public String loginAdmin() {
-        List<Admin> adminler = this.getAdminDao().allList();
-        for (Admin admin : adminler) {
-            if (this.a.getKullaniciadi().equals(admin.getKullaniciadi()) && this.a.getSifre().equals(admin.getSifre())) {
-                role = "admin";
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("loginController", this);
-                autha.setEntity(admin);
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Giriş başarılı, yönlendiriliyorsunuz...", null));
+        try {
+            List<Admin> adminler = adminDao.allList();
+            for (Admin admin : adminler) {
+                if (this.a.getKullaniciadi().equals(admin.getKullaniciadi()) && this.a.getSifre().equals(admin.getSifre())) {
+                    role = "admin";
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("loginController", this);
+                    autha.setEntity(admin);
+                    FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_INFO, "Giriş başarılı, yönlendiriliyorsunuz...", null));
 
-                // JavaScript kullanarak bekleme ve yönlendirme
-            
-
-                FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-                return "/panel/admin/anasayfa/AdminPanelAnasayfa?faces-redirect=true&includeViewParams=true";
+                    // JavaScript kullanarak bekleme ve yönlendirme
+                    FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+                    return "/panel/admin/anasayfa/AdminPanelAnasayfa?faces-redirect=true&includeViewParams=true";
+                }
             }
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Login error", e);
         }
 
         // Hata mesajı ekleyin
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Giriş Hatası", "Kullanıcı adı veya şifre yanlış"));
         return "/panel/admin/admin/AdminGiris?faces-redirect=true";
-    }
-
-    public String logoutAdmin() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/panel/admin/admin/AdminGiris.xhtml?faces-redirect=true";
-    }
-
-    public String logoutOgrenci() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/panel/ogrenci/ogrenci/OgrenciGiris.xhtml?faces-redirect=true";
-    }
-
-    public OgrenciDAO getOgrenciDao() {
-        if (ogrenciDao == null) {
-            this.ogrenciDao = new OgrenciDAO();
-        }
-        return ogrenciDao;
-    }
-
-    public void setOgrenciDao(OgrenciDAO ogrenciDao) {
-        this.ogrenciDao = ogrenciDao;
-    }
-
-    public AdminDAO getAdminDao() {
-        if (adminDao == null) {
-            this.adminDao = new AdminDAO();
-        }
-        return adminDao;
-    }
-
-    public void setAdminDao(AdminDAO adminDao) {
-        this.adminDao = adminDao;
     }
 
     public Ogrenci getO() {

@@ -6,16 +6,28 @@ package entity;
 
 import java.util.Objects;
 
-/**
- *
- * @author Dell
- */
-public class Proje {
+import jakarta.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
+
+@Entity
+@Table(name = "proje")
+public class Proje  implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String projeAdi;
     private String projeAciklamasi;
     private String kullanilanTeknolojiler;
+
+    @ManyToOne
+    @JoinColumn(name = "sahip_ogrenci_id")
     private Ogrenci sahipOgrenciId;
+
+    @ManyToOne
+    @JoinColumn(name = "kategori_id")
     private Kategori kategori;
 
     public Proje() {
@@ -86,9 +98,8 @@ public class Proje {
         this.kategori = kategori;
     }
 
-    
-    
-    
+   
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -110,8 +121,4 @@ public class Proje {
         final Proje other = (Proje) obj;
         return Objects.equals(this.id, other.id);
     }
-    
-    
-            
-    
 }

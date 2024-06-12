@@ -36,13 +36,13 @@
                                 <div class="mb-3">
                                     <label for="sinifid">Sınıf</label>
                                     <h:selectOneMenu id="sinifid" value="#{ogrenciBean.entity.sinif}" converter="sinifConverter" styleClass="form-control">
-                                        <f:selectItems value="#{sinifBean.list}" var="c" itemValue="#{c}" itemLabel="#{c.sinifadi}" />
+                                        <f:selectItems value="#{sinifBean.list}" var="c" itemValue="#{c}" itemLabel="#{c.sinifAdi}" />
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="mb-3">
                                     <label for="bolumid">Bölüm</label>
                                     <h:selectOneMenu id="bolumid" value="#{ogrenciBean.entity.bolum}" converter="bolumConverter" styleClass="form-control">
-                                        <f:selectItems value="#{bolumBean.list}" var="c" itemValue="#{c}" itemLabel="#{c.bolumadi}" />
+                                        <f:selectItems value="#{bolumBean.list}" var="c" itemValue="#{c}" itemLabel="#{c.bolumAdi}" />
                                     </h:selectOneMenu>
                                 </div>
                             </div>

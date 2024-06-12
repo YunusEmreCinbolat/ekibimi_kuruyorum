@@ -35,7 +35,7 @@
                                     <td>#{e.kullaniciadi}</td>
                                     <td>#{e.email}</td>
                                     <td>#{e.sifre}</td>
-                                    <td><h:commandButton class="btn-danger" action="#{adminBean.delete(e.id)}" value="SİL"/></td>
+                                    <td><h:commandButton class="btn-danger" action="#{adminBean.delete(e)}" value="SİL"/></td>
                                     <td><h:commandButton class="btn-secondary" action="#{adminBean.setEntity(e)}" value="GÜNCELLE"/></td>
                                 </tr>
                             </ui:repeat>

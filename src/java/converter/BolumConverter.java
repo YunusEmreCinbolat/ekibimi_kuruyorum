@@ -6,25 +6,32 @@ package converter;
 
 import dao.BolumDAO;
 import entity.Bolum;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
 import jakarta.faces.convert.FacesConverter;
+import jakarta.inject.Named;
+import java.io.Serializable;
 
 /**
  *
  * @author Dell
  */
-
-@FacesConverter("bolumConverter")
-public class BolumConverter implements Converter {
-    
+@Named
+@RequestScoped
+@FacesConverter(value="bolumConverter",managed=true)
+public class BolumConverter implements Converter,Serializable {
+    @EJB
     private BolumDAO dao;
+    
+    
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         int id=Integer.valueOf(string);
-        Bolum f= this.getDao().getTitle(id);
+        Bolum f= this.dao.getTitle(id);
         return f;
     }
 

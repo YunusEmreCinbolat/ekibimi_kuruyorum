@@ -1,147 +1,72 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
-import entity.Admin;
 import entity.EkipUye;
 import entity.Ogrenci;
 import entity.Proje;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import util.Connector;
 
-/**
- *
- * @author Dell
- */
-public class EkipUyeDAO extends Connector {
+@Stateless
+public class EkipUyeDAO {
 
-    private OgrenciDAO odao;
-    private ProjeDAO pdao;
+    @PersistenceContext(unitName = "ekibimi_kuruyorumPU")
+    private EntityManager em;
 
-    public List<EkipUye> readList(int hangiSayfa, int gorunenVeri) {
-        List<EkipUye> list = new ArrayList<>();
+    public void create(EkipUye entity) {
+       Ogrenci ogrenci = em.find(Ogrenci.class, entity.getOgrenci().getId());
+        Proje proje = em.find(Proje.class, entity.getProje().getId());
+        
+        if (ogrenci != null && proje != null) {
+            entity.setOgrenci(ogrenci);
+            entity.setProje(proje);
+            em.persist(entity);
+        } else {
+            throw new IllegalArgumentException("Ogrenci or Proje not found");
+        }
+    }
 
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM ekipuyeleri LIMIT " + gorunenVeri + " OFFSET " + (hangiSayfa - 1) * gorunenVeri);
+    public void update(EkipUye entity) {
+        em.merge(entity);
+    }
 
-            while (rs.next()) {
-                Ogrenci o = this.getOdao().getFromOgrenci(rs.getInt("ogrenciid"));
-                Proje p = this.getPdao().getTitle(rs.getInt("projeid"));
-                list.add(new EkipUye(rs.getLong("ekipuyeid"), o, p, rs.getString("ekiprolu")));
+    @Transactional
+    public void delete(EkipUye entity) {
+         try {
+            if (entity != null) {
+              	em.remove(em.merge(entity));
+                em.flush();
+            } else {
+                // Log that the entity was not found
+                System.err.println("Admin entity with id " + entity.getId() + " not found.");
             }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(EkipUyeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            System.err.println("Exception in delete method: DAO" + e.getMessage());
+            throw e;
         }
-        return list;
-    }
-
-    public void create(EkipUye ekipuye) {
-        try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("insert into ekipuyeleri (ogrenciid,projeid,ekiprolu) values('" + ekipuye.getOgrenci().getId() + "' ,'" + ekipuye.getProje().getId() + "' , '" + ekipuye.getEkiprolu() + "' )");
-        } catch (SQLException ex) {
-            Logger.getLogger(EkipUyeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void delete(int id) {
-        try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("DELETE from ekipuyeleri where ekipuyeid=" + id);
-        } catch (SQLException ex) {
-            Logger.getLogger(EkipUyeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void update(EkipUye ekipuye) {
-        try {
-            Statement st = this.getConnect().createStatement();
-            st.executeUpdate("update ekipuyeleri set ogrenciid='" + ekipuye.getOgrenci().getId() + "', projeid='" + ekipuye.getProje().getId() + "', ekiprolu='" + ekipuye.getEkiprolu() + "' ,   where ekipuyeid=" + ekipuye.getId());
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    public int getEkipUyeCount() {
-        int veriSayisi = 0;
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            ResultSet rs = st.executeQuery("select count(ekipuyeid) as ekipsayisi from ekipuyeleri");
-
-            rs.next();
-            veriSayisi = rs.getInt("ekipsayisi");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(EkipUyeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return veriSayisi;
-    }
-
-    public OgrenciDAO getOdao() {
-        if (this.odao == null) {
-            this.odao = new OgrenciDAO();
-        }
-        return odao;
-    }
-
-    public void setOdao(OgrenciDAO odao) {
-        this.odao = odao;
-    }
-
-    public ProjeDAO getPdao() {
-        if (this.pdao == null) {
-            this.pdao = new ProjeDAO();
-        }
-        return pdao;
-    }
-
-    public void setPdao(ProjeDAO pdao) {
-        this.pdao = pdao;
     }
 
     public List<EkipUye> getFromAOgrenci(int id) {
-        List<EkipUye> list = new ArrayList<>();
-
-        Statement st;
-        try {
-            st = this.getConnect().createStatement();
-            String sql = "SELECT \n"
-                    + "    eu.ekipuyeid,\n"
-                    + "    eu.ogrenciid,\n"
-                    + "    eu.projeid,\n"
-                    + "    eu.ekiprolu\n"
-                    + "FROM \n"
-                    + "    ekipuyeleri eu\n"
-                    + "INNER JOIN \n"
-                    + "    projeler p ON eu.projeid = p.projeid\n"
-                    + "WHERE \n"
-                    + "    p.sahipogrenciid ="+id;
-
-            ResultSet rs = st.executeQuery(sql);
-
-            while (rs.next()) {
-                Ogrenci o = this.getOdao().getFromOgrenci(rs.getInt("ogrenciid"));
-                Proje p = this.getPdao().getTitle(rs.getInt("projeid"));
-                list.add(new EkipUye(rs.getLong("ekipuyeid"), o, p, rs.getString("ekiprolu")));
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(EkipUyeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return  list;
+        return em.createQuery("SELECT e FROM EkipUye e WHERE e.ogrenci.id = :id", EkipUye.class)
+                .setParameter("id", id)
+                .getResultList();
     }
 
+    public List<EkipUye> readList(int hangiSayfa, int gorunenVeri) {
+        return em.createQuery("SELECT e FROM EkipUye e", EkipUye.class)
+                .setFirstResult((hangiSayfa - 1) * gorunenVeri)
+                .setMaxResults(gorunenVeri)
+                .getResultList();
+    }
+        @Transactional
+    public void truncate() {
+        try {
+            em.createQuery("DELETE FROM EkipUye").executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Exception in truncate method: " + e.getMessage());
+            throw e;
+        }
+    }
 }
