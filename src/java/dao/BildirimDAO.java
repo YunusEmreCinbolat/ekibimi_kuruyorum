@@ -5,7 +5,6 @@ import entity.Ogrenci;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import java.util.List;
 
 @Stateless
@@ -31,7 +30,7 @@ public class BildirimDAO {
         em.merge(entity);
     }
 
-    @Transactional
+    
     public void delete(Bildirim entity) {
          try {
             if (entity != null) {
@@ -64,14 +63,5 @@ public class BildirimDAO {
         return ((Long) em.createQuery("SELECT COUNT(b) FROM Bildirim b WHERE b.alici.id = :id")
                          .setParameter("id", id)
                          .getSingleResult()).intValue();
-    }
-    @Transactional
-    public void truncate() {
-        try {
-            em.createQuery("DELETE FROM Bildirim").executeUpdate();
-        } catch (Exception e) {
-            System.err.println("Exception in truncate method: " + e.getMessage());
-            throw e;
-        }
     }
 }

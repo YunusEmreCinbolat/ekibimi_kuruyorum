@@ -33,13 +33,14 @@ public class AdminDAO {
         }
     }
 
-    @Transactional
+  
     public void delete(Admin entity) {
         try {
             if (entity != null) {
-                em.remove(em.merge(entity));
+              	em.remove(em.merge(entity));
                 em.flush();
             } else {
+                // Log that the entity was not found
                 System.err.println("Admin entity with id " + entity.getId() + " not found.");
             }
         } catch (Exception e) {
@@ -66,16 +67,6 @@ public class AdminDAO {
                      .getResultList();
         } catch (Exception e) {
             System.err.println("Exception in allList method: " + e.getMessage());
-            throw e;
-        }
-    }
-
-    @Transactional
-    public void truncate() {
-        try {
-            em.createQuery("DELETE FROM Admin").executeUpdate();
-        } catch (Exception e) {
-            System.err.println("Exception in truncate method: " + e.getMessage());
             throw e;
         }
     }

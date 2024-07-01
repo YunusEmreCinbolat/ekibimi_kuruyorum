@@ -5,7 +5,6 @@ import entity.Ogrenci;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import java.util.List;
 
 @Stateless
@@ -28,7 +27,7 @@ public class DosyaDAO {
         em.merge(entity);
     }
 
-    @Transactional
+    
     public void delete(Dosya entity) {
        try {
             if (entity != null) {
@@ -52,14 +51,5 @@ public class DosyaDAO {
 
     public Dosya readDosya(Long id) {
         return em.find(Dosya.class, id);
-    }
-        @Transactional
-    public void truncate() {
-        try {
-            em.createQuery("DELETE FROM Durum").executeUpdate();
-        } catch (Exception e) {
-            System.err.println("Exception in truncate method: " + e.getMessage());
-            throw e;
-        }
     }
 }

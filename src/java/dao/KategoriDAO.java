@@ -4,7 +4,6 @@ import entity.Kategori;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import java.util.List;
 
 @Stateless
@@ -21,7 +20,7 @@ public class KategoriDAO {
         em.merge(entity);
     }
 
-    @Transactional
+    
     public void delete(Kategori entity) {
         try {
             if (entity != null) {
@@ -48,14 +47,5 @@ public class KategoriDAO {
                  .setFirstResult((hangiSayfa - 1) * gorunenVeri)
                  .setMaxResults(gorunenVeri)
                  .getResultList();
-    }
-      @Transactional
-    public void truncate() {
-        try {
-            em.createQuery("DELETE FROM Kategori").executeUpdate();
-        } catch (Exception e) {
-            System.err.println("Exception in truncate method: " + e.getMessage());
-            throw e;
-        }
     }
 }

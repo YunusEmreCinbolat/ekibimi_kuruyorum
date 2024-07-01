@@ -6,7 +6,6 @@ import entity.Proje;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import java.util.List;
 
 @Stateless
@@ -32,7 +31,7 @@ public class EkipUyeDAO {
         em.merge(entity);
     }
 
-    @Transactional
+    
     public void delete(EkipUye entity) {
          try {
             if (entity != null) {
@@ -59,14 +58,5 @@ public class EkipUyeDAO {
                 .setFirstResult((hangiSayfa - 1) * gorunenVeri)
                 .setMaxResults(gorunenVeri)
                 .getResultList();
-    }
-        @Transactional
-    public void truncate() {
-        try {
-            em.createQuery("DELETE FROM EkipUye").executeUpdate();
-        } catch (Exception e) {
-            System.err.println("Exception in truncate method: " + e.getMessage());
-            throw e;
-        }
     }
 }
