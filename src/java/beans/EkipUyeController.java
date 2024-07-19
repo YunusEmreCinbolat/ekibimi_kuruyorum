@@ -2,11 +2,10 @@ package beans;
 
 import dao.EkipUyeDAO;
 import entity.EkipUye;
+import entity.Ogrenci;
+import entity.Proje;
 import jakarta.ejb.EJB;
-import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.SessionScoped;
-
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
 public class EkipUyeController extends BaseController<EkipUye, EkipUyeDAO> implements Serializable, Controller<EkipUye> {
 
     private EkipUye entity;
-    
+
     @EJB
     private EkipUyeDAO EUD;
 
@@ -32,6 +31,7 @@ public class EkipUyeController extends BaseController<EkipUye, EkipUyeDAO> imple
 
     @Override
     public void create() {
+      
         EUD.create(entity);
         this.entity = new EkipUye();
     }
@@ -57,8 +57,19 @@ public class EkipUyeController extends BaseController<EkipUye, EkipUyeDAO> imple
         return entity;
     }
 
-    public String setEntity(EkipUye entity) {
+    public void setEntity(EkipUye entity) {
         this.entity = entity;
-        return "/panel/admin/admin/EkipUyeGuncelle.xhtml?faces-redirect=true";
+    }
+
+    public void setOgrenci(Ogrenci ogrenci) {
+        if (this.entity != null) {
+            this.entity.setOgrenci(ogrenci);
+        }
+    }
+
+    public void setProje(Proje proje) {
+        if (this.entity != null) {
+            this.entity.setProje(proje);
+        }
     }
 }

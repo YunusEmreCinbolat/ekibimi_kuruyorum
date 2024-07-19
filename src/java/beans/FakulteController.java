@@ -29,7 +29,11 @@ public class FakulteController extends BaseController<Fakulte, FakulteDAO> imple
 
     @Override
     public void delete(Fakulte entity) {
-        FD.delete(entity);
+        try {
+            FD.delete(entity);
+        } catch (Exception e) {
+            System.err.println("Exception in FakulteController delete method: " + e.getMessage());
+        }
     }
 
     public String getFakulteAdi(int fakulteid) {

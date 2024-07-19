@@ -19,19 +19,19 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="ad">Ad</label>
-                                    <h:inputText id="ad" value="#{ogrenciBean.entity.ad}" styleClass="form-control"/>
+                                    <h:inputText id="ad" value="#{ogrenciBean.entity.ad}" styleClass="form-control" required="true" requiredMessage="Ad gerekli"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="soyad">Soyad</label>
-                                    <h:inputText id="soyad" value="#{ogrenciBean.entity.soyad}" styleClass="form-control"/>
+                                    <h:inputText id="soyad" value="#{ogrenciBean.entity.soyad}" styleClass="form-control" required="true" requiredMessage="SoyAd gerekli"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="kullaniciadi">Kullanıcı Adı</label>
-                                    <h:inputText id="kullaniciadi" value="#{ogrenciBean.entity.kullaniciadi}" styleClass="form-control"/>
+                                    <h:inputText id="kullaniciadi" value="#{ogrenciBean.entity.kullaniciadi}" styleClass="form-control" required="true" requiredMessage="Kullanıcı Adı gerekli"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="universite">Üniversite</label>
-                                    <h:inputText id="universite" value="#{ogrenciBean.entity.universite}" styleClass="form-control"/>
+                                    <h:inputText id="universite" value="#{ogrenciBean.entity.universite}" styleClass="form-control" required="true" requiredMessage="üniversite Adı gerekli"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="sinifid">Sınıf</label>
@@ -64,8 +64,12 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <h:commandButton class="btn btn-primary" action="#{ogrenciBean.create}" value="Kayıt Et" rendered="#{empty ogrenciBean.entity.id}"/>
-                                    <h:commandButton class="btn btn-secondary" action="#{ogrenciBean.update}" value="Güncelle" rendered="#{not empty ogrenciBean.entity.id}"/>
+                                    <h:commandButton class="btn btn-primary" action="#{ogrenciBean.create}" value="Kayıt Et" rendered="#{empty ogrenciBean.entity.id}">
+                                         <f:ajax execute="@form" render="@form"/>
+                                    </h:commandButton>
+                                    <h:commandButton class="btn btn-secondary" action="#{ogrenciBean.update}" value="Güncelle" rendered="#{not empty ogrenciBean.entity.id}">
+                                         <f:ajax execute="@form" render="@form"/>
+                                    </h:commandButton>
                                 </div>
                             </div>
                         </div>

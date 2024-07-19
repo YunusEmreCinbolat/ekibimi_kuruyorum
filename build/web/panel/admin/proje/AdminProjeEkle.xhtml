@@ -25,17 +25,17 @@
                             </div>
                             <div class="mb-3">
                                 <label>Ad</label>
-                                <h:inputText value="#{projeBean.entity.projeAdi}" styleClass="form-control" required="true"/>
+                                <h:inputText value="#{projeBean.entity.projeAdi}" styleClass="form-control" required="true" requiredMessage="Proje Adı gerekli"/>
                                 <h:message for="ad" style="color: red" />
                             </div>
                             <div class="mb-3">
                                 <label>Proje Açıklaması</label>
-                                <h:inputTextarea value="#{projeBean.entity.projeAciklamasi}" styleClass="form-control" rows="5" required="true"/>
+                                <h:inputTextarea value="#{projeBean.entity.projeAciklamasi}" styleClass="form-control" rows="5" required="true" requiredMessage="Proje Açıklaması gerekli"/>
                                 <h:message for="ad" style="color: red" />
                             </div>
                             <div class="mb-3">
                                 <label>Proje Yeterlilikleri</label>
-                                <h:inputTextarea value="#{projeBean.entity.kullanilanTeknolojiler}" styleClass="form-control" rows="5" required="true"/>
+                                <h:inputTextarea value="#{projeBean.entity.kullanilanTeknolojiler}" styleClass="form-control" rows="5" required="true" requiredMessage="Kullanılan teknolojiler gerekli"/>
                                 <h:message for="ad" style="color: red" />
                             </div>
                             <div class="mb-3">
@@ -45,8 +45,12 @@
                                 </h:selectOneMenu>
                             </div>
                             <div class="mb-3">
-                                <h:commandButton class="btn-primary" action="#{projeBean.create}" value="Kayıt Et" rendered="#{projeBean.entity.id==null}"/>
-                                <h:commandButton class="btn-primary" action="#{projeBean.update}" value="Güncelle" rendered="#{projeBean.entity.id!=null}"/>
+                                <h:commandButton class="btn-primary" action="#{projeBean.create}" value="Kayıt Et" rendered="#{projeBean.entity.id==null}">
+                                     <f:ajax execute="@form" render="@form"/>
+                                </h:commandButton>
+                                <h:commandButton class="btn-primary" action="#{projeBean.update}" value="Güncelle" rendered="#{projeBean.entity.id!=null}">
+                                     <f:ajax execute="@form" render="@form"/>
+                                </h:commandButton>
                             </div>
                         </h:form>
                     </div>

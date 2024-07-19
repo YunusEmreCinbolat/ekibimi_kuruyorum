@@ -30,13 +30,17 @@
                             </div>
                             <div class="mb-3">
                                     <label for="ekip rolu">Ekip Rolu</label>
-                                    <h:inputText id="ekiprolu" value="#{ekipuyeBean.entity.ekiprolu}" styleClass="form-control"/>
+                                    <h:inputText id="ekiprolu" value="#{ekipuyeBean.entity.ekiprolu}" styleClass="form-control" required="true" requiredMessage="Ekip rolü gerekli"/>
                                 </div>
                             
                             
                                 <div class="mb-3">
-                                    <h:commandButton class="btn btn-primary" action="#{ekipuyeBean.create()}" value="Kayıt Et" rendered="#{empty ekipuyeBean.entity.id}"/>
-                                    <h:commandButton class="btn btn-secondary" action="#{ekipuyeBean.update()}" value="Güncelle" rendered="#{not empty ekipuyeBean.entity.id}"/>
+                                    <h:commandButton class="btn btn-primary" action="#{ekipuyeBean.create()}" value="Kayıt Et" rendered="#{empty ekipuyeBean.entity.id}">
+                                         <f:ajax execute="@form" render="@form"/>
+                                    </h:commandButton>
+                                    <h:commandButton class="btn btn-secondary" action="#{ekipuyeBean.update()}" value="Güncelle" rendered="#{not empty ekipuyeBean.entity.id}">
+                                         <f:ajax execute="@form" render="@form"/>
+                                    </h:commandButton>
                             </div>
                              
                         </div>

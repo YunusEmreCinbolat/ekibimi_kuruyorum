@@ -50,7 +50,7 @@ public class LoginFilter implements Filter {
 
         LoginController loginBean = (session != null) ? (LoginController) session.getAttribute("loginController") : null;
         String loginURI = req.getContextPath() + "/";
-        String logoutURI =  "/logout.xhtml";
+        String logoutURI = "/logout.xhtml";
 
         String requestURI = req.getRequestURI().substring(req.getContextPath().length());
         boolean loggedIn = loginBean != null && loginBean.getRole() != null;
@@ -60,11 +60,17 @@ public class LoginFilter implements Filter {
         boolean isAdmin = loggedIn && "admin".equals(loginBean.getRole());
         boolean isStudent = loggedIn && "student".equals(loginBean.getRole());
 
+        System.out.println("Request URI: " + requestURI);
+        System.out.println("Logged In: " + loggedIn);
+        System.out.println("Login Request: " + loginRequest);
+        System.out.println("Resource Request: " + resourceRequest);
+        System.out.println("Is Admin: " + isAdmin);
+        System.out.println("Is Student: " + isStudent);
+
         if (requestURI.equals(logoutURI)) {
             if (session != null) {
                 session.invalidate();
             }
-            // Çıkış yapan kullanıcının rolüne göre yönlendirme
             if (isAdmin) {
                 res.sendRedirect(req.getContextPath() + "/panel/admin/admin/AdminGiris.xhtml");
             } else if (isStudent) {
@@ -82,7 +88,6 @@ public class LoginFilter implements Filter {
                 } else if (isStudent && studentOnlyUrls.stream().anyMatch(requestURI::startsWith)) {
                     chain.doFilter(request, response);
                 } else if (publicUrls.contains(requestURI)) {
-                    // Redirect to respective homepages after successful login
                     if (isAdmin) {
                         res.sendRedirect(req.getContextPath() + "/panel/admin/admin/AdminPanelAnasayfa.xhtml");
                     } else if (isStudent) {
@@ -91,8 +96,6 @@ public class LoginFilter implements Filter {
                         chain.doFilter(request, response);
                     }
                 } else {
-                    // Kullanıcı giriş yaptı ve doğru role sahip ama izin verilen URL'lerden birine gitmiyor
-                    // Kendi ana sayfasına yönlendir
                     if (isAdmin) {
                         res.sendRedirect(req.getContextPath() + "/panel/admin/anasayfa/AdminPanelAnasayfa.xhtml");
                     } else if (isStudent) {

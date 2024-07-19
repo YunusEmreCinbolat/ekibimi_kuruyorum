@@ -3,15 +3,16 @@ package beans;
 import dao.AdminDAO;
 import entity.Admin;
 import jakarta.ejb.EJB;
-import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
 @Named(value = "adminBean")
 @SessionScoped
-public class AdminController extends BaseController<Admin, AdminDAO> implements Serializable, Controller<Admin> {
+public class AdminController implements Serializable {
 
     private Admin entity;
     private List<Admin> list;
@@ -20,44 +21,49 @@ public class AdminController extends BaseController<Admin, AdminDAO> implements 
     private AdminDAO AD;
 
     public AdminController() {
-        super(Admin.class, AdminDAO.class);
+        // AdminDAO ve Admin entity sınıfına dayalı olarak bu sınıfı başlatır
     }
 
-    @Override
-    public void update() {
-        try {
-            AD.update(this.entity);
-            this.entity = new Admin();
-        } catch (Exception e) {
-            System.err.println("Exception in update method: " + e.getMessage());
-        }
-    }
-
-    @Override
     public void create() {
         try {
-            AD.create(this.entity);
+            AD.create(entity);
             this.entity = new Admin();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Admin başarıyla oluşturuldu!"));
         } catch (Exception e) {
-            System.err.println("Exception in create method: " + e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Admin oluşturulurken hata oluştu: " + e.getMessage()));
         }
     }
 
-    @Override
     public void delete(Admin entity) {
         try {
             AD.delete(entity);
-            this.entity = new Admin(); // after deletion, reset the entity
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Admin başarıyla silindi!"));
+            this.list = null; // Listeyi güncellemek için null yaparak yeniden yüklenmesini sağlayın
         } catch (Exception e) {
-            System.err.println("Exception in delete method: " + e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Admin silinirken hata oluştu: " + e.getMessage()));
+        }
+    }
+
+    public void update() {
+        try {
+            AD.update(entity);
+            this.entity = new Admin();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Admin başarıyla güncellendi!"));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Admin güncellenirken hata oluştu: " + e.getMessage()));
         }
     }
 
     public List<Admin> getList() {
         if (this.list == null) {
-            this.list = AD.readList(this.hangiSayfa, this.gorunenVeri);
+            this.list = AD.readList(1, 10); // Default sayfa ve gösterilecek veri sayısı
         }
         return this.list;
+    }
+
+    public String setEntity(Admin entity) {
+        this.entity = entity;
+        return "/panel/admin//admin/AdminGuncelle.xhtml?faces-redirect=true";
     }
 
     public Admin getEntity() {
@@ -65,10 +71,5 @@ public class AdminController extends BaseController<Admin, AdminDAO> implements 
             this.entity = new Admin();
         }
         return entity;
-    }
-
-    public String setEntity(Admin entity) {
-        this.entity = entity;
-        return "/panel/admin/admin/AdminGuncelle.xhtml?faces-redirect=true";
     }
 }

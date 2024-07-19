@@ -3,6 +3,7 @@ package dao;
 import entity.EkipUye;
 import entity.Ogrenci;
 import entity.Proje;
+import jakarta.ejb.EJBException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -15,48 +16,64 @@ public class EkipUyeDAO {
     private EntityManager em;
 
     public void create(EkipUye entity) {
-       Ogrenci ogrenci = em.find(Ogrenci.class, entity.getOgrenci().getId());
-        Proje proje = em.find(Proje.class, entity.getProje().getId());
-        
-        if (ogrenci != null && proje != null) {
-            entity.setOgrenci(ogrenci);
-            entity.setProje(proje);
-            em.persist(entity);
-        } else {
-            throw new IllegalArgumentException("Ogrenci or Proje not found");
+        try {
+         
+
+       
+          
+                entity.setOgrenci(entity.getOgrenci());
+                entity.setProje(entity.getProje());
+                em.persist(entity);
+          
+        } catch (Exception e) {
+            System.err.println("Exception in create method: " + e.getMessage());
+            throw new EJBException(e);
         }
     }
 
     public void update(EkipUye entity) {
-        em.merge(entity);
+        try {
+            em.merge(entity);
+        } catch (Exception e) {
+            System.err.println("Exception in update method: " + e.getMessage());
+            throw new EJBException(e);
+        }
     }
 
-    
     public void delete(EkipUye entity) {
-         try {
+        try {
             if (entity != null) {
-              	em.remove(em.merge(entity));
+                em.remove(em.merge(entity));
                 em.flush();
             } else {
-                // Log that the entity was not found
-                System.err.println("Admin entity with id " + entity.getId() + " not found.");
+                System.err.println("EkipUye entity with id " + entity.getId() + " not found.");
             }
         } catch (Exception e) {
-            System.err.println("Exception in delete method: DAO" + e.getMessage());
-            throw e;
+            System.err.println("Exception in delete method: " + e.getMessage());
+            throw new EJBException(e);
         }
     }
 
     public List<EkipUye> getFromAOgrenci(int id) {
-        return em.createQuery("SELECT e FROM EkipUye e WHERE e.ogrenci.id = :id", EkipUye.class)
-                .setParameter("id", id)
-                .getResultList();
+        try {
+            return em.createQuery("SELECT e FROM EkipUye e WHERE e.ogrenci.id = :id", EkipUye.class)
+                    .setParameter("id", id)
+                    .getResultList();
+        } catch (Exception e) {
+            System.err.println("Exception in getFromAOgrenci method: " + e.getMessage());
+            throw new EJBException(e);
+        }
     }
 
     public List<EkipUye> readList(int hangiSayfa, int gorunenVeri) {
-        return em.createQuery("SELECT e FROM EkipUye e", EkipUye.class)
-                .setFirstResult((hangiSayfa - 1) * gorunenVeri)
-                .setMaxResults(gorunenVeri)
-                .getResultList();
+        try {
+            return em.createQuery("SELECT e FROM EkipUye e", EkipUye.class)
+                    .setFirstResult((hangiSayfa - 1) * gorunenVeri)
+                    .setMaxResults(gorunenVeri)
+                    .getResultList();
+        } catch (Exception e) {
+            System.err.println("Exception in readList method: " + e.getMessage());
+            throw new EJBException(e);
+        }
     }
 }

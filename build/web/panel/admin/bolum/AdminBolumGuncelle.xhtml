@@ -24,11 +24,13 @@
                             </div>
                             <div class="mb-3">
                                 <label for="bolumadi">Bölüm Adı</label>
-                                <h:inputText id="bolumadi" value="#{bolumBean.entity.bolumAdi}" styleClass="form-control" required="true"/>
+                                <h:inputText id="bolumadi" value="#{bolumBean.entity.bolumAdi}" styleClass="form-control" required="true" requiredMessage="Bölüm Adı gerekli"/>
                                 <h:message for="bolumadi" style="color: red" />
                             </div>
                             <div class="mb-3">
-                                <h:commandButton styleClass="btn btn-primary btn-block" action="#{bolumBean.update()}" value="Bölüm Güncelle"/>
+                                <h:commandButton styleClass="btn btn-primary btn-block" action="#{bolumBean.update()}" value="Bölüm Güncelle">
+                                      <f:ajax execute="@form" render="@form"/>
+                                </h:commandButton>
                             </div>
                         </h:form>
                     </div>

@@ -3,9 +3,7 @@ package beans;
 import dao.BolumDAO;
 import entity.Bolum;
 import jakarta.ejb.EJB;
-import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -37,7 +35,11 @@ public class BolumController extends BaseController<Bolum, BolumDAO> implements 
 
     @Override
     public void delete(Bolum entity) {
-        BD.delete(entity);
+        try {
+            BD.delete(entity);
+        } catch (Exception e) {
+            System.err.println("Exception in BolumController delete method: " + e.getMessage());
+        }
     }
 
     @Override

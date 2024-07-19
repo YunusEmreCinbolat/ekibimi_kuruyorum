@@ -8,10 +8,6 @@ import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- *
- * @author Dell
- */
 @Named(value = "projeBean")
 @SessionScoped
 public class ProjeController extends BaseController<Proje, ProjeDAO> implements Serializable, Controller<Proje> {
@@ -22,6 +18,7 @@ public class ProjeController extends BaseController<Proje, ProjeDAO> implements 
 
     @EJB
     private ProjeDAO PD;
+
     public ProjeController() {
         super(Proje.class, ProjeDAO.class);
     }
@@ -59,7 +56,10 @@ public class ProjeController extends BaseController<Proje, ProjeDAO> implements 
         }
         return entity;
     }
-
+      public String setEntityForogrenci(Proje entity) {
+        this.entity = entity;
+        return "/panel/ogrenci/proje/OgrenciProjeDetay.xhtml?faces-redirect=true";
+    }
     public String setEntity(Proje entity) {
         this.entity = entity;
         return "/panel/admin/proje/AdminProjeDetay.xhtml?faces-redirect=true";

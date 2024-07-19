@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <title>Admin Güncelleme Sayfası</title>
@@ -18,37 +19,55 @@
                         <div class="form-group row">
                             <label for="adi" class="col-sm-2 col-form-label">Adı:</label>
                             <div class="col-sm-10">
-                                <h:inputText id="adi" class="form-control" value="#{adminBean.entity.ad}" />
+                                <h:inputText id="adi" class="form-control" value="#{adminBean.entity.ad}" required="true" requiredMessage="Ad gerekli">
+                                    <f:validateLength minimum="1" />
+                                </h:inputText>
+                                <h:message for="adi" class="text-danger" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="soyadi" class="col-sm-2 col-form-label">Soyadı:</label>
                             <div class="col-sm-10">
-                                <h:inputText id="soyadi" class="form-control" value="#{adminBean.entity.soyad}" />
+                                <h:inputText id="soyadi" class="form-control" value="#{adminBean.entity.soyad}" required="true" requiredMessage="Soyad gerekli">
+                                    <f:validateLength minimum="1" />
+                                </h:inputText>
+                                <h:message for="soyadi" class="text-danger" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="kullaniciadi" class="col-sm-2 col-form-label">Kullanıcı Adı:</label>
                             <div class="col-sm-10">
-                                <h:inputText id="kullaniciadi" class="form-control" value="#{adminBean.entity.kullaniciadi}" />
+                                <h:inputText id="kullaniciadi" class="form-control" value="#{adminBean.entity.kullaniciadi}" required="true" requiredMessage="Kullanıcı adı gerekli">
+                                    <f:validateLength minimum="1" />
+                                </h:inputText>
+                                <h:message for="kullaniciadi" class="text-danger" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="email" class="col-sm-2 col-form-label">Email:</label>
                             <div class="col-sm-10">
-                                <h:inputText id="email" class="form-control" value="#{adminBean.entity.email}" />
+                                <h:inputText id="email" class="form-control" value="#{adminBean.entity.email}" required="true" requiredMessage="Email gerekli">
+                                    <f:validateLength minimum="1" />
+                                    <f:validateRegex pattern="^[A-Za-z0-9+_.-]+@(.+)$" />
+                                </h:inputText>
+                                <h:message for="email" class="text-danger" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="sifre" class="col-sm-2 col-form-label">Şifre:</label>
                             <div class="col-sm-10">
-                                <h:inputText id="sifre" class="form-control" value="#{adminBean.entity.sifre}" />
+                                <h:inputSecret id="sifre" class="form-control" value="#{adminBean.entity.sifre}" required="true" requiredMessage="Şifre gerekli">
+                                    <f:validateLength minimum="6" />
+                                </h:inputSecret>
+                                <h:message for="sifre" class="text-danger" />
                             </div>
                         </div>
                         
                         <div class="form-group row">
                             <div class="col-sm-10 offset-sm-2">
-                                <h:commandButton value="Güncelle" class="btn btn-primary" action="#{adminBean.update}"/>
+                                <h:commandButton value="Güncelle" class="btn btn-primary" action="#{adminBean.update}">
+                                    <f:ajax execute="@form" render="@form"/>
+                                </h:commandButton>
                             </div>
                         </div>
                     </h:form>

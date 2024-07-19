@@ -42,7 +42,9 @@
 
 
                         <div class="mb-3">
-                            <h:commandButton action="#{sinifBean.update}" value="Sınıf Güncelle" />
+                            <h:commandButton action="#{sinifBean.update}" value="Sınıf Güncelle" >
+                                 <f:ajax execute="@form" render="@form"/>
+                            </h:commandButton>
                     
                         </div>
                     </h:form>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -17,28 +17,29 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="fakulte">Ogrenci</label>
+                                <label for="ogrenci">Ogrenci</label>
                                 <h:selectOneMenu id="Ogrenci" value="#{ekipuyeBean.entity.ogrenci}" converter="ogrenciConverter" styleClass="form-control">
                                     <f:selectItems value="#{ogrenciBean.list}" var="ogrenci" itemValue="#{ogrenci}" itemLabel="#{ogrenci.ad}" />
                                 </h:selectOneMenu>
                             </div>
                             <div class="mb-3">
-                                <label for="Proje">Proje</label>
+                                <label for="proje">Proje</label>
                                 <h:selectOneMenu id="Proje" value="#{ekipuyeBean.entity.proje}" converter="projeConverter" styleClass="form-control">
                                     <f:selectItems value="#{projeBean.list}" var="proje" itemValue="#{proje}" itemLabel="#{proje.projeAdi}" />
                                 </h:selectOneMenu>
                             </div>
                             <div class="mb-3">
-                                    <label for="ekip rolu">Ekip Rolu</label>
-                                    <h:inputText id="ekiprolu" value="#{ekipuyeBean.entity.ekiprolu}" styleClass="form-control"/>
-                                </div>
-                            
-                            
-                                <div class="mb-3">
-                                    <h:commandButton class="btn btn-primary" action="#{ekipuyeBean.create()}" value="Kayıt Et" rendered="#{empty ekipuyeBean.entity.id}"/>
-                                    <h:commandButton class="btn btn-secondary" action="#{ekipuyeBean.update()}" value="Güncelle" rendered="#{not empty ekipuyeBean.entity.id}"/>
+                                <label for="ekiprolu">Ekip Rolu</label>
+                                <h:inputText id="ekiprolu" value="#{ekipuyeBean.entity.ekiprolu}" styleClass="form-control" required="true" requiredMessage="Ekip rolü gerekli"/>
                             </div>
-                             
+                            <div class="mb-3">
+                                <h:commandButton class="btn btn-primary" action="#{ekipuyeBean.create}" value="Kayıt Et" rendered="#{empty ekipuyeBean.entity.id}">
+                                    <f:ajax execute="@form" render="@form"/>
+                                </h:commandButton>
+                                <h:commandButton class="btn btn-secondary" action="#{ekipuyeBean.update}" value="Güncelle" rendered="#{not empty ekipuyeBean.entity.id}">
+                                    <f:ajax execute="@form" render="@form"/>
+                                </h:commandButton>
+                            </div>
                         </div>
                     </div>
                 </h:form>

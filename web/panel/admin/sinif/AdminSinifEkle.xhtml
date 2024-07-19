@@ -57,7 +57,9 @@
                             </div>
 
                             <div class="form-group">
-                                <h:commandButton action="#{sinifBean.create}" value="Sınıf Ekle" styleClass="btn btn-primary btn-block"/>
+                                <h:commandButton action="#{sinifBean.create}" value="Sınıf Ekle" styleClass="btn btn-primary btn-block">
+                                     <f:ajax execute="@form" render="@form"/>
+                                </h:commandButton>
                             </div>
                         </h:form>
                     </div>

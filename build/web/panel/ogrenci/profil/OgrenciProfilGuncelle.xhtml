@@ -19,15 +19,15 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="ad">Ad</label>
-                                    <h:inputText id="ad" value="#{ogrenciBean.entity.ad}" styleClass="form-control"/>
+                                    <h:inputText id="ad" value="#{ogrenciBean.entity.ad}" styleClass="form-control" required="true" requiredMessage="Ad gerekli"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="soyad">Soyad</label>
-                                    <h:inputText id="soyad" value="#{ogrenciBean.entity.soyad}" styleClass="form-control"/>
+                                    <h:inputText id="soyad" value="#{ogrenciBean.entity.soyad}" styleClass="form-control" required="true" requiredMessage="Soyad gerekli"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="kullaniciadi">Kullanıcı Adı</label>
-                                    <h:inputText id="kullaniciadi" value="#{ogrenciBean.entity.kullaniciadi}" styleClass="form-control"/>
+                                    <h:inputText id="kullaniciadi" value="#{ogrenciBean.entity.kullaniciadi}" styleClass="form-control" required="true" requiredMessage="Kullanıcı Adı gerekli"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="universite">Üniversite</label>
@@ -36,13 +36,13 @@
                                 <div class="mb-3">
                                     <label for="sinifid">Sınıf</label>
                                     <h:selectOneMenu id="sinifid" value="#{ogrenciBean.entity.sinif}" converter="sinifConverter" styleClass="form-control">
-                                        <f:selectItems value="#{sinifBean.list}" var="c" itemValue="#{c}" itemLabel="#{c.sinifadi}" />
+                                        <f:selectItems value="#{sinifBean.list}" var="c" itemValue="#{c}" itemLabel="#{c.sinifAdi}" />
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="mb-3">
                                     <label for="bolumid">Bölüm</label>
                                     <h:selectOneMenu id="bolumid" value="#{ogrenciBean.entity.bolum}" converter="bolumConverter" styleClass="form-control">
-                                        <f:selectItems value="#{bolumBean.list}" var="c" itemValue="#{c}" itemLabel="#{c.bolumadi}" />
+                                        <f:selectItems value="#{bolumBean.list}" var="c" itemValue="#{c}" itemLabel="#{c.bolumAdi}" />
                                     </h:selectOneMenu>
                                 </div>
                             </div>
@@ -64,7 +64,9 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <h:commandButton class="btn btn-secondary" action="#{ogrenciBean.update}" value="Güncelle" rendered="#{not empty ogrenciBean.entity.id}"/>
+                                    <h:commandButton class="btn btn-secondary" action="#{ogrenciBean.update}" value="Güncelle" rendered="#{not empty ogrenciBean.entity.id}">
+                                         <f:ajax execute="@form" render="@form"/>
+                                    </h:commandButton>
                                 </div>
                             </div>
                         </div>
